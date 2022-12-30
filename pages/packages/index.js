@@ -84,10 +84,10 @@ const Packages = ({ detailsData }) => {
                 overflow: 'hidden',
               }}
             >
-              <img
-                style={{ width: '100%', height: '100%', borderRadius: '12px' }}
-                src={imagesvg}
-              />
+//               <img
+//                 style={{ width: '100%', height: '100%', borderRadius: '12px' }}
+//                 src={imagesvg}
+//               />
             </Grid>
           </Grid>
           <Grid sx={{ mt: '50px' }}>
