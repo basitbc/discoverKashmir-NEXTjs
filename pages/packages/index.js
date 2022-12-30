@@ -6,7 +6,6 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PackageBox from '../../Components/PackageBox';
 import heroImage from '../../public/Assets/Images/pexels-imad-clicks-8627807.jpg';
-import imagesvg from '../../public/Assets/Images/gurez tree.jpg';
 import Image from 'next/image';
 import Head from 'next/head';
 import handler, { getDetails } from '../api/details';
@@ -87,7 +86,7 @@ const Packages = ({ detailsData }) => {
             >
               <img
                 style={{ width: '100%', height: '100%', borderRadius: '12px' }}
-                src={imagesvg}
+                src="#"
               />
             </Grid>
           </Grid>
