@@ -6,7 +6,6 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PackageBox from '../../Components/PackageBox';
 import heroImage from '../../public/Assets/Images/pexels-imad-clicks-8627807.jpg';
-import imagesvg from '../../public/Assets/Images/gurez tree.jpg';
 import Image from 'next/image';
 import Head from 'next/head';
 import handler, { getDetails } from '../api/details';
