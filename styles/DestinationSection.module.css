@@ -1,0 +1,53 @@
+@font-face {
+    font-family: Headings;
+    src: url(../public/Assets/Fonts/Headings/Heading-Pro-ExtraBold-trial.ttf);
+}
+
+.outerContainerDis{
+    display: flex;
+    flex-direction: row;
+    height: 52px;
+    overflow: auto;
+    
+    /* border: 1px solid; */
+}
+
+.innerContainerTitleDis{
+    /* border: 1px solid; */
+display: flex;
+flex-direction: column;
+}
+
+.innerContainerNameDis{
+/* border: 1px solid blue; */
+display: flex;
+flex-direction: row;
+overflow: scroll;
+border-radius: 40px;
+background-color: transparent;
+-ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.disBox{
+display: flex;
+flex-direction: row;
+align-items: center;
+height: 50px;
+padding: 5px 20px 5px 5px;
+background-color: #F5F4F2;
+border-radius: 40px;
+}
+
+.imageDisBox{
+height: 40px;
+border-radius: 50%;
+width: 40px;
+
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.innerContainerNameDis::-webkit-scrollbar {
+    display: none;
+  }
+  

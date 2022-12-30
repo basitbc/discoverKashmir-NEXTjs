@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Lato:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
+@font-face {
+  font-family: TheaAmelia;
+  src: url(../public/Assets/Fonts/TheaAmelia.otf);
+}
+
+
+.logoContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.OuterContainer {
+    display: flex;
+    top: 0;
+    /* border: 1px solid; */
+}
+
+.textDis{
+    font-family: 'Lato', sans-serif;
+    color: #000;
+    font-weight: 700;
+  }
+
+  .textKmr{
+    /* font-family: 'Caveat Brush', cursive; */
+line-height: 0;
+color: white;
+  }
+
+  .heroButton{
+    font-family: "Headings, 'cursive'" ;
+    cursor: pointer;
+    margin-top: 70px;
+    font-size: 15px;
+    padding: 9px 26px;
+    border: none;
+    /* text-transform: uppercase; */
+    letter-spacing: 1.3px;
+    background-color: #F1BC68;
+    border: 1px solid #F1BC68;
+    font-weight: bold;
+    color: rgb(35, 31, 31);
+    border-radius: 1287px;
+    transition: 0.3s ease;
+}
+
+.heroButton:hover{
+  border: 1px solid black;
+  color: black;
+  background-color: transparent;
+
+}

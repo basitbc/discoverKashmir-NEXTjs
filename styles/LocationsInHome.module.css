@@ -1,0 +1,79 @@
+.lhOuterContainer{
+display: flex;
+ /* border: 1px solid; */
+ /* overflow: auto; */
+}
+
+.lhLeftContainer{
+    /* border: 1px solid; */
+/* height: 432px; */
+align-items: center;
+justify-content: center;
+/* margin-top: 20px; */
+}
+
+.lhRightContainer{
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    /* border: 1px solid; */
+    /* height: 432px; */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+
+}
+.lhRightContainer::-webkit-scrollbar {
+    display: none;
+  }
+
+.lhLeftInnerBox{
+    display: flex;
+    flex-direction: row;
+     /* border: 1px solid; */
+    align-items: center;
+    padding: 10px;
+    border-radius: 14px;
+    justify-content: space-between;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.lhLeftInnerBox:hover{
+    background-color: #E6E6E6;
+}
+
+.lhLeftInnerBox:hover .lhLeftInnerBox img{
+    -webkit-transform:  scale(1.1);
+	transform: scale(1.1);
+    -webkit-filter: blur(3px);
+    filter: brightness(75%);
+}
+
+
+.lhRightInnerBox{
+    /* border: 1px solid; */
+    border-radius: 7px;
+cursor: pointer;
+}
+
+.text11{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}
+
+.lhLeftInnerBox img{
+    -webkit-transform:  scale(1.1);
+	transform: scale(1.1);
+    -webkit-filter: blur(3px);
+    filter: brightness(75%);
+    height: 120px;
+    
+}
+
+

@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
+@font-face {
+    font-family: TheaAmelia;
+    src: url(../public/Assets/Fonts/TheaAmelia.otf);
+}
+.thInnerContainer1{
+    /* border: 1px solid black; */
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+.thInnerContainer2{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.thTitle1{
+    font-size: 30px;
+    /* font-family: 'TheaAmelia'; */
+    font-family: 'TheaAmelia', cursive;
+    padding-bottom: 20px;
+}
+    
+.thTitle2{
+        font-weight: 700;
+        font-family: 'Montserrat', sans-serif;
+}

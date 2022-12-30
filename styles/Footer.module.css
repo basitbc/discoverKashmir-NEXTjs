@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@200;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Nunito+Sans:wght@700&family=PT+Sans+Caption:wght@400;700&family=Ubuntu+Mono:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+.ftrOuterContainer{
+    /* border: 1px solid black; */
+    display: flex;
+    margin-bottom: 10px;
+    /* flex-wrap: wrap; */
+}
+
+.ftrInnerContainerRight{
+/* border: 1px solid; */
+display: flex;
+/* flex-direction: row; */
+/* flex-wrap: wrap; */
+}
+
+.ftrText{
+    font-family: 'Ubuntu Mono', monospace;
+    font-weight: 700;
+    text-decoration: underline;
+    font-size: 17px;
+    line-height: 26px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.ftrTextParagraph{
+    font-family: "Montserrat, Arial, sans-serif";
+    font-weight: 100;
+    text-align: justify;
+    
+
+}

@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Comfortaa:wght@300;400;500;600;700&family=Lato:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+@font-face {
+    font-family: TheaAmelia;
+    src: url(../public/Assets/Fonts/TheaAmelia.otf);
+}
+.pkOuterContainer{
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 50px; */
+    width: 100vw;
+    /* border: 1px solid black; */
+}
+
+.pkInnerContainer1{
+    /* border: 1px solid black; */
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+.pkInnerContainer2{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+
+}
+
+.pkInnerContainer3{
+    display: flex;
+    /* padding: 0 30px; */
+    justify-content: space-evenly;
+    
+    /* border: 1px solid black; */
+}
+
+.pkTitle1{
+font-size: 30px;
+/* font-family: 'TheaAmelia'; */
+font-family: 'TheaAmelia', cursive;
+padding-bottom: 20px;
+}
+
+.pkTitle2{
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pkPackageBox{
+    display: flex;
+    flex-direction: column;
+    /* z-index: -1; */
+    max-width: 410px;
+    border-radius: 22px;
+    margin-top: 70px;
+    /* justify-content: center; */
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;    
+}
+
+.pkImageContainer{
+    height: 250px;
+    width: 410px;
+    /* border: 3px solid; */
+    border-radius: 22px;
+}
+
+.pkImageContainer img {
+
+    height: 100%;
+    width: 100%;
+  
+    border-radius: 22px;
+    object-fit: cover;
+}
+
+.pkDurationContainer{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20px;
+    height: 50px;
+    bottom:7%;
+    /* max-width: 350px; */
+    /* z-index: 9; */
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: rgba(6, 30, 98, 0.08) 0px 0px 60px 0px;
+
+}
+.durationText{
+    color: rgb(69, 57, 57);
+}
+
+.pkNameContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+.pkName{
+    font-family: 'Comfortaa', cursive;
+    color: #000;
+    font-weight: 500;
+
+}
+.pkLine{
+    width: 340px;
+    color: grey;
+}
+
+
+.pkLocation{
+color: gray;
+font-family: 'Comfortaa', cursive;
+padding-top: 7px;
+font: 19px;
+}
+.pkPriceContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    padding: 10px 10px;
+
+}
+
+.pkFrom{
+color: grey;
+font-size: 14px;
+}
+
+.pkPrice{
+    font-family: 'Comfortaa', cursive;
+font-size: 27px;
+font-weight: 700;
+color: #DC834E;
+}
+
+.pkButtonEx{
+    font-size: 17px;
+    font-family: 'Comfortaa', cursive;
+    padding-right: 12px;
+    cursor: pointer;
+}
+.pkButtonEx:hover{
+    color: #DC834E
+}
+
+.buttonPkViewMore{
+    margin: 20px 0 0 40px;
+    font-family: 'Comfortaa', cursive;
+    border:none;
+    font-weight: 700;
+    text-transform: capitalize;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 15px 30px;
+    background-color: #DC834E;
+    color: white;
+}

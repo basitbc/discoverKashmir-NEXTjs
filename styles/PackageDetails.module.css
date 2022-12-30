@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@200;500&display=swap');
+.pdUpperContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    background-color: #F6F7FB;
+}

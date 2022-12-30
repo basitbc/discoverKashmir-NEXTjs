@@ -1,0 +1,74 @@
+@font-face {
+    font-family: TheaAmelia;
+    src: url(../public/Assets/Fonts/TheaAmelia.otf);
+}
+@font-face {
+    font-family: SouthamDemo;
+    src: url(../public/Assets/Fonts/Southam\ Demo.otf);
+}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+.abhOuterContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    /* border: 1px solid black; */
+}
+
+.abhInnerContainer1{
+    /* border: 1px solid black; */
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+.abhInnerContainer2{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.abhInnerContainer3{
+    display: flex;
+    flex-direction: row;
+    padding: 0 30px;
+    justify-content: space-between;
+    /* border: 1px solid black; */
+}
+
+.abhTitle1{
+font-size: 30px;
+/* font-family: 'TheaAmelia'; */
+font-family: 'TheaAmelia', cursive;
+padding-bottom: 20px;
+}
+
+.abhTitle2{
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.abhInnerContainer{
+    justify-content: space-evenly;
+}
+
+.abhInnerContainerRight{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.abhImage{
+    height:"459px";
+    width:"310px"
+}
+
+.abhImg .abhImg img{
+    -webkit-transform:  scale(1.1);
+	transform: scale(1.1);
+    -webkit-filter: blur(3px);
+    filter: brightness(75%);
+}

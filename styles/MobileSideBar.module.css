@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+.ms-container{
+    position: absolute;
+    top: 0;
+    right: 0%;
+    z-index:10 ;
+    background-color: black;
+    height:"100vh";
+    width:"30vw";
+    border:"1px solid";
+}

@@ -1,0 +1,24 @@
+
+.Carousel-image{
+    height:600px;
+    width:100vw;
+}
+
+.imageCarousel{
+height: 700px;
+width: 100%;
+}
+
+.carousel .item {
+    height: 500px;
+  }
+  
+  .item img {
+      position: absolute;
+      object-fit:cover;
+      top: 0;
+      left: 0;
+      min-height: 500px;
+  }
+
+ 

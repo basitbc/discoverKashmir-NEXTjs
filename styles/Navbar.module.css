@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Alkalami&family=Raleway:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&family=Poppins:wght@200;500;600;700&display=swap');
+
+
+.navbarContainer {
+    
+    /* border: 1px solid; */
+    display: flex;
+    color: white;
+    align-items: center;
+    flex-direction: row;
+    transition: 0.5s ease;
+    /* background-color: rgb(168, 225, 207); */
+
+}
+
+.navbarContainerLeft {
+    /* border: 1px solid; */
+    
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+
+}
+
+.textContainer {
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+    margin-top:30px;
+    align-items: unset;
+    flex-wrap: nowrap;
+    /* height: 70px; */
+}
+
+
+
+.textItems {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* border: 1px solid; */
+    height: 34px;
+    flex-wrap: nowrap;
+    /* padding: 9px 7px 3px 7px; */
+
+}
+
+
+
+.NavText {
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+    justify-content: center;
+    
+}
+
+
+.textItems:hover {
+    /* background-color: rgba(0, 0, 0, 0.3); */
+    /* border-radius: 15px; */
+    
+    border-bottom: 5px solid #DC834E;
+    /* position: absolute; */
+    /* padding: 3px 7px 3px 7px; */
+    /* font-style: italic; */
+}
+
+
+
+.navbarContainerRight {
+    /* border: 1px solid; */
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.textPhoneNo{
+    font-family: 'Montserrat Alternates', sans-serif;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.logoText{
+    font-family: 'Caveat Brush', cursive;
+
+}

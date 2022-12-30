@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
+.trbHeroContainer{
+    width: 100vw;
+    overflow: hidden;
+}
+
+.trbHeroContainer img{
+    height: 100%;
+    width: 100%;
+    filter: brightness(.3);
+}
+
+.trbTitle{
+    position: absolute;
+    top: '50%'; 
+    left: '50%'; 
+    transform: 'translate(-50%,-50%)';
+    color: rgb(255, 255, 255);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    letter-spacing: 3.5px;
+}
+
