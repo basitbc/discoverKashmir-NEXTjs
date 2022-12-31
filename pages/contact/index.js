@@ -83,8 +83,9 @@ const ContactUs = ({ detailsData, contactData }) => {
         >
           <Image
             // className={styles.abhImage}
+            priority
             fill
-            src={'/' + contactData.backgroundImage}
+            src={'/Assets/Images/Contact/' + contactData.backgroundImage}
           />
         </Grid>
         <Typography

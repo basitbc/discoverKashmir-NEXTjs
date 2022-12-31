@@ -94,7 +94,6 @@ export default function Home({ detailsData, packagesData }) {
                 color: 'black',
                 overflow: 'hidden',
                 fontFamily: "'Lato', sans-serif",
-                fontWeight: 100,
               }}
             >
               DISCOVER
@@ -109,7 +108,6 @@ export default function Home({ detailsData, packagesData }) {
                 letterSpacing: '7.0px',
                 // overflow: { xs: 'auto', md: 'visible' },
                 fontFamily: "'Raleway', cursive",
-                fontWeight: 900,
               }}
             >
               Kashmir
