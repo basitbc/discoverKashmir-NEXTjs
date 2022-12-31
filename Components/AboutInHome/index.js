@@ -130,8 +130,11 @@ const AboutInHome = (props) => {
           >
             <Image
               // className={styles.abhImage}
-              layout='fill'
-              src={details.aboutImageBack}
+              fill
+              src={
+                '/../public/Assets/Images/Home/' +
+                props.detailsData.aboutImageBack
+              }
             />
           </Grid>
           <Grid
@@ -148,8 +151,11 @@ const AboutInHome = (props) => {
           >
             <Image
               className={styles.abhImage}
-              layout='fill'
-              src={details.aboutImageFront}
+              fill
+              src={
+                '/../public/Assets/Images/Home/' +
+                props.detailsData.aboutImageFront
+              }
             />
           </Grid>
         </Grid>

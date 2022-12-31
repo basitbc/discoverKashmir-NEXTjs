@@ -99,6 +99,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             item
             className={styles.textContainer}
             sx={{
+              marginTop: '30px',
               height: { md: '30px', lg: '60px' },
               width: { md: '90px', lg: '150px' },
             }}
