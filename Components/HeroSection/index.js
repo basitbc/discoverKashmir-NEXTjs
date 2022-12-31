@@ -15,7 +15,7 @@ const HeroSection = (props) => {
       <Grid item className={styles.heroHeroContainer} sx={{ height: '63vh' }}>
         <img
           style={{ width: isMobile ? '900px' : '100%' }}
-          src={props.bgImage}
+          src={'/Assets/Images/Packages/' + props.bgImage}
         />
       </Grid>
       <Typography

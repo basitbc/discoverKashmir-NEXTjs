@@ -39,7 +39,7 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
   useEffect(() => {
     if (router.isReady) {
       console.log(router.query.id, 'props id router');
-      setPackageData(packageDataAll[1]);
+      setPackageData(packageDataAll[router.query.id]);
     }
   }, [router.query.id, router.isReady]);
   useEffect(() => {
