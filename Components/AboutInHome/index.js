@@ -2,6 +2,7 @@ import { Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
 import styles from '../../styles/AboutInHome.module.css';
+import details from '../../Data/Details.json';
 
 const AboutInHome = (props) => {
   useEffect(() => {
@@ -130,7 +131,7 @@ const AboutInHome = (props) => {
             <Image
               // className={styles.abhImage}
               layout='fill'
-              src={props.detailsData.aboutImageBack}
+              src={details.aboutImageBack}
             />
           </Grid>
           <Grid
@@ -148,7 +149,7 @@ const AboutInHome = (props) => {
             <Image
               className={styles.abhImage}
               layout='fill'
-              src={props.detailsData.aboutImageFront}
+              src={details.aboutImageFront}
             />
           </Grid>
         </Grid>

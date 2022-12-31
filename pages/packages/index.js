@@ -15,10 +15,6 @@ const Packages = ({ detailsData }) => {
     defaultMatches: true,
   });
 
-  useEffect(() => {
-    console.log(detailsData, 'packages');
-  }, []);
-
   return (
     <>
       <Head>
