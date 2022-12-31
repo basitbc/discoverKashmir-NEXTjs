@@ -22,13 +22,6 @@ const ContactUs = ({ detailsData, contactData }) => {
     return <Slide direction='up' ref={ref} {...props} />;
   });
 
-  const backgroundImage = dynamic(
-    () => import('../../public/Assets/Images/Home/blogBackground.jpg'),
-    {
-      loading: () => 'Loading...',
-    }
-  );
-
   const handleOpen = () => {
     setopen(true);
   };
@@ -89,9 +82,9 @@ const ContactUs = ({ detailsData, contactData }) => {
           sx={{ height: '63vh', width: '100vw' }}
         >
           <Image
+            // className={styles.abhImage}
             fill
-            // style={{ width: isMobile ? '900px' : '100%' }}
-            src={'/../public/Assets/Images/Contact/background.jpg'}
+            src={'/' + contactData.backgroundImage}
           />
         </Grid>
         <Typography
