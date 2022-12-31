@@ -4,14 +4,11 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import styles from '../../styles/Contact.module.css';
 import { useRef } from 'react';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import details from '../../public//Data/Details.json';
 import { useRouter } from 'next/router';
-import { getDetails } from '../api/details';
 import Image from 'next/image';
 const ContactUs = ({ detailsData, contactData }) => {
   const theme = useTheme();
@@ -84,9 +81,11 @@ const ContactUs = ({ detailsData, contactData }) => {
           sx={{ height: '63vh' }}
         >
           <Image
-            layout='fill'
+            fill
             // style={{ width: isMobile ? '900px' : '100%' }}
-            src={contactData.backgroundImage}
+            src={
+              '/../public/Assets/Images/Contact/' + contactData.backgroundImage
+            }
           />
         </Grid>
         <Typography
