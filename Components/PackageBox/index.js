@@ -27,10 +27,15 @@ const PackageBox = ({ item, usedIn }) => {
       }}
     >
       <Grid
+        position='relative'
         className={styles.pboxImageContainer}
         sx={{ height: '250px', width: { xs: '100%', md: '410px' } }}
       >
-        <img className={styles.pboxImage} src={item.image} />
+        <Image
+          fill
+          className={styles.pboxImage}
+          src={'/Assets/Images/Packages/' + item.image}
+        />
       </Grid>
       <Grid
         item

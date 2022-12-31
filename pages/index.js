@@ -81,7 +81,7 @@ export default function Home({ detailsData, packagesData }) {
                 color: 'white',
                 marginLeft: { xs: '-60px', lg: '-150px' },
                 lineHeight: '0',
-                fontFamily: "Lato, 'cursive'",
+                fontFamily: "Lato, 'sans-serif'",
                 fontWeight: 900,
               }}
             >
@@ -94,6 +94,7 @@ export default function Home({ detailsData, packagesData }) {
                 color: 'black',
                 overflow: 'hidden',
                 fontFamily: "'Lato', sans-serif",
+                fontWeight: 900,
               }}
             >
               DISCOVER
@@ -107,7 +108,8 @@ export default function Home({ detailsData, packagesData }) {
                 marginRight: { xs: '-60px', lg: '-130px' },
                 letterSpacing: '7.0px',
                 // overflow: { xs: 'auto', md: 'visible' },
-                fontFamily: "'Raleway', cursive",
+                fontFamily: "'Raleway', sans-serif",
+                fontWeight: 700,
               }}
             >
               Kashmir

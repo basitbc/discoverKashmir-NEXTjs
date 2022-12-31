@@ -51,11 +51,12 @@ const packagesSection = ({ packagesData }) => {
           sx={{
             flexDirection: { xs: 'column', md: 'row' },
             alignItems: 'center',
+            justifyContent: { xs: 'center', md: 'flex-start' },
             flexWrap: 'wrap',
           }}
           className={styles.pkInnerContainer3}
         >
-          {packages.slice(0, 3).map((item) => {
+          {packagesData.slice(0, 3).map((item) => {
             return <PackageBox item={item} usedIn={'home'} />;
           })}
         </Grid>

@@ -8,8 +8,8 @@ import PackageBox from '../../Components/PackageBox';
 import heroImage from '../../public/Assets/Images/Packages/background.jpg';
 import Image from 'next/image';
 import Head from 'next/head';
-import handler, { getDetails } from '../api/details';
-const Packages = ({ detailsData }) => {
+
+const Packages = ({ packagesData }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
@@ -132,7 +132,7 @@ const Packages = ({ detailsData }) => {
             m: { md: '10px 30px 0px 60px' },
           }}
         >
-          {packages.map((item) => {
+          {packagesData.map((item) => {
             return <PackageBox item={item} />;
           })}
         </Grid>
@@ -152,7 +152,11 @@ export async function getStaticProps() {
     jsonDirectory + '/Details.json',
     'utf8'
   );
+  const packagesData = await fsPromises.readFile(
+    jsonDirectory + '/Packages.json',
+    'utf8'
+  );
   return {
-    props: { detailsData: JSON.parse(detailsData) },
+    props: { packagesData: JSON.parse(packagesData) },
   };
 }
