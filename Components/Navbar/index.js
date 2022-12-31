@@ -99,18 +99,15 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             item
             className={styles.textContainer}
             sx={{
-              marginTop: '30px',
               height: { md: '30px', lg: '60px' },
-              width: { md: '90px', lg: '150px' },
+              width: { md: '90px', lg: '120px' },
+              marginTop: '30px',
             }}
             // height='60px'
             // width='150px'
           >
             <Grid className={styles.textItems}>
-              <Link
-                href='/destinations'
-                style={{ textDecoration: 'none', color: 'white' }}
-              >
+              <Link href='/' style={{ textDecoration: 'none', color: 'white' }}>
                 <Typography
                   className={styles.navText}
                   sx={{
@@ -119,7 +116,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
                     fontFamily: 'Raleway, sans-serif',
                   }}
                 >
-                  Destinations
+                  Home
                 </Typography>
                 {/* <KeyboardArrowDownIcon /> */}
               </Link>
@@ -131,6 +128,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             sx={{
               height: { md: '30px', lg: '60px' },
               width: { md: '140px', lg: '160px' },
+              marginTop: '30px',
             }}
           >
             <Grid className={styles.textItems}>
@@ -158,6 +156,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             sx={{
               height: { md: '30px', lg: '60px' },
               width: { md: '90px', lg: '150px' },
+              marginTop: '30px',
             }}
           >
             <Grid className={styles.textItems}>
@@ -185,6 +184,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             sx={{
               height: { md: '30px', lg: '60px' },
               width: { md: '90px', lg: '150px' },
+              marginTop: '30px',
             }}
           >
             <Grid className={styles.textItems}>

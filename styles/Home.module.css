@@ -22,13 +22,14 @@
 .textDis{
     font-family: 'Lato', sans-serif;
     color: #000;
-    font-weight: 700;
+    font-weight: 900;
   }
 
   .textKmr{
     /* font-family: 'Caveat Brush', cursive; */
 line-height: 0;
 color: white;
+font-weight: 700;
   }
 
   .heroButton{
