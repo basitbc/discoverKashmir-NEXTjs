@@ -77,7 +77,7 @@ const AboutInHome = (props) => {
               fontWeight: 300,
             }}
           >
-            {/* "{props.detailsData.about1}" */}
+            {props.detailsData.about1}
           </Typography>
           <br />
 
@@ -89,7 +89,7 @@ const AboutInHome = (props) => {
               fontWeight: 300,
             }}
           >
-            {/* "{props.detailsData.about2}" */}
+            {props.detailsData.about2}
           </Typography>
           {/* <img
             style={{ marginTop: '23px' }}
@@ -121,17 +121,15 @@ const AboutInHome = (props) => {
           <Grid
             item
             className={styles.abhImg}
+            position='relative'
             sx={{
               height: { xs: '340px', md: '360px', lg: '459px' },
               width: { xs: '270px', md: '370px', lg: '365px' },
             }}
           >
-            <img
-              className={styles.abhImage}
-              style={{
-                height: '100%',
-                width: '100%',
-              }}
+            <Image
+              // className={styles.abhImage}
+              layout='fill'
               src={props.detailsData.aboutImageBack}
             />
           </Grid>
@@ -147,12 +145,9 @@ const AboutInHome = (props) => {
               border: '4px solid white',
             }}
           >
-            <img
+            <Image
               className={styles.abhImage}
-              style={{
-                height: '100%',
-                width: '100%',
-              }}
+              layout='fill'
               src={props.detailsData.aboutImageFront}
             />
           </Grid>

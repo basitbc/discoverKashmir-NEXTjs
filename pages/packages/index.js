@@ -5,7 +5,7 @@ import packages from '../../public/Data/Packages.json';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PackageBox from '../../Components/PackageBox';
-import heroImage from '../../public/Assets/Images/pexels-imad-clicks-8627807.jpg';
+import heroImage from '../../public/Assets/Images/Packages/background.jpg';
 import Image from 'next/image';
 import Head from 'next/head';
 import handler, { getDetails } from '../api/details';
@@ -27,8 +27,18 @@ const Packages = ({ detailsData }) => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </Head>
       <Grid container>
-        <Grid item className={styles.pkgHeroContainer} sx={{ height: '63vh' }}>
-          <img style={{ width: isMobile ? '900px' : '100%' }} src={heroImage} />
+        <Grid
+          item
+          position='relative'
+          className={styles.pkgHeroContainer}
+          sx={{ height: '63vh' }}
+        >
+          <Image
+            priority
+            layout='fill'
+            // style={{ width: isMobile ? '900px' : '100%' }}
+            src={heroImage}
+          />
         </Grid>
         <Typography
           variant='bold'
@@ -86,7 +96,7 @@ const Packages = ({ detailsData }) => {
             >
               <img
                 style={{ width: '100%', height: '100%', borderRadius: '12px' }}
-                src="#"
+                src='#'
               />
             </Grid>
           </Grid>
