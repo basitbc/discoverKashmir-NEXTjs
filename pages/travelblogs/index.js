@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import styles from '../../styles/TravelBlogs.module.css';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Grid, Typography } from '@mui/material';
-import heroImage from '../../public/Assets/Images/bg.jpg';
+import heroImage from '../../public/Assets/Images/Blogs/background.jpg';
 import BlogBox from '../../Components/BlogBox';
 import BlogData from '../../public/Data/blog.json';
 import Image from 'next/image';
@@ -25,8 +25,17 @@ const TravelBlogs = () => {
         />{' '}
       </Head>
       <Grid container>
-        <Grid item className={styles.trbHeroContainer} sx={{ height: '63vh' }}>
-          <img style={{ width: isMobile ? '900px' : '100%' }} src={heroImage} />
+        <Grid
+          item
+          position='relative'
+          className={styles.trbHeroContainer}
+          sx={{ height: '63vh' }}
+        >
+          <Image
+            layout='fill'
+            // style={{ width: isMobile ? '900px' : '100%' }}
+            src={heroImage}
+          />
         </Grid>
         <Typography
           variant='bold'

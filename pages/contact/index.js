@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import styles from '../../styles/Contact.module.css';
-import heroImage from '../../public/Assets/Images/river-g3195075c3_1920.jpg';
 import { useRef } from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
@@ -14,7 +13,7 @@ import details from '../../public//Data/Details.json';
 import { useRouter } from 'next/router';
 import { getDetails } from '../api/details';
 import Image from 'next/image';
-const ContactUs = ({ detailsData }) => {
+const ContactUs = ({ detailsData, contactData }) => {
   const theme = useTheme();
   const [open, setopen] = useState(false);
   const bkcolor = 'white';
@@ -66,6 +65,7 @@ const ContactUs = ({ detailsData }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
   });
+
   return (
     <div>
       <Head>
@@ -77,8 +77,17 @@ const ContactUs = ({ detailsData }) => {
         />{' '}
       </Head>
       <Grid container>
-        <Grid item className={styles.cnHeroContainer} sx={{ height: '63vh' }}>
-          <img style={{ width: isMobile ? '900px' : '100%' }} src={heroImage} />
+        <Grid
+          position='relative'
+          item
+          className={styles.cnHeroContainer}
+          sx={{ height: '63vh' }}
+        >
+          <Image
+            layout='fill'
+            // style={{ width: isMobile ? '900px' : '100%' }}
+            src={contactData.backgroundImage}
+          />
         </Grid>
         <Typography
           variant='bold'
@@ -292,9 +301,14 @@ export async function getStaticProps() {
     jsonDirectory + '/Details.json',
     'utf8'
   );
+  const contactData = await fsPromises.readFile(
+    jsonDirectory + '/Contact.json',
+    'utf8'
+  );
   return {
     props: {
       detailsData: JSON.parse(detailsData),
+      contactData: JSON.parse(contactData),
     },
   };
 }
