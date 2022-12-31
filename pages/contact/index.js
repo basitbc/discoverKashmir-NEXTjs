@@ -10,6 +10,7 @@ import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+
 const ContactUs = ({ detailsData, contactData }) => {
   const theme = useTheme();
   const [open, setopen] = useState(false);
@@ -20,6 +21,13 @@ const ContactUs = ({ detailsData, contactData }) => {
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction='up' ref={ref} {...props} />;
   });
+
+  const backgroundImage = dynamic(
+    () => import('../../public/Assets/Images/Home/blogBackground.jpg'),
+    {
+      loading: () => 'Loading...',
+    }
+  );
 
   const handleOpen = () => {
     setopen(true);
@@ -75,17 +83,15 @@ const ContactUs = ({ detailsData, contactData }) => {
       </Head>
       <Grid container>
         <Grid
-          position='relative'
           item
+          position='relative'
           className={styles.cnHeroContainer}
-          sx={{ height: '63vh' }}
+          sx={{ height: '63vh', width: '100vw' }}
         >
           <Image
             fill
             // style={{ width: isMobile ? '900px' : '100%' }}
-            src={
-              '/../public/Assets/Images/Contact/' + contactData.backgroundImage
-            }
+            src={'/../public/Assets/Images/Contact/background.jpg'}
           />
         </Grid>
         <Typography
@@ -293,6 +299,7 @@ import path from 'path';
 import fsPromises from 'fs/promises';
 import Head from 'next/head';
 import { sendForm } from '@emailjs/browser';
+import dynamic from 'next/dynamic';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json
