@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { Grid, Typography } from '@mui/material';
 import heroImage from '../../public/Assets/Images/Blogs/background.jpg';
 import BlogBox from '../../Components/BlogBox';
-import BlogData from '../../Data/blog.json';
+import BlogData from '../../Data/Blog.json';
 import Image from 'next/image';
 import Head from 'next/head';
 
