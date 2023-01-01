@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardMedia, Grid, Typography } from '@mui/material';
-import testimonialsData from '../../public/Data/Testimonials.json';
+import testimonialsData from '../../Data/Testimonials.json';
 import Carousel from 'react-bootstrap/Carousel';
 import { Alert, CCarousel, CCarouselItem } from '@coreui/react';
 import '@coreui/coreui/dist/css/coreui.min.css';

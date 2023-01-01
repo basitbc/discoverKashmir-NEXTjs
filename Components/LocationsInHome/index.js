@@ -1,8 +1,8 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react';
 import styles from '../../styles/LocationsInHome.module.css';
-import destinationData from '../../public/Data/Destinations.json';
-import blogData from '../../public/Data/blog.json';
+import destinationData from '../../Data/Destinations.json';
+import blogData from '../../Data/blog.json';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from 'next/image';

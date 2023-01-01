@@ -1,7 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 import styles from '../../styles/Packages.module.css';
 import React, { useEffect } from 'react';
-import packages from '../../public/Data/Packages.json';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PackageBox from '../../Components/PackageBox';

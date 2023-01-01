@@ -6,21 +6,31 @@ import PlaceIcon from '@mui/icons-material/Place';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
+import slugify from 'slugify';
 import Image from 'next/image';
 
 const PackageBox = ({ item, usedIn }) => {
   const router = useRouter();
   useEffect(() => {
     if (!router.isReady) return;
+    console.log(item, 'item in box');
+    console.log(router, 'router in box');
   }, [router]);
+  const handleClick = (item) => {
+    Router.push({
+      pathname: `/packages/${slugify(item.packageName).toLowerCase()}`,
+      query: { id: item.id },
+    });
+  };
 
   return (
     <Grid
-      // container
+      item
       className={styles.pboxPackageBox}
       sx={{
-        maxHeight: '470px',
-        maxWidth: {
+        flexDirection: 'column',
+        height: '470px',
+        width: {
           xs: usedIn === 'home' ? '90%' : '100%',
           md: '410px',
         },
@@ -105,10 +115,7 @@ const PackageBox = ({ item, usedIn }) => {
               className={styles.pboxButtonContainer}
               variant='text'
               onClick={() => {
-                Router.push({
-                  pathname: '/packagedetails',
-                  query: { id: item.id },
-                });
+                handleClick(item);
               }}
             >
               <Typography
