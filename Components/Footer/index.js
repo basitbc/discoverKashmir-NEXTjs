@@ -15,6 +15,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import Image from 'next/image';
+import { Link as LinkMUI } from '@mui/material';
+import Link from 'next/link';
 const Footer = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
@@ -76,26 +78,56 @@ const Footer = () => {
             />
           </Grid>
           <Grid item sx={{ mb: '40px', zIndex: '-1' }}>
-            <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
-              {/* <i className={styles.fa fa-instagram' style={{ fontSize: '23px' }}></i> */}
-              <InstagramIcon />
-            </Fab>
-            <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
-              {/* <i className={styles.fa fa-facebook' style={{ fontSize: '23px' }}></i> */}
-              <FacebookOutlinedIcon />
-            </Fab>
-            <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
-              {/* <i className={styles.fa fa-linkedin' style={{ fontSize: '23px' }}></i> */}
-              <LinkedInIcon />
-            </Fab>
-            <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
-              {/* <i className={styles.fa fa-twitter' style={{ fontSize: '23px' }}></i> */}
-              <TwitterIcon />
-            </Fab>
-            <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
-              {/* <i className={styles.fa fa-youtube' style={{ fontSize: '23px' }}></i> */}
-              <YouTubeIcon />
-            </Fab>
+            <LinkMUI
+              target={'_blank'}
+              href='https://www.instagram.com/discoverkashmir1/'
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
+                {/* <i className={styles.fa fa-instagram' style={{ fontSize: '23px' }}></i> */}
+                <InstagramIcon />
+              </Fab>
+            </LinkMUI>
+            <LinkMUI
+              target={'_blank'}
+              href='https://www.facebook.com/discoverkashmir1/?mibextid=ZbWKwL'
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
+                {/* <i className={styles.fa fa-facebook' style={{ fontSize: '23px' }}></i> */}
+                <FacebookOutlinedIcon />
+              </Fab>
+            </LinkMUI>
+            <LinkMUI
+              target={'_blank'}
+              href='https://www.linkedin.com/company/discover-kashmir/'
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
+                {/* <i className={styles.fa fa-linkedin' style={{ fontSize: '23px' }}></i> */}
+                <LinkedInIcon />
+              </Fab>
+            </LinkMUI>
+            <LinkMUI
+              target={'_blank'}
+              href='https://twitter.com/Discoverkashmir'
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
+                {/* <i className={styles.fa fa-twitter' style={{ fontSize: '23px' }}></i> */}
+                <TwitterIcon />
+              </Fab>
+            </LinkMUI>
+            <LinkMUI
+              target={'_blank'}
+              href='https://www.youtube.com/@discoverkashmir6312'
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
+                {/* <i className={styles.fa fa-youtube' style={{ fontSize: '23px' }}></i> */}
+                <YouTubeIcon />
+              </Fab>
+            </LinkMUI>
           </Grid>
         </Grid>
         <Grid
@@ -142,51 +174,59 @@ const Footer = () => {
             <Typography variant='bold' className={styles.ftrText}>
               Menu
             </Typography>
-            <Typography
-              sx={{
-                margin: '10px 0',
-                textDecoration: 'underline',
+            <Link href={'/'} style={{ color: 'black' }}>
+              <Typography
+                sx={{
+                  margin: '10px 0',
+                  textDecoration: 'underline',
 
-                fontFamily: 'Montserrat, Arial, sans-serif',
-                fontSize: '14px',
-              }}
-              className={styles.ftrTextParagraph}
-            >
-              Destinations
-            </Typography>
-            <Typography
-              sx={{
-                margin: '10px 0',
-                textDecoration: 'underline',
-                fontFamily: 'Montserrat, Arial, sans-serif',
-                fontSize: '14px',
-              }}
-              className={styles.ftrTextParagraph}
-            >
-              travel Blogs
-            </Typography>
-            <Typography
-              sx={{
-                margin: '10px 0 ',
-                textDecoration: 'underline',
-                fontFamily: 'Montserrat, Arial, sans-serif',
-                fontSize: '14px',
-              }}
-              className={styles.ftrTextParagraph}
-            >
-              Packages
-            </Typography>
-            <Typography
-              sx={{
-                margin: '10px 0 ',
-                textDecoration: 'underline',
-                fontFamily: 'Montserrat, Arial, sans-serif',
-                fontSize: '14px',
-              }}
-              className={styles.ftrTextParagraph}
-            >
-              Contact Us
-            </Typography>
+                  fontFamily: 'Montserrat, Arial, sans-serif',
+                  fontSize: '14px',
+                }}
+                className={styles.ftrTextParagraph}
+              >
+                Home
+              </Typography>
+            </Link>
+            <Link href={'/travelblogs'} style={{ color: 'black' }}>
+              <Typography
+                sx={{
+                  margin: '10px 0',
+                  textDecoration: 'underline',
+                  fontFamily: 'Montserrat, Arial, sans-serif',
+                  fontSize: '14px',
+                }}
+                className={styles.ftrTextParagraph}
+              >
+                travel Blogs
+              </Typography>
+            </Link>
+            <Link href={'/packages'} style={{ color: 'black' }}>
+              <Typography
+                sx={{
+                  margin: '10px 0 ',
+                  textDecoration: 'underline',
+                  fontFamily: 'Montserrat, Arial, sans-serif',
+                  fontSize: '14px',
+                }}
+                className={styles.ftrTextParagraph}
+              >
+                Packages
+              </Typography>
+            </Link>
+            <Link href={'/contact'} style={{ color: 'black' }}>
+              <Typography
+                sx={{
+                  margin: '10px 0 ',
+                  textDecoration: 'underline',
+                  fontFamily: 'Montserrat, Arial, sans-serif',
+                  fontSize: '14px',
+                }}
+                className={styles.ftrTextParagraph}
+              >
+                Contact Us
+              </Typography>
+            </Link>
           </Grid>
 
           <Grid
@@ -214,8 +254,14 @@ const Footer = () => {
                   fontSize: '14px',
                 }}
               >
-                <CallIcon style={{ marginRight: '20px' }} />
-                {detailsData.phoneNumber}
+                <a
+                  style={{ textDecoration: 'none', color: 'black' }}
+                  href={`tel:${detailsData.phoneNumber}`}
+                >
+                  <CallIcon style={{ marginRight: '20px' }} />
+
+                  {detailsData.phoneNumber}
+                </a>
               </Typography>
             </Grid>
             <Grid
@@ -233,7 +279,13 @@ const Footer = () => {
                 }}
               >
                 <WhatsAppIcon style={{ marginRight: '20px' }} />
-                {detailsData.whatsappNumber}
+                <LinkMUI
+                  target={'_blank'}
+                  href={`https://wa.me/${detailsData.whatsappNumber}?text=Hello discover kashmir, I want to get my customized package for my trip to Kashmir `}
+                  style={{ textDecoration: 'none', color: 'black' }}
+                >
+                  {detailsData.whatsappNumber}
+                </LinkMUI>
               </Typography>
             </Grid>
             <Grid
@@ -251,7 +303,13 @@ const Footer = () => {
                 }}
               >
                 <MailOutlineIcon style={{ marginRight: '20px' }} />
-                {detailsData.email}
+                <a
+                  style={{ textDecoration: 'none', color: 'black' }}
+                  target={'_blank'}
+                  href={`mailto:${detailsData.email}`}
+                >
+                  {detailsData.email}
+                </a>
               </Typography>
             </Grid>
           </Grid>
@@ -292,9 +350,16 @@ const Footer = () => {
         </Typography>
         <Typography
           sx={{ fontSize: { xs: '9px', md: '12px' } }}
+          fontFamily='lato'
           className={styles.ftrTextParagraph}
         >
-          Privacy Policy
+          Developed by{' '}
+          <a
+            href='https://basitchanna.netlify.app/'
+            style={{ color: '#DC834E', textDecoration: 'none' }}
+          >
+            Basit Channa
+          </a>
         </Typography>
       </Grid>
     </Grid>

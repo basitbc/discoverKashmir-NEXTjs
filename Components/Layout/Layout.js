@@ -5,7 +5,10 @@ import MobileSideBar from '../MobileSideBar';
 import { Fab, Grid } from '@mui/material';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import CloseIcon from '@mui/icons-material/Close';
-
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import styles from '../../styles/Layout.module.css';
+import details from '../../Data/Details.json';
+import Link from 'next/link';
 export default function Layout({ children }) {
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -42,6 +45,25 @@ export default function Layout({ children }) {
         setOpenDrawer: setOpenDrawer,
       })}
       <Footer />
+      <Link
+        target={'_blank'}
+        href={`https://wa.me/${details.whatsappNumber}?text=Hello, I want to get my customized package for my trip to Kashmir`}
+      >
+        <Grid
+          className={styles.btnWhatsappPulse}
+          item
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            position: 'fixed',
+            alignItems: 'center',
+            zIndex: '999999',
+            padding: { xs: '27px', md: '35px' },
+          }}
+        >
+          <WhatsAppIcon style={{ fontSize: '40px', color: 'white' }} />
+        </Grid>
+      </Link>
     </>
   );
 }

@@ -55,7 +55,7 @@ const ContactUs = ({ detailsData, contactData }) => {
 
   const styleTypo = {
     fontFamily: "Roboto, 'cursive'",
-    fontSize: '1.2vw',
+    fontSize: { xs: '12px', md: '1.2vw' },
     fontWeight: '500',
     flexWrap: 'wrap',
   };
@@ -98,16 +98,20 @@ const ContactUs = ({ detailsData, contactData }) => {
             transform: 'translate(-50%,-110%)',
           }}
         >
-          Contact
+          Let's Talk
         </Typography>
         <Grid
           container
-          sx={{ display: 'flex', flexDirection: 'row', width: '100vw' }}
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            width: '100vw',
+          }}
         >
           <Grid
             item
             className={styles.cnInnerContainerLeft}
-            sx={{ width: '40vw' }}
+            sx={{ width: { xs: '100vw', md: '40vw' } }}
           >
             <Grid
               className={styles.cnLeftContainer}
@@ -125,19 +129,27 @@ const ContactUs = ({ detailsData, contactData }) => {
                 item
                 sx={{
                   display: 'flex',
-                  flexDirection: 'row',
+                  flexDirection: { xs: 'column', md: 'row' },
+                  justifyContent: { xs: 'center', md: 'unset' },
+                  alignItems: 'center',
+                  textAlign: { xs: 'center', md: 'unset' },
                   m: '10px 0',
                   width: '100%',
                 }}
               >
-                <Grid sx={{ mr: '27px' }}>
+                <Grid sx={{ mr: { md: '27px' }, m: { xs: '10px 0', md: '' } }}>
                   <NearMeOutlinedIcon
                     style={{ color: 'orange', fontSize: '30px' }}
                   />
                 </Grid>
                 <Grid item sx={{ height: '100%', width: '100%' }}>
                   <Typography sx={styleTypo}>Address</Typography>
-                  <Typography sx={{ color: 'GrayText', fontSize: '1vw' }}>
+                  <Typography
+                    sx={{
+                      color: 'GrayText',
+                      fontSize: { xs: '10px', md: '1vw' },
+                    }}
+                  >
                     {detailsData.address}
                   </Typography>
                 </Grid>
@@ -150,16 +162,20 @@ const ContactUs = ({ detailsData, contactData }) => {
                   width: '100%',
                 }}
               />
+
               <Grid
                 item
                 sx={{
                   display: 'flex',
-                  flexDirection: 'row',
                   m: '10px 0',
                   width: '100%',
+                  flexDirection: { xs: 'column', md: 'row' },
+                  justifyContent: { xs: 'center', md: 'unset' },
+                  alignItems: 'center',
+                  textAlign: { xs: 'center', md: 'unset' },
                 }}
               >
-                <Grid sx={{ mr: '27px' }}>
+                <Grid sx={{ mr: { md: '27px' }, m: { xs: '10px 0', md: '' } }}>
                   <LocalPhoneOutlinedIcon
                     style={{ color: 'orange', fontSize: '30px' }}
                   />
@@ -182,12 +198,15 @@ const ContactUs = ({ detailsData, contactData }) => {
                 item
                 sx={{
                   display: 'flex',
-                  flexDirection: 'row',
+                  flexDirection: { xs: 'column', md: 'row' },
+                  justifyContent: { xs: 'center', md: 'unset' },
+                  alignItems: 'center',
+                  textAlign: { xs: 'center', md: 'unset' },
                   m: '10px 0',
                   width: '100%',
                 }}
               >
-                <Grid sx={{ mr: '27px' }}>
+                <Grid sx={{ mr: { md: '27px' }, m: { xs: '10px 0', md: '' } }}>
                   <WhatsAppIcon style={{ color: 'orange', fontSize: '30px' }} />
                 </Grid>
                 <Typography sx={styleTypo}>
@@ -198,7 +217,6 @@ const ContactUs = ({ detailsData, contactData }) => {
                 style={{
                   height: '1px',
                   color: 'gray',
-                  background: 'black',
                   width: '100%',
                 }}
               />
@@ -206,12 +224,15 @@ const ContactUs = ({ detailsData, contactData }) => {
                 item
                 sx={{
                   display: 'flex',
-                  flexDirection: 'row',
+                  flexDirection: { xs: 'column', md: 'row' },
+                  justifyContent: { xs: 'center', md: 'unset' },
+                  alignItems: 'center',
+                  textAlign: { xs: 'center', md: 'unset' },
                   m: '10px 0',
                   width: '100%',
                 }}
               >
-                <Grid sx={{ mr: '27px' }}>
+                <Grid sx={{ mr: { md: '27px' }, m: { xs: '10px 0', md: '' } }}>
                   <EmailOutlinedIcon
                     style={{ color: 'orange', fontSize: '30px' }}
                   />
@@ -223,16 +244,22 @@ const ContactUs = ({ detailsData, contactData }) => {
           <Grid
             item
             className={styles.cnInnerContainerRight}
-            sx={{ width: '50vw' }}
+            sx={{ width: { xs: '100vw', md: '50vw' } }}
           >
             <Grid container className={styles.cnRightContainer}>
               <Grid item>
                 <Typography
-                  sx={{ fontSize: '30px', fontWeight: '700', pb: '10px' }}
+                  sx={{
+                    fontSize: { xs: '17px', md: '30px' },
+                    fontWeight: '700',
+                    pb: '10px',
+                  }}
                 >
                   Send Us a message
                 </Typography>
-                <Typography sx={{ fontSize: '16px', color: 'gray' }}>
+                <Typography
+                  sx={{ fontSize: { xs: '9px', md: '16px' }, color: 'gray' }}
+                >
                   We would love to hear from you
                 </Typography>
               </Grid>
@@ -277,7 +304,12 @@ const ContactUs = ({ detailsData, contactData }) => {
                     />
                   </Grid>
                 </Grid>
-                <input className={styles.cnButton} type='submit' value='Send' />
+                <input
+                  style={{ fontFamily: "'Comfortaa', sans-serif" }}
+                  className={styles.cnButton}
+                  type='submit'
+                  value='Send'
+                />
               </form>
             </Grid>
           </Grid>

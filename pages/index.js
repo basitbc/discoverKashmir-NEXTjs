@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Inter } from '@next/font/google';
+import { Montserrat_Alternates } from '@next/font/google';
 import React, { useEffect, useState } from 'react';
 import { Button, Fab, Grid, Typography } from '@mui/material';
 import Router, { useRouter } from 'next/router';
@@ -12,9 +12,14 @@ import BlogInHome from '../Components/BlogInHome';
 import LocationsInHome from '../Components/LocationsInHome';
 import TestimonialHome from '../Components/TestimonialHome';
 
-const inter = Inter({ subsets: ['latin'] });
 export default function Home({ detailsData, packagesData }) {
   <Head>
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&display=swap'
+      rel='stylesheet'
+    />
     <link
       rel='stylesheet'
       href='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css'
@@ -22,10 +27,6 @@ export default function Home({ detailsData, packagesData }) {
     <link
       rel='stylesheet'
       href='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css'
-    />
-    <link
-      href='https://fonts.googleapis.com/css?family=Montserrat Alternates'
-      rel='stylesheet'
     />
     <link rel='apple-touch-icon' href='%PUBLIC_URL%/logo192.png' />
     <link
@@ -79,13 +80,28 @@ export default function Home({ detailsData, packagesData }) {
               sx={{
                 fontSize: { xs: '15px', lg: '24px' },
                 color: 'white',
-                marginLeft: { xs: '-60px', lg: '-150px' },
+                marginLeft: { xs: '-37px', lg: '-110px' },
                 lineHeight: '0',
-                fontFamily: "Lato, 'sans-serif'",
-                // fontWeight: 900,
+                fontFamily: 'Montserrat Alternates, sans-serif',
+                fontWeight: 700,
               }}
             >
-              <b>Escape. Explore. &</b>
+              <b
+                style={{
+                  fontFamily: 'Montserrat Alternates, sans-serif',
+                  fontWeight: 700,
+                }}
+              >
+                Escape. Explore.{' '}
+              </b>
+              <b
+                style={{
+                  fontFamily: 'Lato, sans-serif',
+                  fontWeight: 900,
+                }}
+              >
+                &
+              </b>
             </Typography>
             <Typography
               className={styles.textDis}
@@ -93,7 +109,8 @@ export default function Home({ detailsData, packagesData }) {
                 fontSize: { xs: '37px', lg: '70px' },
                 color: 'black',
                 overflow: 'hidden',
-                fontFamily: "'Lato', sans-serif",
+                // fontFamily: "'Lato', sans-serif",
+                fontFamily: 'Poppins, sans-serif',
                 fontWeight: 900,
               }}
             >
@@ -105,10 +122,10 @@ export default function Home({ detailsData, packagesData }) {
                 fontSize: { xs: '23px', lg: '50px' },
                 color: 'white',
                 lineHeight: '0',
-                marginRight: { xs: '-60px', lg: '-130px' },
-                letterSpacing: '7.0px',
+                marginRight: { xs: '-70px', lg: '-117px' },
+                letterSpacing: '3.0px',
                 // overflow: { xs: 'auto', md: 'visible' },
-                fontFamily: "'Raleway', sans-serif",
+                fontFamily: 'Poppins, sans-serif',
                 fontWeight: 700,
               }}
             >

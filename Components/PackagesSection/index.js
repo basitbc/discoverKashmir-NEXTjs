@@ -5,6 +5,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import PackageBox from '../PackageBox';
+import Router from 'next/router';
 
 const packagesSection = ({ packagesData }) => {
   useEffect(() => {
@@ -49,7 +50,7 @@ const packagesSection = ({ packagesData }) => {
           container
           sx={{
             flexDirection: { xs: 'column', md: 'row' },
-            // alignItems: 'center',
+            alignItems: { xs: 'center', md: 'unset' },
             justifyContent: { xs: 'center', md: 'space-evenly' },
             flexWrap: 'wrap',
           }}
@@ -63,7 +64,9 @@ const packagesSection = ({ packagesData }) => {
       <button
         className={styles.buttonPkViewMore}
         onClick={() => {
-          console.log('clicked');
+          Router.push({
+            pathname: '/packages',
+          });
         }}
       >
         View All Tours <ArrowRightAltIcon />
