@@ -13,32 +13,46 @@ import MailIcon from '@mui/icons-material/Mail';
 import { Fab, Grid, Typography } from '@mui/material';
 import DialpadIcon from '@mui/icons-material/Dialpad';
 import styles from '../../styles/MobileSideBar.module.css';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import Link from 'next/link';
-
+import FacebookIcon from '@mui/icons-material/Facebook';
+import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
+import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined';
+import DeckOutlinedIcon from '@mui/icons-material/DeckOutlined';
+import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
+import { blue } from '@mui/material/colors';
 export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
   const sideBarLinks = [
     {
-      name: 'Destinations',
-      path: '/destinations',
+      name: 'Home',
+      path: '/',
+      icon: <HouseOutlinedIcon sx={{ fontSize: '25px', color: '#DC834E' }} />,
     },
     {
       name: 'Travel Blogs',
       path: '/travelblogs',
+      icon: (
+        <FlightTakeoffOutlinedIcon
+          sx={{ fontSize: '25px', color: '#DC834E' }}
+        />
+      ),
     },
     {
       name: 'Packages',
       path: '/packages',
+      icon: <DeckOutlinedIcon sx={{ fontSize: '25px', color: '#DC834E' }} />,
     },
     {
       name: 'Contact Us',
       path: '/contact',
+      icon: <PhoneOutlinedIcon sx={{ fontSize: '25px', color: '#DC834E' }} />,
     },
   ];
 
   const list = () => (
     <Box
-      sx={{ width: 250, p: '90px 0 0 0px' }}
-      role='presentation'
+      sx={{ width: '100vw', mt: '110px', overflow: 'hidden', height: '100vh' }}
+      role='persistent'
       onClick={() => {
         openDrawer ? setOpenDrawer(false) : setOpenDrawer(true);
       }}
@@ -52,33 +66,50 @@ export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
+                justifyContent: 'center',
               }}
             >
               <Grid>
                 <ListItem disablePadding>
-                  <ListItemButton>
+                  <ListItemButton
+                    style={{
+                      textDecoration: 'none',
+                      borderBottom: '1px solid #D3D3D3',
+                    }}
+                  >
                     <ListItemText>
-                      <Link style={{ textDecoration: 'none' }} href={item.path}>
-                        <Typography
-                          sx={{
-                            fontWeight: 800,
-                            fontFamily: 'Raleway, sans-serif',
-                          }}
-                        >
-                          {item.name}
-                        </Typography>
+                      <Link
+                        style={{
+                          textDecoration: 'none',
+                          display: 'inline-flex',
+                          // flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          textAlign: 'center',
+                        }}
+                        href={item.path}
+                      >
+                        <Grid item sx={{ color: 'black', mr: '16px' }}>
+                          {item.icon}
+                        </Grid>
+                        <Grid item>
+                          <Typography
+                            sx={{
+                              fontWeight: 300,
+                              fontSize: '13px',
+                              fontFamily: 'Lato, sans-serif',
+                              color: 'black',
+                              textTransform: 'uppercase',
+                              alignItems: 'center',
+                            }}
+                          >
+                            {item.name}
+                          </Typography>
+                        </Grid>
                       </Link>
                     </ListItemText>
                   </ListItemButton>
                 </ListItem>
-                <hr
-                  style={{
-                    height: '0.5px',
-                    backgroundColor: 'black',
-                    color: 'black',
-                  }}
-                />
               </Grid>
             </Grid>
           );
@@ -89,7 +120,9 @@ export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
         container
         sx={{
           margin: '0 10px 0 20px',
+          height: '30px',
           display: 'flex',
+          mt: '20px',
           justifyContent: 'flex-start',
           alignItems: 'center',
         }}
@@ -100,21 +133,32 @@ export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
           Follow us:
         </Typography>
         <Grid item>
-          <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
-            {/* <i
-              className='fa fa-instagram'
-              style={{ fontSize: '23px', color: '#8a3ab9' }}
-            ></i> */}
+          <Fab
+            size='small'
+            aria-label='like'
+            sx={{
+              marginRight: '10px',
+              background: '#d6249f',
+              background:
+                'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)',
+              color: 'white',
+            }}
+          >
+            <InstagramIcon />
           </Fab>
         </Grid>
         <Grid item>
           <Fab
             size='small'
-            color='primary'
             aria-label='like'
-            sx={{ marginRight: '10px' }}
+            sx={{
+              marginRight: '10px',
+              background: '#d6249f',
+              background: ' #4267B2 ',
+              color: 'white',
+            }}
           >
-            {/* <i className='fa fa-facebook' style={{ fontSize: '23px' }}></i> */}
+            <FacebookIcon />
           </Fab>
         </Grid>
         {/* <Grid item sx={{ display: 'flex' }}>
@@ -133,7 +177,16 @@ export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
   return (
     <div>
       <React.Fragment>
-        <Drawer anchor='right' open={openDrawer}>
+        <Drawer
+          anchor='right'
+          open={openDrawer}
+          PaperProps={{
+            sx: {
+              background: 'white',
+            },
+          }}
+          transitionDuration={{ enter: 1000, exit: 500 }}
+        >
           {list()}
         </Drawer>
       </React.Fragment>

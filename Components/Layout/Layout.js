@@ -15,13 +15,15 @@ export default function Layout({ children }) {
   return (
     <>
       <NavBar />
+      {/* <Grid sx={{ display: { xs: 'flex', md: 'none' }, height: '50px' }}></Grid> */}
       <MobileSideBar openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
       <Grid
         container
         sx={{
           position: 'fixed',
-          top: '10px',
-          justifyContent: 'end',
+          top: '5px',
+          left: '10px',
+          justifyContent: 'start',
           // border: '1px solid',
           display: { xs: 'flex', md: 'none' },
           marginTop: '10px',

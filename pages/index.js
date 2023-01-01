@@ -77,31 +77,17 @@ export default function Home({ detailsData, packagesData }) {
             }}
           >
             <Typography
+              className={styles.textExcape}
               sx={{
                 fontSize: { xs: '15px', lg: '24px' },
                 color: 'white',
                 marginLeft: { xs: '-37px', lg: '-110px' },
                 lineHeight: '0',
-                fontFamily: 'Montserrat Alternates, sans-serif',
+                fontFamily: "'Montserrat Alternates', sans-serif",
                 fontWeight: 700,
               }}
             >
-              <b
-                style={{
-                  fontFamily: 'Montserrat Alternates, sans-serif',
-                  fontWeight: 700,
-                }}
-              >
-                Escape. Explore.{' '}
-              </b>
-              <b
-                style={{
-                  fontFamily: 'Lato, sans-serif',
-                  fontWeight: 900,
-                }}
-              >
-                &
-              </b>
+              Escape. Explore. &
             </Typography>
             <Typography
               className={styles.textDis}

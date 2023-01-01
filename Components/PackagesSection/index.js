@@ -48,6 +48,8 @@ const packagesSection = ({ packagesData }) => {
         </Grid>
         <Grid
           container
+          rowGap={2}
+          columnGap={2}
           sx={{
             flexDirection: { xs: 'column', md: 'row' },
             alignItems: { xs: 'center', md: 'unset' },
