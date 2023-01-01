@@ -32,7 +32,8 @@ const TravelBlogs = () => {
           sx={{ height: '63vh' }}
         >
           <Image
-            layout='fill'
+            fill
+            priority
             // style={{ width: isMobile ? '900px' : '100%' }}
             src={heroImage}
           />

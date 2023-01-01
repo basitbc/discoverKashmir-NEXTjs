@@ -8,9 +8,9 @@ const data = [
   {
     image: 'hero1.jpg',
   },
-  // {
-  //   image: 'hero2.jpg',
-  // },
+  {
+    image: 'hero2.jpg',
+  },
   // {
   //   image: 'hero3.jpg',
   // },
