@@ -15,7 +15,7 @@ export default function Layout({ children }) {
   return (
     <>
       <NavBar />
-      {/* <Grid sx={{ display: { xs: 'flex', md: 'none' }, height: '50px' }}></Grid> */}
+      <Grid sx={{ display: { xs: 'flex', md: 'none' }, height: '70px' }}></Grid>
       <MobileSideBar openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
       <Grid
         container
