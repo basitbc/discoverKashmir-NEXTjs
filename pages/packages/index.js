@@ -123,6 +123,7 @@ const Packages = ({ packagesData }) => {
         <Grid
           container
           columnGap={2}
+          rowGap={2}
           sx={{
             display: 'flex',
             flexDirection: 'row',

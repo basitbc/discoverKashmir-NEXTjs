@@ -31,7 +31,7 @@ const PackageBox = ({ item, usedIn }) => {
         flexDirection: 'column',
         height: '470px',
         width: {
-          xs: usedIn === 'home' ? '90%' : '100%',
+          xs: '90%',
           md: '410px',
         },
       }}

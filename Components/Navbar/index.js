@@ -5,18 +5,25 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import DialpadIcon from '@mui/icons-material/Dialpad';
 import { Link as LinkMUI } from '@mui/material';
 import logoWhite from '../../public/Assets/logo/logo-whiteColor.png';
+import logoBlack from '../../public/Assets/logo/logo-blackColor.png';
 import Link from 'next/link';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import Image from 'next/image';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import Head from 'next/head';
 import detailsData from '../../Data/Details.json';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
 const NavBar = ({ setOpenDrawer, openDrawer }) => {
   const [changedNavbar, setChangedNavbar] = useState(false);
   const [changedNavbarMobile, setChangedNavbarMobile] = useState(false);
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
+    defaultMatches: true,
+  });
   if (typeof window !== 'undefined') {
     let scroll = window.scrollY;
     window.addEventListener('scroll', () => {
@@ -44,21 +51,28 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
       className={styles.navbarContainer}
       id='navbar'
       sx={{
-        background: {
-          xs: changedNavbarMobile ? 'rgba(2, 27, 48, 0.9)' : '',
-          md: changedNavbar ? 'rgba(2, 27, 48, 0.9)' : '',
+        backgroundColor: {
+          // xs: changedNavbarMobile ? 'rgba(2, 27, 48, 0.9)' : '',
+          xs: 'white',
+          md: changedNavbar ? 'rgba(2, 27, 48, 0.9)' : 'transparent',
         },
         position: { xs: 'fixed', md: changedNavbar ? 'fixed' : 'absolute' },
         padding: {
           md: changedNavbar ? '5px 10px 0 10px' : '15px 10px 0 10px',
         },
-        height: changedNavbar ? '70px' : '100px',
+        height: { xs: '70px', md: changedNavbar ? '70px' : '100px' },
         width: '100vw',
         zIndex: '9999',
         // borderBottom: '1px solid',
         justifyContent: { xs: 'space-between', md: 'space-between' },
+        // borderBottom: { xs: '2px solid gray', md: '0px solid' },
+        boxShadow: {
+          xs: 'rgba(0, 0, 0, 0.16) 0px 1px 4px;',
+          md: 'unset',
+        },
       }}
     >
+      <Grid item sx={{ display: { xs: 'flex', md: 'none' } }}></Grid>
       <Grid
         item
         sx={{
@@ -79,13 +93,22 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
           >
             {details.Logo}
           </Typography> */}
-          <Image
-            src={logoWhite}
-            style={{ height: '50px', width: '130px' }}
-            alt='logo'
-          />
+          {isMobile ? (
+            <Image
+              src={logoBlack}
+              style={{ height: '52px', width: '130px' }}
+              alt='logo'
+            />
+          ) : (
+            <Image
+              src={logoWhite}
+              style={{ height: '50px', width: '130px' }}
+              alt='logo'
+            />
+          )}
         </Link>
       </Grid>
+
       <Grid container display='flex' flexDirection='row' width='auto'>
         <Grid
           container
