@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 import Image from 'next/image';
-import destinationData from '../../public/Data/Destinations.json';
+import destinationData from '../../Data/Destinations.json';
 import styles from '../../styles/DestinationSection.module.css';
 
 const DestinationSection = () => {

@@ -82,10 +82,10 @@ export default function Home({ detailsData, packagesData }) {
                 marginLeft: { xs: '-60px', lg: '-150px' },
                 lineHeight: '0',
                 fontFamily: "Lato, 'sans-serif'",
-                fontWeight: 900,
+                // fontWeight: 900,
               }}
             >
-              Escape. Explore. &
+              <b>Escape. Explore. &</b>
             </Typography>
             <Typography
               className={styles.textDis}
@@ -97,7 +97,7 @@ export default function Home({ detailsData, packagesData }) {
                 fontWeight: 900,
               }}
             >
-              DISCOVER
+              <b>DISCOVER</b>
             </Typography>
             <Typography
               className={styles.textKmr}
@@ -112,7 +112,7 @@ export default function Home({ detailsData, packagesData }) {
                 fontWeight: 700,
               }}
             >
-              Kashmir
+              <b>Kashmir</b>
             </Typography>
 
             <Grid>

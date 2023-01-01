@@ -12,7 +12,6 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { Fab, Grid, Typography } from '@mui/material';
 import DialpadIcon from '@mui/icons-material/Dialpad';
-import details from '../../public/Data/Details.json';
 import styles from '../../styles/MobileSideBar.module.css';
 import Link from 'next/link';
 

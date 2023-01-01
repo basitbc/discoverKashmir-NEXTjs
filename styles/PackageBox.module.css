@@ -20,7 +20,7 @@
 }
 
 .pboxImageContainer{
-    /* height: 250px; */
+    height: 250px;
     /* width: 410px; */
     /* width: 100%; */
     /* border: 3px solid; */
@@ -30,17 +30,14 @@
 }
 
 
-.pboxImageContainer img {
-
-    height: 100%;
-    width: 100%;
+.pboxImage{
     border-radius: 22px;
     object-fit: cover;
     overflow: hidden;
     transition: 0.3s ease-in;
 }
 
-.pboxPackageBox:hover .pboxImageContainer img{
+.pboxPackageBox:hover .pboxImage{
     -webkit-transform:  scale(1.1);
 	transform: scale(1.1);
     -webkit-filter: blur(3px);

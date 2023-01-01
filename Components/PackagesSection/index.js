@@ -1,7 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import styles from '../../styles/packagesSection.module.css';
-import packages from '../../public/Data/Packages.json';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
@@ -15,7 +14,7 @@ const packagesSection = ({ packagesData }) => {
   return (
     <>
       <Grid
-        Container
+        container
         className={styles.pkOuterContainer}
         sx={{
           flexDirection: 'column',
@@ -47,11 +46,11 @@ const packagesSection = ({ packagesData }) => {
           </Typography>
         </Grid>
         <Grid
-          item
+          container
           sx={{
             flexDirection: { xs: 'column', md: 'row' },
-            alignItems: 'center',
-            justifyContent: { xs: 'center', md: 'flex-start' },
+            // alignItems: 'center',
+            justifyContent: { xs: 'center', md: 'space-evenly' },
             flexWrap: 'wrap',
           }}
           className={styles.pkInnerContainer3}
