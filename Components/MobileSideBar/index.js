@@ -185,7 +185,7 @@ export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
               background: 'white',
             },
           }}
-          transitionDuration={{ enter: 1000, exit: 500 }}
+          transitionDuration={{ enter: 770, exit: 500 }}
         >
           {list()}
         </Drawer>

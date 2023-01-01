@@ -153,6 +153,7 @@ import useSWR from 'swr';
 
 import path from 'path';
 import fsPromises from 'fs/promises';
+import PreLoader from '../Components/PreLoader';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json
