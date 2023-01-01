@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react';
 import styles from '../../styles/BlogInHome.module.css';
-import blogData from '../../Data/blog.json';
+import blogData from '../../Data/Blog.json';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from 'next/image';
