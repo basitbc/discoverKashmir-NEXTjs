@@ -153,7 +153,6 @@ const BookingBox = (props) => {
               </LocalizationProvider>
             </Grid>
           </Grid>
-          <hr style={{ height: '1px', color: 'gray' }} />
         </Grid>
       </Grid>
 

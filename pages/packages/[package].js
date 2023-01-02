@@ -19,6 +19,7 @@ import BookingBox from '../../Components/BookingBox';
 import PackageBox from '../../Components/PackageBox';
 import FacebookEmbed from '../../Components/FacebookEmbed';
 import PackageAccordain from '../../Components/PackageAccordain';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import { useRouter } from 'next/router';
 import packageDatas from '../../Data/Packages.json';
 import { withRouter } from 'next/router';
@@ -85,6 +86,13 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
         />
       ),
       value: packageData.mealsPlan,
+    },
+    {
+      name: 'Vehicle',
+      icon: (
+        <DirectionsCarIcon style={{ fontSize: isMobile ? '30px' : '40px' }} />
+      ),
+      value: packageData.vehicle,
     },
   ];
   return (
@@ -191,72 +199,107 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
               About
             </Typography>
           </Grid>
-          <Typography
-            sx={{ fontSize: '16px', color: 'gray', p: '20px 0 40px 0' }}
-          >
-            {packageData.description}
-          </Typography>
-          <hr style={{ height: '1px' }} />
-          <Typography
-            sx={{
-              fontSize: '30px',
-              fontFamily: "'Raleway', sans-serif",
-              fontWeight: 700,
-              color: '#DC834E',
-              pt: '20px',
+          <Grid sx={{ width: '100%' }}>
+            <Typography
+              sx={{
+                fontSize: '16px',
+                color: 'gray',
+                p: '20px 0 40px 0',
+                fontFamily: "'Comfortaa', sans-serif",
+              }}
+            >
+              {packageData.description}
+            </Typography>
+          </Grid>
+          <hr
+            style={{
+              height: '1px',
+              margin: '10px 0',
+              backgroundColor: '#D3D3D3',
             }}
-          >
-            Tour Plan
-          </Typography>
-          <PackageAccordain tourPlan={packageData.tourPlan} />
-          <hr style={{ height: '1px', color: 'black' }} />
-          <Typography
-            sx={{
-              fontSize: '30px',
-              fontFamily: "'Raleway', sans-serif",
-              fontWeight: 700,
+          />
+          <Grid item sx={{ width: '100%' }}>
+            <Typography
+              sx={{
+                fontSize: '30px',
+                fontFamily: "'Raleway', sans-serif",
+                fontWeight: 700,
+                color: '#DC834E',
+                pt: '20px',
+              }}
+            >
+              Tour Plan
+            </Typography>
+            <PackageAccordain tourPlan={packageData.tourPlan} />
+          </Grid>
+          <hr
+            style={{
+              height: '1px',
+              margin: '0px 0 20px 0',
+              backgroundColor: '#D3D3D3',
             }}
-          >
-            Included
-          </Typography>
-          {Inclusions?.map((item) => {
-            return (
-              <Typography
-                variant='body1'
-                sx={{ paddingTop: '10px', color: 'gray' }}
-              >
-                <CheckCircleOutlineOutlinedIcon
-                  sx={{ color: 'green', marginRight: '10px' }}
-                />
-                {item}
-              </Typography>
-            );
-          })}
-          <hr style={{ height: '1px', color: 'black' }} />
-          <Typography
-            sx={{
-              fontSize: '30px',
-              fontFamily: "'Raleway', sans-serif",
-              fontWeight: 700,
+          />
+          <Grid item sx={{ mb: '30px', width: '100%' }}>
+            <Typography
+              sx={{
+                fontSize: '30px',
+                fontFamily: "'Raleway', sans-serif",
+                fontWeight: 700,
+              }}
+            >
+              Included
+            </Typography>
+            {Inclusions?.map((item) => {
+              return (
+                <Typography
+                  variant='body1'
+                  sx={{
+                    paddingTop: '10px',
+                    color: 'gray',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <CheckCircleOutlineOutlinedIcon
+                    sx={{ color: 'green', marginRight: '10px' }}
+                  />
+                  {item}
+                </Typography>
+              );
+            })}
+          </Grid>
+          <hr
+            style={{
+              height: '1px',
+              margin: '10px 0',
+              backgroundColor: '#D3D3D3',
             }}
-          >
-            Excluded
-          </Typography>
-          {Exclusions?.map((item) => {
-            return (
-              <Typography
-                variant='body1'
-                sx={{ paddingTop: '10px', color: 'gray' }}
-              >
-                <CancelOutlinedIcon
-                  sx={{ color: 'red', marginRight: '10px' }}
-                />
-                {item}
-              </Typography>
-            );
-          })}
-          <hr style={{ height: '1px', color: 'black' }} />
-          <Grid sx={{ mb: '10px' }}>
+          />
+          <Grid item sx={{ mb: '30px', width: '100%' }}>
+            <Typography
+              sx={{
+                fontSize: '30px',
+                fontFamily: "'Raleway', sans-serif",
+                fontWeight: 700,
+              }}
+            >
+              Excluded
+            </Typography>
+            {Exclusions?.map((item) => {
+              return (
+                <Typography
+                  variant='body1'
+                  sx={{ paddingTop: '10px', color: 'gray', display: 'flex' }}
+                >
+                  <CancelOutlinedIcon
+                    sx={{ color: 'red', marginRight: '10px' }}
+                  />
+                  {item}
+                </Typography>
+              );
+            })}
+          </Grid>
+          <Grid sx={{ mb: '10px', width: '100%' }}>
             <SingleAccordion
               title={'Major Activities'}
               description={MajorActivities}
@@ -269,26 +312,34 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
               description={ThingsToCarry}
             />
           </Grid>
-          <Grid>
+          <Grid sx={{ mb: '30px' }}>
             <SingleAccordion
               title={'Terms and Conditions'}
               description={TermsAndConditions}
             />
           </Grid>
-          <hr style={{ height: '1px', color: 'black' }} />
+
           <Typography
             sx={{
               fontSize: '30px',
               fontFamily: "'Raleway', sans-serif",
               fontWeight: 700,
+              mb: '20px',
             }}
           >
             You may like
           </Typography>
           <Grid
+            // item
             container
-            columnGap={1}
-            sx={{ display: 'flex', flexDirection: { md: 'row' } }}
+            columnGap={2}
+            rowGap={2}
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'column', md: 'row' },
+              justifyContent: { xs: 'center', md: 'unset' },
+              flexWrap: 'nowrap',
+            }}
           >
             {packages.slice(0, 2).map((item) => {
               return <PackageBox item={item} />;
