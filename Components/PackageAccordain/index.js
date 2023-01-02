@@ -71,9 +71,11 @@ const PackageAccordain = ({ tourPlan }) => {
             >
               <Typography
                 sx={{
+                  display: 'flex',
                   color: '#DC834E',
-                  fontFamily: "'Raleway', sans-serif",
-                  fontWeight: '700',
+                  fontFamily: "'Comfortaa', sans-serif",
+                  fontWeight: { xs: '500', md: '700' },
+                  justifyContent: 'center',
                 }}
               >
                 <LocationOnOutlinedIcon
@@ -83,15 +85,28 @@ const PackageAccordain = ({ tourPlan }) => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography sx={{ color: 'gray', padding: '0 0 0 30px' }}>
+              <Typography
+                sx={{
+                  color: 'gray',
+                  padding: '0 0 0 30px',
+                  fontFamily: "'Comfortaa', sans-serif",
+                }}
+              >
                 {item.description}
               </Typography>
               {item.note ? (
-                <Typography sx={{ color: 'gray', paddingTop: '20px' }}>
+                <Typography
+                  sx={{
+                    color: 'gray',
+                    paddingTop: '20px',
+                    fontFamily: "'Comfortaa', sans-serif",
+                  }}
+                >
                   <span
                     style={{
                       color: 'black',
                       fontWeight: '500',
+                      fontFamily: "'Comfortaa', sans-serif",
                     }}
                   >
                     Note:{' '}

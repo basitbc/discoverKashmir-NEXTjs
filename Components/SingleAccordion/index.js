@@ -28,7 +28,7 @@ const SingleAccordion = (props) => {
         }}
       >
         <AccordionSummary
-          sx={{ background: '#DC834E' }}
+          sx={{ background: '#DC834E', border: '0px solid' }}
           expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />}
           aria-controls='panel1a-content'
           id='panel1a-header'
@@ -45,15 +45,22 @@ const SingleAccordion = (props) => {
           </Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ mt: '20px' }}>
-          {props?.description?.map((item) => {
-            return (
-              <li
-                style={{ color: 'gray', fontFamily: "'Raleway', sans-serif" }}
-              >
-                {item}
-              </li>
-            );
-          })}
+          <ul style={{ paddingLeft: '10px' }}>
+            {props?.description?.map((item) => {
+              return (
+                <li
+                  style={{
+                    color: 'gray',
+                    paddingLeft: '5px',
+                    fontFamily: "'Raleway', sans-serif",
+                    marginBottom: '16px',
+                  }}
+                >
+                  {item}
+                </li>
+              );
+            })}
+          </ul>
         </AccordionDetails>
       </Accordion>
     </Grid>

@@ -7,6 +7,7 @@ import PackageBox from '../../Components/PackageBox';
 import heroImage from '../../public/Assets/Images/Packages/background.jpg';
 import Image from 'next/image';
 import Head from 'next/head';
+import aboutOverview from '../../public/Assets/Images/Packages/aboutOverview.jpg';
 
 const Packages = ({ packagesData }) => {
   const theme = useTheme();
@@ -30,7 +31,7 @@ const Packages = ({ packagesData }) => {
         >
           <Image
             priority
-            layout='fill'
+            fill
             // style={{ width: isMobile ? '900px' : '100%' }}
             src={heroImage}
           />
@@ -79,6 +80,7 @@ const Packages = ({ packagesData }) => {
           </Grid>
           <Grid item className={styles.pkgImgContainer}>
             <Grid
+              position='relative'
               className={styles.pkgImgContainerInner}
               item
               sx={{
@@ -89,9 +91,10 @@ const Packages = ({ packagesData }) => {
                 overflow: 'hidden',
               }}
             >
-              <img
-                style={{ width: '100%', height: '100%', borderRadius: '12px' }}
-                src='#'
+              <Image
+                fill
+                style={{ borderRadius: '12px' }}
+                src={aboutOverview}
               />
             </Grid>
           </Grid>

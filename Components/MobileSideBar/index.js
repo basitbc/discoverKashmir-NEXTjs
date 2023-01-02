@@ -14,6 +14,7 @@ import { Fab, Grid, Typography } from '@mui/material';
 import DialpadIcon from '@mui/icons-material/Dialpad';
 import styles from '../../styles/MobileSideBar.module.css';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import { Link as LinkMUI } from '@mui/material';
 import Link from 'next/link';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
@@ -133,33 +134,46 @@ export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
           Follow us:
         </Typography>
         <Grid item>
-          <Fab
-            size='small'
-            aria-label='like'
-            sx={{
-              marginRight: '10px',
-              background: '#d6249f',
-              background:
-                'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)',
-              color: 'white',
-            }}
+          <LinkMUI
+            target={'_blank'}
+            href='https://www.instagram.com/discoverkashmir1/'
+            style={{ textDecoration: 'none', color: 'white' }}
           >
-            <InstagramIcon />
-          </Fab>
+            <Fab
+              size='small'
+              aria-label='like'
+              sx={{
+                marginRight: '10px',
+                background: '#d6249f',
+                background:
+                  'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)',
+                color: 'white',
+              }}
+            >
+              <InstagramIcon />
+            </Fab>
+          </LinkMUI>
         </Grid>
+
         <Grid item>
-          <Fab
-            size='small'
-            aria-label='like'
-            sx={{
-              marginRight: '10px',
-              background: '#d6249f',
-              background: ' #4267B2 ',
-              color: 'white',
-            }}
+          <LinkMUI
+            target={'_blank'}
+            href='https://www.facebook.com/discoverkashmir1/?mibextid=ZbWKwL'
+            style={{ textDecoration: 'none', color: 'white' }}
           >
-            <FacebookIcon />
-          </Fab>
+            <Fab
+              size='small'
+              aria-label='like'
+              sx={{
+                marginRight: '10px',
+                background: '#d6249f',
+                background: ' #4267B2 ',
+                color: 'white',
+              }}
+            >
+              <FacebookIcon />
+            </Fab>
+          </LinkMUI>
         </Grid>
         {/* <Grid item sx={{ display: 'flex' }}>
           <Typography
