@@ -5,6 +5,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import styles from '../../styles/PackagesAccordain.module.css';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import { Grid } from '@mui/material';
 
@@ -88,11 +89,18 @@ const PackageAccordain = ({ tourPlan }) => {
               <Typography
                 sx={{
                   color: 'gray',
-                  padding: '0 0 0 30px',
+                  // padding: '0 0 0 30px',
                   fontFamily: "'Comfortaa', sans-serif",
+                  whiteSpace: 'pre-wrap',
                 }}
               >
-                {item.description}
+                <span
+                  className={styles.span}
+                  style={{
+                    fontFamily: "'Comfortaa', sans-serif",
+                  }}
+                  dangerouslySetInnerHTML={{ __html: [`${item.description}`] }}
+                />
               </Typography>
               {item.note ? (
                 <Typography
@@ -107,6 +115,7 @@ const PackageAccordain = ({ tourPlan }) => {
                       color: 'black',
                       fontWeight: '500',
                       fontFamily: "'Comfortaa', sans-serif",
+                      fontWeight: 'bold',
                     }}
                   >
                     Note:{' '}
