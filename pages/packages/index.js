@@ -151,10 +151,10 @@ import fsPromises from 'fs/promises';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json
-  const detailsData = await fsPromises.readFile(
-    jsonDirectory + '/Details.json',
-    'utf8'
-  );
+  // const detailsData = await fsPromises.readFile(
+  //   jsonDirectory + '/Details.json',
+  //   'utf8'
+  // );
   const packagesData = await fsPromises.readFile(
     jsonDirectory + '/Packages.json',
     'utf8'

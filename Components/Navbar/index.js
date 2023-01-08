@@ -20,6 +20,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 const NavBar = ({ setOpenDrawer, openDrawer }) => {
   const [changedNavbar, setChangedNavbar] = useState(false);
   const [changedNavbarMobile, setChangedNavbarMobile] = useState(false);
+  const [staticBg, setStaticBg] = useState(true);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
@@ -54,13 +55,23 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
         backgroundColor: {
           // xs: changedNavbarMobile ? 'rgba(2, 27, 48, 0.9)' : '',
           xs: 'white',
-          md: changedNavbar ? 'rgba(2, 27, 48, 0.9)' : 'transparent',
+          md: staticBg ? 'black' : changedNavbar ? 'black' : 'transparent',
         },
-        position: { xs: 'fixed', md: changedNavbar ? 'fixed' : 'absolute' },
+        position: {
+          xs: 'fixed',
+          md: staticBg ? 'fixed' : changedNavbar ? 'fixed' : 'absolute',
+        },
         padding: {
-          md: changedNavbar ? '5px 10px 0 10px' : '15px 10px 0 10px',
+          md: staticBg
+            ? '5px 10px 0 10px'
+            : changedNavbar
+            ? '5px 10px 0 10px'
+            : '15px 10px 0 10px',
         },
-        height: { xs: '70px', md: changedNavbar ? '70px' : '100px' },
+        height: {
+          xs: '70px',
+          md: staticBg ? '70px' : changedNavbar ? '70px' : '100px',
+        },
         width: '100vw',
         zIndex: '9999',
         // borderBottom: '1px solid',
@@ -102,6 +113,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
           ) : (
             <Image
               src={logoWhite}
+              // src={logoBlack}
               style={{ height: '50px', width: '130px' }}
               alt='logo'
             />
@@ -254,7 +266,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             <LinkMUI
               target={'_blank'}
               href='https://www.instagram.com/discoverkashmir1/'
-              style={{ textDecoration: 'none', color: 'white' }}
+              style={{ textDecoration: 'none', color: 'black' }}
             >
               <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
                 {/* <i className='fa fa-instagram' style={{ fontSize: '23px' }}></i> */}

@@ -85,8 +85,10 @@ export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
                           display: 'inline-flex',
                           // flexDirection: 'row',
                           alignItems: 'center',
-                          justifyContent: 'center',
+                          // justifyContent: 'center',
                           textAlign: 'center',
+                          height: '100%',
+                          width: '100%',
                         }}
                         href={item.path}
                       >
