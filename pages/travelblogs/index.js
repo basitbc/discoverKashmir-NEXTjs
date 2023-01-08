@@ -5,11 +5,11 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { Grid, Typography } from '@mui/material';
 import heroImage from '../../public/Assets/Images/Blogs/background.jpg';
 import BlogBox from '../../Components/BlogBox';
-import BlogData from '../../Data/Blog.json';
+// import BlogData from '../../Data/Blog.json';
 import Image from 'next/image';
 import Head from 'next/head';
 
-const TravelBlogs = () => {
+const TravelBlogs = ({ blogData }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
@@ -64,18 +64,18 @@ const TravelBlogs = () => {
           <Grid
             container
             rowGap={4}
-            columnGap={1}
+            columnGap={10}
             sx={{
               display: 'flex',
               flexDirection: 'row',
               margin: '10px 40px',
               flexWrap: 'wrap',
-              justifyContent: 'space-evenly',
+              justifyContent: 'flex-start',
               // background: `url(${bg})`,
               // backgroundSize: '100vw 100vh',
             }}
           >
-            {BlogData.map((item) => {
+            {blogData.map((item) => {
               return <BlogBox item={item} />;
             })}
           </Grid>
@@ -92,11 +92,11 @@ import fsPromises from 'fs/promises';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json
-  const detailsData = await fsPromises.readFile(
-    jsonDirectory + '/Details.json',
+  const blogData = await fsPromises.readFile(
+    jsonDirectory + '/Blog.json',
     'utf8'
   );
   return {
-    props: { detailsData: JSON.parse(detailsData) },
+    props: { blogData: JSON.parse(blogData) },
   };
 }

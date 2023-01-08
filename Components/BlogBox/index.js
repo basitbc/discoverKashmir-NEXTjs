@@ -1,28 +1,43 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react';
 import '../../styles/BlogBox.module.css';
-
+import Router, { useRouter } from 'next/router';
+import slugify from 'slugify';
+import styles from '../../styles/BlogBox.module.css';
+import Image from 'next/image';
 const BlogBox = ({ item }) => {
+  const handleClick = (item) => {
+    Router.push({
+      pathname: `/travelblogs/${slugify(item.Title).toLowerCase()}`,
+      query: { id: item.id },
+    });
+  };
   return (
     <Grid
       container
-      className='box-bg'
+      className={styles.boxBg}
       sx={{
         height: '30vh',
         maxWidth: { xs: '640px', md: '25vw' },
         // border: '1px solid',
         borderRadius: '12px',
         flexWrap: 'wrap',
-        background: `url(${item.Image})`,
+        background: 'url(/Assets/Images/Blogs/0/cardImage.jpg)',
+        // /Assets/Images/Blogs/1/cardImage.jpg
+        // {'/Assets/Images/Packages/' + item.image}
         backgroundSize: '100% 100%',
         overflow: 'hidden',
         padding: '10px 40px',
+        cursor: 'pointer',
         // overflow: 'hidden',
+      }}
+      onClick={() => {
+        handleClick(item);
       }}
     >
       <Typography
         variant='h6'
-        className='text-bg'
+        className={styles.textBg}
         sx={{
           position: 'relative',
           display: 'inline',
@@ -35,6 +50,7 @@ const BlogBox = ({ item }) => {
             fontSize: '1.3vw',
             backgroundColor: 'white',
             boxDecorationBreak: 'clone',
+            fontSize: { xs: '20px', md: '' },
           }}
         >
           {item.Title}

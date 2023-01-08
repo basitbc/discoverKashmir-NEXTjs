@@ -1,10 +1,10 @@
-.text-bg{
+.textBg{
 	-webkit-box-decoration-break: clone;
 	box-decoration-break: clone;
     cursor: pointer;
 }
 
-.box-bg:hover{
+.boxBg:hover{
     /* -webkit-transform:  scale(1.1); */
     -webkit-filter: blur(3px);
     overflow: hidden;

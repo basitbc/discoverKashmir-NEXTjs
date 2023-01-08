@@ -8,7 +8,7 @@ import 'aos/dist/aos.css';
 import PreLoader from '../Components/PreLoader';
 
 export default function App({ Component, pageProps }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     AOS.init({
       startEvent: 'DOMContentLoaded',
@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }) {
     });
   }, []);
   useEffect(() => {
-    setTimeout(() => setLoading(false), 3000);
+    // setTimeout(() => setLoading(false), 3000);
   });
   return loading ? (
     <PreLoader />
