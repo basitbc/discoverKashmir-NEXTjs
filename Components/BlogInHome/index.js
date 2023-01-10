@@ -3,14 +3,22 @@ import React from 'react';
 import styles from '../../styles/BlogInHome.module.css';
 import blogData from '../../Data/Blog.json';
 import { useTheme } from '@mui/material/styles';
+import slugify from 'slugify';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from 'next/image';
+import Router from 'next/router';
 
 const BlogInHome = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
   });
+  const handleClick = (item) => {
+    Router.push({
+      pathname: `/travelblogs/${slugify(item.Title).toLowerCase()}`,
+      query: { id: item.id },
+    });
+  };
   return (
     <Grid
       container
@@ -118,6 +126,9 @@ const BlogInHome = () => {
       >
         {blogData.slice(0, 3).map((item) => (
           <Grid
+            onClick={() => {
+              handleClick(item);
+            }}
             container
             display={'flex'}
             alignItems='center'
@@ -132,6 +143,7 @@ const BlogInHome = () => {
               xs={4}
               className={styles.bgInnerBox}
               sx={{
+                position: 'relative',
                 height: { xs: '60px', md: '72px' },
                 width: '108px',
                 borderRadius: '14px',
@@ -140,13 +152,14 @@ const BlogInHome = () => {
                 mr: '15px',
               }}
             >
-              <img
+              <Image
+                src={'/Assets/Images/Blogs/' + item.Image + '/cardImage.jpg'}
+                fill
                 style={{
-                  height: '100%',
-                  width: '100%',
+                  // height: '100%',
+                  // width: '100%',
                   borderRadius: '14px',
                 }}
-                src={item.Image}
               />
             </Grid>
             <Grid

@@ -3,15 +3,23 @@ import React from 'react';
 import styles from '../../styles/LocationsInHome.module.css';
 import destinationData from '../../Data/Destinations.json';
 import blogData from '../../Data/Blog.json';
+import slugify from 'slugify';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from 'next/image';
+import Router from 'next/router';
 
 const LocationsInHome = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
   });
+  const handleClick = (item) => {
+    Router.push({
+      pathname: `/travelblogs/${slugify(item.Title).toLowerCase()}`,
+      query: { id: item.id },
+    });
+  };
   return (
     <Grid
       container
@@ -33,6 +41,9 @@ const LocationsInHome = () => {
         {blogData.slice(0, 4).map((item) => (
           <Grid
             item
+            onClick={() => {
+              handleClick(item);
+            }}
             className={styles.lhLeftInnerBox}
             sx={{
               height: { xs: '84px', md: '104px' },
@@ -40,33 +51,54 @@ const LocationsInHome = () => {
               justifyContent: 'flex-start',
             }}
           >
-            <img
+            <Grid
               className={styles.lhImage}
-              style={{
-                height: isMobile ? '66px' : '84px',
-                width: isMobile ? '99px' : '126px',
+              sx={{
+                position: 'relative',
+                minHeight: isMobile ? '66px' : '84px',
+                minWidth: isMobile ? '99px' : '126px',
                 borderRadius: '12px',
                 marginRight: '20px',
               }}
-              src={item.Image}
-              alt='imageOf'
-            />
-            <Typography
-              className={styles.text11}
+            >
+              <Image
+                className={styles.lhImg}
+                fill
+                style={{
+                  // height: isMobile ? '66px' : '84px',
+                  // width: isMobile ? '99px' : '126px',
+                  borderRadius: '12px',
+                  // marginRight: '20px',
+                }}
+                src={'/Assets/Images/Blogs/' + item.Image + '/cardImage.jpg'}
+                alt='imageOf'
+              />
+            </Grid>
+            <Grid
               sx={{
-                fontSize: { xs: '17px', lg: '21px' },
-                fontWeight: '700',
-                fontFamily: 'Headings,',
-                letterSpacing: '-0.3px',
-                lineHeight: { xs: '', md: '32.5px' },
-                textOverflow: 'ellipsis',
-                wordWrap: 'break-word',
-                overflow: 'hidden',
-                whiteSpace: 'pre-wrap',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                textAlign: 'start',
+                alignItems: 'start',
               }}
             >
-              {item.Title}
-            </Typography>
+              <Typography
+                className={styles.text11}
+                sx={{
+                  fontSize: { xs: '17px', lg: '21px' },
+                  fontWeight: '700',
+                  fontFamily: 'Headings,',
+                  letterSpacing: '-0.3px',
+                  lineHeight: { xs: '', md: '32.5px' },
+                  textOverflow: 'ellipsis',
+                  wordWrap: 'break-word',
+                  overflow: 'hidden',
+                  whiteSpace: 'pre-wrap',
+                }}
+              >
+                {item.Title}
+              </Typography>
+            </Grid>
           </Grid>
         ))}
       </Grid>

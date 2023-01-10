@@ -15,6 +15,7 @@ const index = ({ BlogsData }) => {
   const router = useRouter();
   useEffect(() => {
     if (!router.isReady) return;
+
     console.log(router, 'router in blog');
     // setPackageData(packageDataAll[router.query.id]);
     setBlog();
