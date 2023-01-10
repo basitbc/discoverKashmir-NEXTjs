@@ -16,15 +16,17 @@ import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import Head from 'next/head';
 import detailsData from '../../Data/Details.json';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import { useRouter } from 'next/router';
 
 const NavBar = ({ setOpenDrawer, openDrawer }) => {
   const [changedNavbar, setChangedNavbar] = useState(false);
   const [changedNavbarMobile, setChangedNavbarMobile] = useState(false);
-  const [staticBg, setStaticBg] = useState(true);
+  const [staticBg, setStaticBg] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
   });
+  const router = useRouter();
   if (typeof window !== 'undefined') {
     let scroll = window.scrollY;
     window.addEventListener('scroll', () => {
@@ -45,6 +47,15 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
       }
     });
   }
+  const setNavStatic = () => {
+    if (router.pathname === '/travelblogs/[blog]') {
+      setStaticBg(true);
+    }
+  };
+
+  useEffect(() => {
+    setNavStatic();
+  }, [router.pathname]);
 
   return (
     <Grid

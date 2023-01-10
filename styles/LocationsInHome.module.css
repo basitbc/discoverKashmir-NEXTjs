@@ -44,7 +44,7 @@ justify-content: center;
     background-color: #E6E6E6;
 }
 
-.lhLeftInnerBox:hover .lhLeftInnerBox img{
+.lhLeftInnerBox:hover .lhImg{
     -webkit-transform:  scale(1.1);
 	transform: scale(1.1);
     -webkit-filter: blur(3px);
