@@ -394,6 +394,7 @@ export default PackageDetails;
 import path from 'path';
 import fsPromises from 'fs/promises';
 import slugify from 'slugify';
+import Head from 'next/head';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json
