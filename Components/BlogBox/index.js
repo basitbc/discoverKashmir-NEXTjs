@@ -1,11 +1,13 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react';
 import '../../styles/BlogBox.module.css';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import slugify from 'slugify';
 import styles from '../../styles/BlogBox.module.css';
 import Image from 'next/image';
+import next from 'next';
 const BlogBox = ({ item }) => {
+  const router = useRouter();
   const handleClick = (item) => {
     Router.push({
       pathname: `/travelblogs/${slugify(item.Title).toLowerCase()}`,
