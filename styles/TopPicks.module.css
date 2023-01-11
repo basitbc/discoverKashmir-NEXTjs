@@ -6,14 +6,9 @@
     src: url(../public/Assets/Fonts/Headings/Heading-Pro-Family-CC-BY-NCLicense.pdf);
 }
 
-.span{
-    font-size: '19.5px';
-}
-
-
 .bgGridRight{
     display: flex;
-    background-color: #F5F5F5;
+    /* background-color: #F5F5F5; */
     flex-direction: column;
     /* border: 1px solid; */
     border-radius: 15px;
@@ -21,7 +16,7 @@
 .bgInBox{
     border-radius: 7px;
     cursor: pointer;
-    background-color: #F5F5F5;
+    /* background-color: #F5F5F5; */
 
     /* border: 1px solid; */
 padding: 8px;
@@ -31,7 +26,7 @@ padding: 8px;
 .bgInnerBox{
     overflow: hidden;
 }
-.bgInnerBox img{
+.imageCont{
     transition: 0.3s ease-in;
 }
 
@@ -46,3 +41,4 @@ padding: 8px;
 .bgInBox:hover{
     background-color: rgba(19, 19, 19, 0.1);
 }
+
