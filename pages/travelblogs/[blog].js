@@ -34,6 +34,10 @@ const index = ({ BlogsData, packagesData }) => {
       <Head>
         <title>{blogData.Title}</title>
         <meta name='description' content={blogData.shortDes} />
+        <meta
+          itemprop='image'
+          content={`/Assets/Images/Blogs/${blogData.Image}/background.jpg`}
+        />
       </Head>
 
       <Grid>
