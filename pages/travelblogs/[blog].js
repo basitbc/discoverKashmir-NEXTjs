@@ -5,17 +5,22 @@ import blogDatas from '../../Data/Blog.json';
 import Image1 from '../../public/Assets/Images/Packages/3.jpg';
 import styles from '../../styles/BlogDetails.module.css';
 
-const index = ({ BlogsData }) => {
+const index = ({ BlogsData, packagesData }) => {
   const [blogData, setBlogData] = useState(BlogsData[0]);
   const setBlog = () => {
     BlogsData.map((item) => {
       item.id === router.query.id ? setBlogData(item) : null;
     });
   };
+  const handleClickBlog = (item) => {
+    Router.push({
+      pathname: `/travelblogs/${slugify(item.Title).toLowerCase()}`,
+      query: { id: item.id },
+    });
+  };
   const router = useRouter();
   useEffect(() => {
     if (!router.isReady) return;
-
     console.log(router, 'router in blog');
     // setPackageData(packageDataAll[router.query.id]);
     setBlog();
@@ -114,7 +119,120 @@ const index = ({ BlogsData }) => {
           </Typography>
         </Grid>
         {/* For the right section containg links */}
-        <Grid item sx={{ display: 'flex', width: '30%' }}></Grid>
+        <Grid
+          item
+          sx={{
+            display: 'flex',
+            width: { xs: '100%', md: '30%' },
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
+        >
+          <Grid
+            sx={{
+              // height: '20px',
+              display: 'flex',
+
+              margin: { md: '70px 0 10px 0px', xs: '10px 0 0 0' },
+              width: { xs: '90vw', md: '340px' },
+              justifyContent: 'center',
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: 'Headings,sans-serif',
+                textTransform: 'uppercase',
+                letterSpacing: '1.1px',
+                fontWeight: 700,
+              }}
+            >
+              Related Articles
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            display={'flex'}
+            flexDirection='column'
+            className={styles.bgGridRight}
+            sx={{
+              minHeight: { xs: '230px', md: '230px' },
+              width: { xs: '90vw', md: '340px' },
+              padding: { xs: '5px 5px', md: '10px 10px' },
+              margin: { md: '5px 0px', xs: '10px 0' },
+            }}
+          >
+            {BlogsData.slice(0, 3).map((item) => (
+              <Grid
+                onClick={() => {
+                  handleClickBlog(item);
+                }}
+                container
+                display={'flex'}
+                alignItems='center'
+                flexDirection='row'
+                flexWrap={'nowrap'}
+                bgcolor='white'
+                // boxShadow='rgba(0, 0, 0, 0.16) 0px 1px 4px'
+                className={styles.bgInBox}
+              >
+                <Grid
+                  item
+                  xs={4}
+                  className={styles.bgInnerBox}
+                  sx={{
+                    position: 'relative',
+                    height: { xs: '60px', md: '60px' },
+                    width: '90px',
+                    borderRadius: '14px',
+                    // border: '3px solid',
+                    objectFit: 'cover',
+                    mr: '15px',
+                  }}
+                >
+                  <Image
+                    src={
+                      '/Assets/Images/Blogs/' + item.Image + '/cardImage.jpg'
+                    }
+                    fill
+                    style={{
+                      // height: '100%',
+                      // width: '100%',
+                      borderRadius: '14px',
+                    }}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={8}
+                  sx={{
+                    display: 'inline-block',
+                    height: '55px',
+                    textOverflow: 'ellipsis',
+                    // border: '1px solid red',
+                    overflow: 'hidden',
+                  }}
+                >
+                  <Typography
+                    className={styles.textTitle}
+                    sx={{
+                      fontSize: { xs: '12px', md: '15px' },
+                      fontWeight: '700',
+                      fontFamily: 'Headings,',
+                      letterSpacing: '0.3px',
+                      lineHeight: '24.5px',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {item.Title}
+                  </Typography>
+                </Grid>
+              </Grid>
+            ))}
+          </Grid>
+          <Grid item>
+            <TopPicks BlogsData={BlogsData} packagesData={packagesData} />
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );
@@ -124,7 +242,8 @@ export default index;
 import path from 'path';
 import fsPromises from 'fs/promises';
 import slugify from 'slugify';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
+import TopPicks from '../../Components/TopPicks';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json
@@ -132,9 +251,14 @@ export async function getStaticProps() {
     jsonDirectory + '/Blog.json',
     'utf8'
   );
+  const packagesData = await fsPromises.readFile(
+    jsonDirectory + '/Packages.json',
+    'utf8'
+  );
   return {
     props: {
       BlogsData: JSON.parse(BlogsData),
+      packagesData: JSON.parse(packagesData),
     },
   };
 }
