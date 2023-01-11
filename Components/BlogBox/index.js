@@ -22,7 +22,7 @@ const BlogBox = ({ item }) => {
         // border: '1px solid',
         borderRadius: '12px',
         flexWrap: 'wrap',
-        background: 'url(/Assets/Images/Blogs/0/cardImage.jpg)',
+        background: `url(/Assets/Images/Blogs/${item.Image}/cardImage.jpg)`,
         // /Assets/Images/Blogs/1/cardImage.jpg
         // {'/Assets/Images/Packages/' + item.image}
         backgroundSize: '100% 100%',
