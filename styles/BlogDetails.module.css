@@ -10,6 +10,14 @@
     font-size: '19.5px';
 }
 
+.span b{
+    color: black;
+}
+
+.span ol{
+    /* color: black; */
+    padding-left: 20px;
+}
 
 .bgGridRight{
     display: flex;

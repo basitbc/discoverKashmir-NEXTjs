@@ -40,7 +40,7 @@ const index = ({ BlogsData, packagesData }) => {
           item
           sx={{
             width: { xs: '100%', md: '40%' },
-            margin: { xs: '40px 80px 0 10px', md: '140px 70px 0 20px' },
+            margin: { xs: '40px 80px 0 10px', md: '', lg: '140px 70px 0 20px' },
           }}
         >
           <Typography
@@ -76,18 +76,29 @@ const index = ({ BlogsData, packagesData }) => {
             position: 'relative',
             display: 'flex',
             margin: '-120px -70px 0 0',
-            height: { xs: '70vh', lg: '53vw' },
+            height: { xs: '63vh', md: '97vh', lg: '107vh' },
             ml: { xs: '-50px', md: '0px' },
             width: { xs: '130%', md: '60%' },
             overflow: 'hidden',
             // borderRadius: '46% 54% 44% 56% / 52% 33% 67% 48% ',
-            borderRadius: '35% 36% 52% 48% / 56% 30% 46% 45% ',
+            // borderRadius: '35% 36% 52% 48% / 56% 30% 46% 45% ',
+            borderRadius: {
+              xs: '0% 0% 61% 49% / 66% 32% 27% 35% ',
+              md: '35% 0% 61% 49% / 60% 0% 22% 40% ',
+              lg: '  35% 0% 61% 49% / 50% 0% 59% 50%  ',
+            },
           }}
         >
           <Image
             fill
-            src={'/Assets/Images/Blogs/0/background.jpg'}
-            style={{ borderRadius: '46% 54% 44% 56% / 52% 33% 67% 48% ' }}
+            src={`/Assets/Images/Blogs/${blogData.bgImage}/background.jpg`}
+            style={{
+              borderRadius: {
+                xs: '0% 0% 61% 49% / 66% 32% 27% 35% ',
+                md: '35% 0% 61% 49% / 60% 0% 22% 40% ',
+                lg: '  35% 0% 61% 49% / 60% 0% 59% 40%  ',
+              },
+            }}
           />
         </Grid>
       </Grid>
@@ -171,7 +182,6 @@ const index = ({ BlogsData, packagesData }) => {
                 alignItems='center'
                 flexDirection='row'
                 flexWrap={'nowrap'}
-                bgcolor='white'
                 // boxShadow='rgba(0, 0, 0, 0.16) 0px 1px 4px'
                 className={styles.bgInBox}
               >
@@ -232,6 +242,9 @@ const index = ({ BlogsData, packagesData }) => {
           <Grid item>
             <TopPicks BlogsData={BlogsData} packagesData={packagesData} />
           </Grid>
+          <Grid item>
+            <FacebookEmbed />
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
@@ -244,6 +257,7 @@ import fsPromises from 'fs/promises';
 import slugify from 'slugify';
 import Router, { useRouter } from 'next/router';
 import TopPicks from '../../Components/TopPicks';
+import FacebookEmbed from '../../Components/FacebookEmbed';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json
