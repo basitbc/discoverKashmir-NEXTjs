@@ -285,6 +285,9 @@ const index = ({ BlogsData, packagesData }) => {
             <Grid item>
               <FacebookEmbed />
             </Grid>
+            <Grid>
+              <ShareButtons />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -300,6 +303,7 @@ import fsPromises from 'fs/promises';
 import TopPicks from '../../Components/TopPicks';
 import FacebookEmbed from '../../Components/FacebookEmbed';
 import Head from 'next/head';
+import ShareButtons from '../../Components/ShareButtons';
 
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
