@@ -36,15 +36,27 @@ const index = ({ BlogsData, packagesData }) => {
   return router.isReady ? (
     <div>
       <Head>
-        <title>{blogData.Title.slice(0, 800)}</title>
-        <meta name='description' content={blogData.shortDes} />
+        <title>{blogData.Title}</title>
+        <meta name='description' content={blogData.shortDes.slice(0, 142)} />
         <meta
           property='og:image'
           itemprop='image'
           content={`/Assets/Images/Blogs/${blogData.Image}/cardImage.jpg`}
         />
-        <meta property='og:type' content='website' />
-        <meta property='og:type' content='website' />
+        <link
+          itemprop='thumbnailUrl'
+          href={`/Assets/Images/Blogs/${blogData.Image}/cardImage.jpg`}
+        />
+        <span
+          itemprop='thumbnail'
+          itemscope
+          itemtype='http://schema.org/ImageObject'
+        >
+          <link
+            itemprop='url'
+            href={`/Assets/Images/Blogs/${blogData.Image}/cardImage.jpg`}
+          />
+        </span>
         {/* <meta property='og:image:type' content='image/jpg'></meta> */}
       </Head>
 

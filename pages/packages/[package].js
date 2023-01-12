@@ -99,11 +99,29 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
     <div>
       <Head>
         <title>{packageData.packageName}</title>
-        <meta name='description' content={packageData.description} />
         <meta
+          name='description'
+          content={packageData.description.slice(0, 142)}
+        />
+        <meta
+          property='og:image'
           itemprop='image'
           content={`/Assets/Images/Packages/${packageData.image}`}
         />
+        <link
+          itemprop='thumbnailUrl'
+          href={`/Assets/Images/Packages/${packageData.image}`}
+        />
+        <span
+          itemprop='thumbnail'
+          itemscope
+          itemtype='http://schema.org/ImageObject'
+        >
+          <link
+            itemprop='url'
+            href={`/Assets/Images/Packages/${packageData.image}`}
+          />
+        </span>
       </Head>
       <Grid container>
         <HeroSection
