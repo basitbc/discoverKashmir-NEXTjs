@@ -8,9 +8,12 @@ import Router, { useRouter } from 'next/router';
 import slugify from 'slugify';
 const index = ({ BlogsData, packagesData }) => {
   const router = useRouter();
-  const [blogData, setBlogData] = useState(BlogsData[0]);
+  const [blogData, setBlogData] = useState(
+    !router.isReady ? BlogsData[0] : BlogsData[router.query.id]
+  );
   useEffect(() => {
     if (!router.isReady) return;
+
     console.log(router, 'router in blog');
     // setPackageData(packageDataAll[router.query.id]);
     setBlog();
@@ -22,20 +25,21 @@ const index = ({ BlogsData, packagesData }) => {
   };
 
   const handleClickBlog = (item) => {
-    Router.push({
+    router.push({
       pathname: `/travelblogs/${slugify(item.Title).toLowerCase()}`,
       query: { id: item.id },
     });
+    setBlogData(item);
     // router.reload();
   };
 
-  return (
+  return router.isReady ? (
     <div>
       <Head>
         <title>{blogData.Title}</title>
         <meta name='description' content={blogData.shortDes} />
         <meta
-          itemprop='image'
+          property='og:image'
           content={`/Assets/Images/Blogs/${blogData.Image}/background.jpg`}
         />
       </Head>
@@ -269,6 +273,8 @@ const index = ({ BlogsData, packagesData }) => {
         </Grid>
       </Grid>
     </div>
+  ) : (
+    <Grid></Grid>
   );
 };
 
@@ -278,6 +284,7 @@ import fsPromises from 'fs/promises';
 import TopPicks from '../../Components/TopPicks';
 import FacebookEmbed from '../../Components/FacebookEmbed';
 import Head from 'next/head';
+
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json
