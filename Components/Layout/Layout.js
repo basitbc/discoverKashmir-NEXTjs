@@ -9,6 +9,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import styles from '../../styles/Layout.module.css';
 import details from '../../Data/Details.json';
 import Link from 'next/link';
+import BreadCrumb from '../Breadcrumb/BreadCrumb';
 export default function Layout({ children }) {
   const [openDrawer, setOpenDrawer] = useState(false);
 

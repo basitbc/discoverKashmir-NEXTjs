@@ -81,6 +81,7 @@ const index = ({ BlogsData, packagesData }) => {
               },
             }}
           >
+            <BreadCrumb usedIn='blog' />
             <Typography
               sx={{
                 fontSize: { xs: '27px', md: '35px' },
@@ -304,6 +305,7 @@ import TopPicks from '../../Components/TopPicks';
 import FacebookEmbed from '../../Components/FacebookEmbed';
 import Head from 'next/head';
 import ShareButtons from '../../Components/ShareButtons';
+import BreadCrumb from '../../Components/Breadcrumb/BreadCrumb';
 
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
