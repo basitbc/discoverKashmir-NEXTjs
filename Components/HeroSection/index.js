@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import styles from '../../styles/HeroSection.module.css';
 import Image from 'next/image';
+import BreadCrumb from '../Breadcrumb/BreadCrumb';
 
 const HeroSection = (props) => {
   const theme = useTheme();
@@ -29,6 +30,7 @@ const HeroSection = (props) => {
         }}
       >
         {props.packageName}
+        <BreadCrumb usedIn='packageDetails' />
       </Typography>
     </Grid>
   );

@@ -41,14 +41,14 @@ export default function ShareButtons() {
         flexDirection: 'column',
       }}
     >
-      <TwitterShareButton url={url}>
+      <TwitterShareButton url={url} style={{ background: '#1DA1F2' }}>
         <TwitterIcon size={size} />
       </TwitterShareButton>
 
-      <FacebookShareButton url={url}>
+      <FacebookShareButton url={url} style={{ background: '#3B599A' }}>
         <FacebookIcon size={size} />
       </FacebookShareButton>
-      <LinkedinShareButton url={url}>
+      <LinkedinShareButton url={url} style={{ background: '#027FB1' }}>
         <LinkedinIcon size={size} />
       </LinkedinShareButton>
       <WhatsappShareButton url={url}>

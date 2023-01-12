@@ -29,12 +29,12 @@ const TravelBlogs = ({ blogData }) => {
           item
           position='relative'
           className={styles.trbHeroContainer}
-          sx={{ height: '63vh' }}
+          sx={{ height: '63vh', width: '900px' }}
         >
           <Image
-            fill
+            // fill={!isMobile}
             priority
-            // style={{ width: isMobile ? '900px' : '100%' }}
+            width={isMobile ? '900px' : '100%'}
             src={heroImage}
           />
         </Grid>
@@ -42,7 +42,7 @@ const TravelBlogs = ({ blogData }) => {
           variant='bold'
           className={styles.trbTitle}
           sx={{
-            fontSize: { xs: '21px', md: '39px' },
+            fontSize: { xs: '17px', md: '27px' },
             top: '50%',
             left: '50%',
             transform: 'translate(-50%,-110%)',
