@@ -66,6 +66,7 @@ export default function Home({ detailsData, packagesData }) {
           width='100vw'
           sx={{ margin: '0 0 30px 0' }}
         >
+          <FormDialog />
           <Grid
             sx={{
               display: 'flex',
@@ -159,6 +160,7 @@ import useSWR from 'swr';
 import path from 'path';
 import fsPromises from 'fs/promises';
 import PreLoader from '../Components/PreLoader';
+import FormDialog from '../Components/FormDialog';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json
