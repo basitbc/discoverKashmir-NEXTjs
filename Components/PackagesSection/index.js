@@ -40,7 +40,8 @@ const packagesSection = ({ packagesData }) => {
             className={styles.pkTitle2}
             sx={{
               fontSize: { xs: '34px', md: '50px', lg: '60px' },
-              fontFamily: "Roboto, 'sans-serif'",
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700,
             }}
           >
             Choose Best for You

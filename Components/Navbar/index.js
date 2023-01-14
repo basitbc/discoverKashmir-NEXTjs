@@ -27,6 +27,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
     defaultMatches: true,
   });
   const router = useRouter();
+
   if (typeof window !== 'undefined') {
     let scroll = window.scrollY;
     window.addEventListener('scroll', () => {
@@ -50,6 +51,8 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
   const setNavStatic = () => {
     if (router.pathname === '/travelblogs/[blog]') {
       setStaticBg(true);
+    } else {
+      setStaticBg(false);
     }
   };
 
