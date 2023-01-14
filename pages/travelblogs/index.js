@@ -29,7 +29,7 @@ const TravelBlogs = ({ blogData }) => {
           item
           position='relative'
           className={styles.trbHeroContainer}
-          sx={{ height: '63vh', width: '900px' }}
+          sx={{ height: '63vh', width: '100vw' }}
         >
           <Image
             // fill={!isMobile}

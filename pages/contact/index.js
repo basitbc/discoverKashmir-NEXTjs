@@ -1,4 +1,12 @@
-import { Dialog, Grid, Slide, TextField, Typography } from '@mui/material';
+import {
+  Alert,
+  Dialog,
+  Grid,
+  Slide,
+  Snackbar,
+  TextField,
+  Typography,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -34,10 +42,10 @@ const ContactUs = ({ detailsData, contactData }) => {
     e.preventDefault();
 
     sendForm(
-      'YOUR_SERVICE_ID',
-      'YOUR_TEMPLATE_ID',
+      'service_h37zmnt',
+      'template_jpglnfc',
       form.current,
-      'YOUR_PUBLIC_KEY'
+      'uxUACuGSvix8kkLqR'
     )
       .then(
         (result) => {
@@ -263,7 +271,7 @@ const ContactUs = ({ detailsData, contactData }) => {
                   We would love to hear from you
                 </Typography>
               </Grid>
-              <form ref={form} onSubmit={sendEmail}>
+              <form ref={form} onSubmit={sendEmail} id='myForm'>
                 <Grid
                   container
                   rowGap={2}
@@ -315,6 +323,11 @@ const ContactUs = ({ detailsData, contactData }) => {
           </Grid>
         </Grid>
       </Grid>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
+          This is a success message!
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

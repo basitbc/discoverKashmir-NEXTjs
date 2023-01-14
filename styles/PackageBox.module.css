@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Comfortaa:wght@300;400;500;600;700&family=Lato:wght@900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+
 @font-face {
     font-family: TheaAmelia;
     src: url(../public/Assets/Fonts/TheaAmelia.otf);
@@ -72,7 +73,7 @@
 
 }
 .pboxName{
-    font-family: 'Comfortaa', cursive;
+
     color: #000;
     font-weight: 500;
 
@@ -87,7 +88,6 @@
 
 .pboxLocation{
 color: gray;
-font-family: 'Comfortaa', cursive;
 padding-top: 7px;
 font: 19px;
 }
@@ -105,14 +105,12 @@ font-size: 14px;
 }
 
 .pboxPrice{
-    font-family: 'Comfortaa', cursive;
 font-weight: 700;
 color: #DC834E;
 }
 
 .pboxButtonEx{
     font-size: 17px;
-    font-family: 'Comfortaa', cursive;
     padding-right: 12px;
     cursor: pointer;
 }
@@ -122,7 +120,6 @@ color: #DC834E;
 
 .buttonPboxViewMore{
     margin: 20px 0 0 40px;
-    font-family: 'Comfortaa', cursive;
     border:none;
     font-weight: 700;
     text-transform: capitalize;
