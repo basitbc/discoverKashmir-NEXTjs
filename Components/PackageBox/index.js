@@ -30,6 +30,7 @@ const PackageBox = ({ item, usedIn }) => {
       sx={{
         flexDirection: 'column',
         height: '470px',
+        margin: '30px 0',
         width: {
           xs: '90%',
           md: '410px',
@@ -73,14 +74,18 @@ const PackageBox = ({ item, usedIn }) => {
           <Typography
             sx={{
               fontSize: '20px',
-              fontFamily: "'Raleway', sans-serif",
-              fontWeight: 500,
+              fontFamily: "'Comfortaa',sans-serif",
+              fontWeight: 700,
             }}
             className={styles.pboxName}
           >
             {item.packageName}
           </Typography>
-          <Typography fontSize={'17px'} className={styles.pboxLocation}>
+          <Typography
+            sx={{ fontFamily: "'Comfortaa',sans-serif" }}
+            fontSize={'17px'}
+            className={styles.pboxLocation}
+          >
             <PlaceIcon style={{ marginRight: '10px', color: 'gray' }} />
             {item.location}
           </Typography>
@@ -96,8 +101,17 @@ const PackageBox = ({ item, usedIn }) => {
           }}
         >
           <Grid item sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography className={styles.pboxFrom}>From</Typography>
-            <Typography className={styles.pboxPrice} fontSize={'21px'}>
+            <Typography
+              sx={{ fontFamily: "'Comfortaa',sans-serif" }}
+              className={styles.pboxFrom}
+            >
+              From
+            </Typography>
+            <Typography
+              sx={{ fontFamily: "'Comfortaa',sans-serif" }}
+              className={styles.pboxPrice}
+              fontSize={'21px'}
+            >
               ₹ {item.price} /-
             </Typography>
           </Grid>
@@ -121,7 +135,7 @@ const PackageBox = ({ item, usedIn }) => {
               <Typography
                 sx={{
                   textDecoration: 'none',
-                  fontFamily: "'Comfortaa', cursive",
+                  fontFamily: "'Comfortaa',sans-serif",
                   color: 'black',
                 }}
               >
@@ -129,7 +143,7 @@ const PackageBox = ({ item, usedIn }) => {
                   className={styles.pboxButtonEx}
                   style={{
                     textDecoration: 'none',
-
+                    fontFamily: "'Comfortaa',sans-serif",
                     textTransform: 'capitalize',
                   }}
                 >
