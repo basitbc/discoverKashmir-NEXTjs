@@ -40,6 +40,7 @@ const TravelBlogs = ({ blogData }) => {
         </Grid>
         <Typography
           variant='bold'
+          // add
           className={styles.trbTitle}
           sx={{
             fontSize: { xs: '17px', md: '27px' },
