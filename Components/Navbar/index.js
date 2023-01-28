@@ -165,7 +165,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
                   sx={{
                     fontSize: { md: '13px', lg: '19px' },
                     fontFamily: 'Raleway, sans-serif',
-                    fontWeight: 300,
+                    fontWeight: 400,
                   }}
                 >
                   Home
@@ -193,7 +193,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
                   sx={{
                     fontSize: { md: '13px', lg: '19px' },
                     fontFamily: 'Raleway, sans-serif',
-                    fontWeight: 300,
+                    fontWeight: 400,
                   }}
                 >
                   Packages
@@ -222,7 +222,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
                   sx={{
                     fontSize: { md: '13px', lg: '19px' },
                     fontFamily: 'Raleway, sans-serif',
-                    fontWeight: 300,
+                    fontWeight: 400,
                   }}
                 >
                   Travel Blogs
@@ -250,7 +250,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
                   sx={{
                     fontSize: { md: '13px', lg: '19px' },
                     fontFamily: 'Raleway, sans-serif',
-                    fontWeight: 300,
+                    fontWeight: 400,
                   }}
                 >
                   Destinations
@@ -278,7 +278,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
                   sx={{
                     fontSize: { md: '13px', lg: '19px' },
                     fontFamily: 'Raleway, sans-serif',
-                    fontWeight: 300,
+                    fontWeight: 400,
                   }}
                 >
                   Contact
