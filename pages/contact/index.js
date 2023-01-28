@@ -83,31 +83,11 @@ const ContactUs = ({ detailsData, contactData }) => {
         />{' '}
       </Head>
       <Grid container>
-        <Grid
-          item
-          position='relative'
-          className={styles.cnHeroContainer}
-          sx={{ height: '63vh', width: '100vw' }}
-        >
-          <Image
-            // className={styles.abhImage}
-            priority
-            fill
-            src={'/Assets/Images/Contact/' + contactData.backgroundImage}
-          />
-        </Grid>
-        <Typography
-          variant='bold'
-          className={styles.cnTitle}
-          sx={{
-            fontSize: { xs: '21px', md: '39px' },
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%,-110%)',
-          }}
-        >
-          Let's Talk
-        </Typography>
+        <HeroSection
+          usedIn='Contact'
+          bgImage='background.jpg'
+          Name={"Let's Talk"}
+        />
         <Grid
           container
           sx={{
@@ -339,6 +319,7 @@ import fsPromises from 'fs/promises';
 import Head from 'next/head';
 import { sendForm } from '@emailjs/browser';
 import dynamic from 'next/dynamic';
+import HeroSection from '../../Components/HeroSection';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json

@@ -23,31 +23,11 @@ const Packages = ({ packagesData }) => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </Head>
       <Grid container>
-        <Grid
-          item
-          position='relative'
-          className={styles.pkgHeroContainer}
-          sx={{ height: '63vh' }}
-        >
-          <Image
-            priority
-            fill
-            // style={{ width: isMobile ? '900px' : '100%' }}
-            src={heroImage}
-          />
-        </Grid>
-        <Typography
-          variant='bold'
-          className={styles.pkgTitle}
-          sx={{
-            fontSize: '39px',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%,-110%)',
-          }}
-        >
-          Packages
-        </Typography>
+        <HeroSection
+          usedIn='Packages'
+          bgImage='background.jpg'
+          Name={'Packages'}
+        />
         <Grid
           container
           sx={{
@@ -148,6 +128,7 @@ export default Packages;
 
 import path from 'path';
 import fsPromises from 'fs/promises';
+import HeroSection from '../../Components/HeroSection';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json

@@ -141,7 +141,7 @@ const LocationsInHome = () => {
                   fontSize: '26px',
                 }}
               >
-                {item.DistinationName}
+                {item.destinationName}
               </Typography>
 
               <Typography

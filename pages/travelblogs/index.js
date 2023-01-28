@@ -25,32 +25,11 @@ const TravelBlogs = ({ blogData }) => {
         />{' '}
       </Head>
       <Grid container>
-        <Grid
-          item
-          position='relative'
-          className={styles.trbHeroContainer}
-          sx={{ height: '63vh', width: '100vw' }}
-        >
-          <Image
-            // fill={!isMobile}
-            priority
-            width={isMobile ? '900px' : '100%'}
-            src={heroImage}
-          />
-        </Grid>
-        <Typography
-          variant='bold'
-          // add
-          className={styles.trbTitle}
-          sx={{
-            fontSize: { xs: '17px', md: '27px' },
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%,-110%)',
-          }}
-        >
-          Tips & How to’s
-        </Typography>
+        <HeroSection
+          usedIn='Blogs'
+          bgImage='background.jpg'
+          Name={'Tips & How to’s '}
+        />
         <Grid container>
           <Typography
             sx={{
@@ -90,6 +69,7 @@ export default TravelBlogs;
 
 import path from 'path';
 import fsPromises from 'fs/promises';
+import HeroSection from '../../Components/HeroSection';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json

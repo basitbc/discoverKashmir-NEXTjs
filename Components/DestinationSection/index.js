@@ -64,7 +64,7 @@ const DestinationSection = () => {
                 }}
                 fontSize='17px'
               >
-                {item.DistinationName}
+                {item.destinationName}
               </Typography>
             </Grid>
           );

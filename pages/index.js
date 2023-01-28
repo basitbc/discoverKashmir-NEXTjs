@@ -92,10 +92,25 @@ export default function Home({ detailsData, packagesData }) {
                 fontFamily: "'Montserrat Alternates', sans-serif",
                 fontWeight: 700,
               }}
+              data-aos='fade-right'
+              data-aos-offset='200'
+              data-aos-delay='50'
+              data-aos-duration='1000'
+              data-aos-easing='ease-in-out'
+              data-aos-mirror='true'
+              data-aos-once='false'
+              // data-aos-anchor-placement='top-center'
             >
               Escape. Explore. &
             </Typography>
             <Typography
+              data-aos='fade-up'
+              data-aos-delay='500'
+              data-aos-offset='200'
+              data-aos-duration='1000'
+              data-aos-easing='ease-in-out'
+              data-aos-mirror='true'
+              data-aos-once='false'
               className={styles.textDis}
               sx={{
                 fontSize: { xs: '37px', lg: '70px' },
@@ -109,6 +124,13 @@ export default function Home({ detailsData, packagesData }) {
               <b>DISCOVER</b>
             </Typography>
             <Typography
+              data-aos='fade-left'
+              data-aos-delay='800'
+              data-aos-offset='200'
+              data-aos-duration='1000'
+              data-aos-easing='ease-in-out'
+              data-aos-mirror='true'
+              data-aos-once='false'
               className={styles.textKmr}
               sx={{
                 fontSize: { xs: '23px', lg: '50px' },
@@ -126,6 +148,13 @@ export default function Home({ detailsData, packagesData }) {
 
             <Grid>
               <button
+                data-aos='fade'
+                data-aos-delay='1200'
+                data-aos-offset='200'
+                data-aos-duration='1000'
+                data-aos-easing='ease-in-out'
+                data-aos-mirror='true'
+                data-aos-once='false'
                 onClick={() => {
                   Router.push({
                     pathname: '/packages',

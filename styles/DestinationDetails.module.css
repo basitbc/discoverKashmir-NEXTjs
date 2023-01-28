@@ -1,0 +1,14 @@
+@font-face {
+    font-family: StayWinter;
+    src: url(../public/Assets/Fonts/stay\ winter.otf);
+}
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
+
+.textName{ 
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: rgba(94,60,59,.3);
+    text-shadow: 
+    0.06em 0.06em #D8C4C3;   
+}
+

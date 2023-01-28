@@ -20,6 +20,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
 import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined';
 import DeckOutlinedIcon from '@mui/icons-material/DeckOutlined';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 import { blue } from '@mui/material/colors';
 export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
@@ -30,6 +31,16 @@ export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
       icon: <HouseOutlinedIcon sx={{ fontSize: '25px', color: '#DC834E' }} />,
     },
     {
+      name: 'Packages',
+      path: '/packages',
+      icon: <DeckOutlinedIcon sx={{ fontSize: '25px', color: '#DC834E' }} />,
+    },
+    {
+      name: 'Destinations',
+      path: '/destinations',
+      icon: <TravelExploreIcon sx={{ fontSize: '25px', color: '#DC834E' }} />,
+    },
+    {
       name: 'Travel Blogs',
       path: '/travelblogs',
       icon: (
@@ -37,11 +48,6 @@ export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
           sx={{ fontSize: '25px', color: '#DC834E' }}
         />
       ),
-    },
-    {
-      name: 'Packages',
-      path: '/packages',
-      icon: <DeckOutlinedIcon sx={{ fontSize: '25px', color: '#DC834E' }} />,
     },
     {
       name: 'Contact Us',
