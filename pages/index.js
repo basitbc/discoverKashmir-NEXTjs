@@ -11,6 +11,8 @@ import DestinationSection from '../Components/DestinationSection';
 import BlogInHome from '../Components/BlogInHome';
 import LocationsInHome from '../Components/LocationsInHome';
 import TestimonialHome from '../Components/TestimonialHome';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 export default function Home({ detailsData, packagesData }) {
   <Head>
@@ -43,7 +45,10 @@ export default function Home({ detailsData, packagesData }) {
     if (!router.isReady) return;
     console.log(packagesData, 'in index');
   }, [router]);
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
+    defaultMatches: true,
+  });
   return (
     <div>
       <Head>
@@ -96,10 +101,9 @@ export default function Home({ detailsData, packagesData }) {
               data-aos-offset='200'
               data-aos-delay='50'
               data-aos-duration='1000'
-              data-aos-easing='ease-in-out'
-              data-aos-mirror='true'
-              data-aos-once='false'
-              // data-aos-anchor-placement='top-center'
+              data-aos-easing={!isMobile ? 'ease-in-out' : ''}
+              data-aos-mirror={!isMobile ? 'true' : 'false'}
+              data-aos-once={!isMobile ? 'false' : 'true'}
             >
               Escape. Explore. &
             </Typography>
@@ -108,9 +112,9 @@ export default function Home({ detailsData, packagesData }) {
               data-aos-delay='500'
               data-aos-offset='200'
               data-aos-duration='1000'
-              data-aos-easing='ease-in-out'
-              data-aos-mirror='true'
-              data-aos-once='false'
+              data-aos-easing={!isMobile ? 'ease-in-out' : ''}
+              data-aos-mirror={!isMobile ? 'true' : 'false'}
+              data-aos-once={!isMobile ? 'false' : 'true'}
               className={styles.textDis}
               sx={{
                 fontSize: { xs: '37px', lg: '70px' },
@@ -128,9 +132,9 @@ export default function Home({ detailsData, packagesData }) {
               data-aos-delay='800'
               data-aos-offset='200'
               data-aos-duration='1000'
-              data-aos-easing='ease-in-out'
-              data-aos-mirror='true'
-              data-aos-once='false'
+              data-aos-easing={!isMobile ? 'ease-in-out' : ''}
+              data-aos-mirror={!isMobile ? 'true' : 'false'}
+              data-aos-once={!isMobile ? 'false' : 'true'}
               className={styles.textKmr}
               sx={{
                 fontSize: { xs: '23px', lg: '50px' },
@@ -152,9 +156,9 @@ export default function Home({ detailsData, packagesData }) {
                 data-aos-delay='1200'
                 data-aos-offset='200'
                 data-aos-duration='1000'
-                data-aos-easing='ease-in-out'
-                data-aos-mirror='true'
-                data-aos-once='false'
+                data-aos-easing={!isMobile ? 'ease-in-out' : ''}
+                data-aos-mirror={!isMobile ? 'true' : 'false'}
+                data-aos-once={!isMobile ? 'false' : 'true'}
                 onClick={() => {
                   Router.push({
                     pathname: '/packages',
