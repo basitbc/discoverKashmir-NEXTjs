@@ -4,6 +4,13 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import HeroSection from '../../Components/HeroSection';
 
 const destination = ({ destinationData }) => {
+  const Districts = [
+    'Srinagar',
+    'Baramulla',
+    'Anantnag',
+    'Budgam',
+    'Ganderbal',
+  ];
   console.log(destinationData);
   return (
     <div>
@@ -14,10 +21,15 @@ const destination = ({ destinationData }) => {
       />
       <Grid container>
         <Grid>
-          <DistrictSection
-            name={'Srinagar'}
-            destinationData={destinationData}
-          />
+          {Districts.length > 0 &&
+            Districts.map((item) => {
+              return (
+                <DistrictSection
+                  name={item}
+                  destinationData={destinationData}
+                />
+              );
+            })}
         </Grid>
       </Grid>
     </div>

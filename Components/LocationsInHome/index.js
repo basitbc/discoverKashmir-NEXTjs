@@ -116,21 +116,23 @@ const LocationsInHome = () => {
             sx={{
               height: { xs: '250px', md: '432px' },
               width: { xs: '226px', md: '249px' },
+              position: 'relative',
             }}
           >
-            <img
+            <Image
               className={styles.lhInnerRightImg}
+              fill
               style={{
-                height: isMobile ? '250px' : '432px',
-                width: isMobile ? '226px' : '249px',
+                // height: isMobile ? '250px' : '432px',
+                // width: isMobile ? '226px' : '249px',
                 borderRadius: '7px',
               }}
-              src={item.HomeImage}
+              src={`/Assets/Images/Destinations/${item.District}/${item.Image}/cardImage.jpg`}
             />
             <Grid
               sx={{
-                position: 'relative',
-                bottom: { xs: '30%', md: '17%' },
+                position: 'absolute',
+                bottom: { xs: '10%', md: '10%' },
                 left: '10%',
               }}
             >
@@ -138,7 +140,7 @@ const LocationsInHome = () => {
                 fontFamily={"Headings,'Airal'"}
                 sx={{
                   color: 'white',
-                  fontSize: '26px',
+                  fontSize: { xs: '17px', md: '26px' },
                 }}
               >
                 {item.destinationName}
@@ -149,9 +151,10 @@ const LocationsInHome = () => {
                   color: 'white',
                   letterSpacing: '0.7px',
                   lineHeight: '10px',
+                  fontSize: { xs: '13px', md: '19px' },
                 }}
               >
-                Srinagar
+                {item.District}
               </Typography>
             </Grid>
           </Grid>

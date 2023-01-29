@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Router, { useRouter } from 'next/router';
@@ -22,7 +22,22 @@ const DistrictSection = (props) => {
 
   return (
     <Grid>
-      <Grid sx={{ padding: '40px 20px 20px 20px' }}>
+      <Grid
+        sx={{
+          padding: '40px 20px 20px 20px',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+      >
+        <Box
+          sx={{
+            height: '37px',
+            width: '10px',
+            backgroundColor: '#DC834E',
+            mr: '10px',
+          }}
+        ></Box>
         <Typography
           sx={{
             fontSize: { xs: '25px', md: '30px' },
@@ -35,8 +50,7 @@ const DistrictSection = (props) => {
       </Grid>
       <Grid className={styles.dsOuterContainer} rowGap={2}>
         {props.destinationData.map((item) => {
-          return item.destinationName ? (
-            // .includes('Gulmarg')
+          return item.District.includes(props.name) ? (
             <Grid
               item
               margin={'0 10px'}
@@ -58,7 +72,7 @@ const DistrictSection = (props) => {
                   //   width: isMobile ? '330px' : '310px',
                   borderRadius: '7px',
                 }}
-                src={`/Assets/Images/Destinations/${item.District}/${item.destinationName}/${item.HomeImage}`}
+                src={`/Assets/Images/Destinations/${item.District}/${item.Image}/cardImage.jpg`}
               />
               <Grid
                 sx={{
@@ -71,21 +85,22 @@ const DistrictSection = (props) => {
                   fontFamily={"Headings,'Airal'"}
                   sx={{
                     color: 'white',
-                    fontSize: '26px',
+                    fontSize: '32px',
                   }}
                 >
                   {item.destinationName}
                 </Typography>
 
-                <Typography
+                {/* <Typography
                   sx={{
                     color: 'white',
+                    fontFamily: "Headings,'Airal'",
                     letterSpacing: '0.7px',
                     lineHeight: '10px',
                   }}
                 >
                   {item.District}
-                </Typography>
+                </Typography> */}
               </Grid>
             </Grid>
           ) : null;
