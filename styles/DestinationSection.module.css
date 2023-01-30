@@ -37,6 +37,11 @@ height: 50px;
 padding: 5px 20px 5px 5px;
 background-color: #F5F4F2;
 border-radius: 40px;
+cursor: pointer;
+}
+.disBox:hover{
+background-color: #e0dcd3;
+
 }
 
 .imageDisBox{

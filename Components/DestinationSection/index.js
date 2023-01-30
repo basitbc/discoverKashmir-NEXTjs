@@ -2,8 +2,16 @@ import { Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 import destinationData from '../../Data/Destinations.json';
 import styles from '../../styles/DestinationSection.module.css';
+import Router from 'next/router';
+import slugify from 'slugify';
 
 const DestinationSection = () => {
+  const handleClickLocation = (item) => {
+    Router.push({
+      pathname: `/destinations/${slugify(item.destinationName).toLowerCase()}`,
+      query: { id: item.id },
+    });
+  };
   return (
     <Grid
       container
@@ -50,10 +58,18 @@ const DestinationSection = () => {
       >
         {destinationData.map((item) => {
           return (
-            <Grid item className={styles.disBox} width={'190px'}>
-              <img
+            <Grid
+              item
+              className={styles.disBox}
+              onClick={() => {
+                handleClickLocation(item);
+              }}
+            >
+              <Image
                 className={styles.imageDisBox}
-                src='https://assets.gqindia.com/photos/616d2712c93aeaf2a32d61fe/master/pass/top-image%20(1).jpg'
+                height='40'
+                width='40'
+                src={`/Assets/Images/Destinations/${item.District}/${item.Image}/cardImage.jpg`}
                 alt='img'
               />
               <Typography
@@ -61,6 +77,7 @@ const DestinationSection = () => {
                   fontFamily: "Headings, 'cursive'",
                   paddingLeft: '15px',
                   fontWeight: 700,
+                  whiteSpace: 'nowrap',
                 }}
                 fontSize='17px'
               >

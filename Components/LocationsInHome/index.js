@@ -20,6 +20,13 @@ const LocationsInHome = () => {
       query: { id: item.id },
     });
   };
+
+  const handleClickLocation = (item) => {
+    Router.push({
+      pathname: `/destinations/${slugify(item.destinationName).toLowerCase()}`,
+      query: { id: item.id },
+    });
+  };
   return (
     <Grid
       container
@@ -117,6 +124,9 @@ const LocationsInHome = () => {
               height: { xs: '250px', md: '432px' },
               minWidth: { xs: '226px', md: '249px' },
               position: 'relative',
+            }}
+            onClick={() => {
+              handleClickLocation(item);
             }}
           >
             <Image

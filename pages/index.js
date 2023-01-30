@@ -16,12 +16,12 @@ import { useTheme } from '@mui/material/styles';
 
 export default function Home({ detailsData, packagesData }) {
   <Head>
-    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    {/* <link rel='preconnect' href='https://fonts.googleapis.com' />
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
     <link
       href='https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&display=swap'
       rel='stylesheet'
-    />
+    /> */}
 
     <link
       rel='stylesheet'
@@ -94,7 +94,7 @@ export default function Home({ detailsData, packagesData }) {
                 color: 'white',
                 marginLeft: { xs: '-37px', lg: '-110px' },
                 lineHeight: '0',
-                fontFamily: "'Montserrat', sans-serif",
+                // fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 700,
               }}
               data-aos='fade-right'
@@ -121,7 +121,7 @@ export default function Home({ detailsData, packagesData }) {
                 color: 'black',
                 overflow: 'hidden',
                 // fontFamily: "'Lato', sans-serif",
-                fontFamily: 'Poppins, sans-serif',
+                // fontFamily: 'Poppins, sans-serif',
                 fontWeight: 900,
               }}
             >

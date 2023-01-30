@@ -23,14 +23,28 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
       pathname: `/destinations/${slugify(item.Title).toLowerCase()}`,
       query: { id: item.id },
     });
-    setBlogData(item);
+    // setBlogData(item);
     // router.reload();
   };
 
   return (
     <div>
       <Head>
-        <title>{destination.destinationName}</title>
+        <title>
+          {destination.destinationName} | Discover Kashmir | Best Travel Company
+          in Kashmir{' '}
+        </title>
+        <meta property='og:title' content={destination.destinationName} />
+        <meta
+          property='og:description'
+          content={destination?.shortDes?.slice(0, 142)}
+        />
+        <meta
+          property='og:image'
+          itemprop='image'
+          content={`/Assets/Images/Destinations/${destination.District}/${destination.Image}/thumbnail.jpg`}
+        />
+        <meta property='og:type' content='website' />
         <meta
           name='description'
           content={destination?.shortDes?.slice(0, 142)}
@@ -38,11 +52,11 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
         <meta
           property='og:image'
           itemprop='image'
-          content={`/Assets/Images/Blogs/${destination.Image}/cardImage.jpg`}
+          content={`/Assets/Images/Destinations/${destination.District}/${destination.Image}/thumbnail.jpg`}
         />
         <link
           itemprop='thumbnailUrl'
-          href={`/Assets/Images/Blogs/${destination.Image}/cardImage.jpg`}
+          content={`/Assets/Images/Destinations/${destination.District}/${destination.Image}/thumbnail.jpg`}
         />
         <span
           itemprop='thumbnail'
@@ -51,7 +65,7 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
         >
           <link
             itemprop='url'
-            href={`/Assets/Images/Blogs/${destination.Image}/cardImage.jpg`}
+            content={`/Assets/Images/Destinations/${destination.District}/${destination.Image}/thumbnail.jpg`}
           />
         </span>
         {/* <meta property='og:image:type' content='image/jpg'></meta> */}
@@ -106,7 +120,7 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
                     fontWeight: 300,
                   }}
                 >
-                  100kms from Srinagar to visit the snowland
+                  {destination.distance}
                 </span>
               </Typography>
               <Typography
@@ -137,7 +151,7 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
                     fontWeight: 300,
                   }}
                 >
-                  November to April is the best time to visit city
+                  {destination.bestTimeToVisit}
                 </span>
               </Typography>
             </Grid>
@@ -260,7 +274,7 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
                     fontWeight: 300,
                   }}
                 >
-                  100kms from Srinagar to visit the snowland
+                  {destination.distance}
                 </span>
               </Typography>
               <Typography
@@ -279,6 +293,7 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
               <Typography
                 sx={{
                   color: '#353535',
+                  padding: '0 10px',
                 }}
               >
                 <span
@@ -290,7 +305,7 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
                     fontWeight: 300,
                   }}
                 >
-                  November to April is the best time to visit city
+                  {destination.bestTimeToVisit}
                 </span>
               </Typography>
             </Grid>
