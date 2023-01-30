@@ -106,7 +106,7 @@ const LocationsInHome = () => {
         item
         md={7.5}
         className={styles.lhRightContainer}
-        sx={{ overflow: 'auto', width: '100vw' }}
+        sx={{ overflow: 'scroll', width: '100vw' }}
       >
         {destinationData.slice(0, 10).map((item) => (
           <Grid
@@ -115,7 +115,7 @@ const LocationsInHome = () => {
             className={styles.lhRightInnerBox}
             sx={{
               height: { xs: '250px', md: '432px' },
-              width: { xs: '226px', md: '249px' },
+              minWidth: { xs: '226px', md: '249px' },
               position: 'relative',
             }}
           >

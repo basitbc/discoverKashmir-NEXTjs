@@ -94,7 +94,7 @@ export default function Home({ detailsData, packagesData }) {
                 color: 'white',
                 marginLeft: { xs: '-37px', lg: '-110px' },
                 lineHeight: '0',
-                fontFamily: "'Montserrat Alternates', sans-serif",
+                fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 700,
               }}
               data-aos='fade-right'

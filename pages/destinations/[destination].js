@@ -69,6 +69,79 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
             }}
           >
             <Grid
+              sx={{
+                width: { xs: '100%', md: '20%' },
+                // border: '1px solid',
+                display: { xs: 'flex', md: 'none' },
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center',
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: { xs: '17px', md: '19px', lg: '23px' },
+                  letterSpacing: '-1.5px',
+                  // lineHeight: { xs: '40px', md: '60.5px' },
+                  // mt: '10px',
+                  mb: { xs: '10px', lg: '10px' },
+                  fontFamily: "'StayWinter', sans-serif",
+                  color: '#71797E',
+                  padding: '0px 60px',
+                }}
+              >
+                Distance
+              </Typography>
+              <Typography
+                sx={{
+                  color: '#353535',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '16px',
+                    backgroundColor: '#F0E7E7',
+                    boxDecorationBreak: 'clone',
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontWeight: 300,
+                  }}
+                >
+                  100kms from Srinagar to visit the snowland
+                </span>
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: { xs: '17px', md: '19px', lg: '21px' },
+                  // letterSpacing: '-1.5px',
+                  // lineHeight: { xs: '40px', md: '60.5px' },
+                  mt: '30px',
+                  mb: { xs: '10px', lg: '10px' },
+                  fontFamily: "'StayWinter', sans-serif",
+                  color: '#71797E',
+                }}
+              >
+                Best Time to Visit
+              </Typography>
+              <Typography
+                sx={{
+                  color: '#353535',
+                  padding: '0px 60px',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '16px',
+                    backgroundColor: '#F0E7E7',
+                    boxDecorationBreak: 'clone',
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontWeight: 300,
+                  }}
+                >
+                  November to April is the best time to visit city
+                </span>
+              </Typography>
+            </Grid>
+            <Grid
               item
               sx={{
                 width: { xs: '100%', md: '20%' },
@@ -110,10 +183,10 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
               <Typography
                 sx={{
                   fontFamily: "'Montserrat', sans-serif",
-                  fontSize: { xs: '10px', md: '13px', lg: '17px' },
+                  fontSize: { xs: '13px', md: '13px', lg: '17px' },
                   fontWeight: '300',
                   mb: '30px',
-                  padding: { xs: '0 20px 0 40px', md: '' },
+                  padding: { xs: '0 30px 0 10px', md: '0 20px 0 40px' },
                 }}
               >
                 {destination.shortDes}
@@ -125,7 +198,7 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
                 position: 'relative',
                 display: 'flex',
                 // margin: '-120px -70px 0 0',
-                height: { xs: '63vh', md: '70vh', lg: '70vh' },
+                height: { xs: '52vh', md: '70vh', lg: '70vh' },
                 // ml: { xs: '-50px', md: '0px' },
                 width: { xs: '130%', md: '50%' },
                 overflow: 'hidden',
@@ -154,11 +227,72 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
               sx={{
                 width: { xs: '100%', md: '20%' },
                 // border: '1px solid',
-                display: 'flex',
+                display: { xs: 'none', md: 'flex' },
+                flexDirection: 'column',
                 alignItems: 'center',
+                textAlign: 'center',
               }}
             >
-              {/* <WeatherWidget destination={destination.destinationName} /> */}
+              <Typography
+                sx={{
+                  fontSize: { xs: '17px', md: '19px', lg: '23px' },
+                  letterSpacing: '-1.5px',
+                  // lineHeight: { xs: '40px', md: '60.5px' },
+                  mt: '90px',
+                  mb: { md: '10px', lg: '10px' },
+                  fontFamily: "'StayWinter', sans-serif",
+                  color: '#71797E',
+                }}
+              >
+                Distance
+              </Typography>
+              <Typography
+                sx={{
+                  color: '#353535',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '16px',
+                    backgroundColor: '#F0E7E7',
+                    boxDecorationBreak: 'clone',
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontWeight: 300,
+                  }}
+                >
+                  100kms from Srinagar to visit the snowland
+                </span>
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: { xs: '17px', md: '19px', lg: '21px' },
+                  // letterSpacing: '-1.5px',
+                  // lineHeight: { xs: '40px', md: '60.5px' },
+                  mt: '90px',
+                  mb: { md: '10px', lg: '10px' },
+                  fontFamily: "'StayWinter', sans-serif",
+                  color: '#71797E',
+                }}
+              >
+                Best Time to Visit
+              </Typography>
+              <Typography
+                sx={{
+                  color: '#353535',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '16px',
+                    backgroundColor: '#F0E7E7',
+                    boxDecorationBreak: 'clone',
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontWeight: 300,
+                  }}
+                >
+                  November to April is the best time to visit city
+                </span>
+              </Typography>
             </Grid>
           </Grid>
           <Grid
