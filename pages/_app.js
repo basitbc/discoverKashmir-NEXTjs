@@ -16,6 +16,15 @@ export default function App({ Component, pageProps }) {
       animatedClassName: 'aos-animate',
     });
   }, []);
+
+  // useEffect(() => {
+  //   AOS.init({
+  //     easing: 'ease-out-cubic',
+  //     once: true,
+  //     offset: 50,
+  //   });
+  // }, []);
+
   useEffect(() => {
     // setTimeout(() => setLoading(false), 3000);
   });

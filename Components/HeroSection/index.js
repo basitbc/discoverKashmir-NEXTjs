@@ -16,20 +16,21 @@ const HeroSection = (props) => {
       <Grid item className={styles.heroHeroContainer} sx={{ height: '63vh' }}>
         <img
           style={{ width: isMobile ? '900px' : '100%' }}
-          src={'/Assets/Images/Packages/' + props.bgImage}
+          src={`/Assets/Images/${props.usedIn}/${props.bgImage}`}
         />
       </Grid>
+
       <Typography
         variant='bold'
         className={styles.heroTitle}
         sx={{
-          fontSize: '39px',
+          fontSize: { xs: '17px', md: '39px' },
           top: '50%',
           left: '50%',
           transform: 'translate(-50%,-110%)',
         }}
       >
-        {props.packageName}
+        {props.Name}
         <BreadCrumb usedIn='packageDetails' />
       </Typography>
     </Grid>

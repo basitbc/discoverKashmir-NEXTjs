@@ -18,6 +18,7 @@ import { sendForm } from '@emailjs/browser';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { MuiTelInput } from 'mui-tel-input';
+import Router, { useRouter } from 'next/router';
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const [startDate, setStartDate] = useState(new Date());
@@ -28,6 +29,7 @@ export default function FormDialog() {
   });
   const [sendMessage, setSendMessage] = useState(false);
 
+  const router = useRouter();
   useEffect(() => {
     let pop_status = sessionStorage.getItem('pop_status');
     if (!pop_status) {
@@ -46,6 +48,8 @@ export default function FormDialog() {
 
   const handleClose = () => {
     setOpen(false);
+    // router.replace(router.asPath);
+    Router.reload();
   };
   const [noOfPersons, setNoOfPersons] = useState({
     Adults: 0,
@@ -104,11 +108,12 @@ export default function FormDialog() {
         open={open}
         // onClose={handleClose}
         hideBackdrop={true}
-        disableScrollLock
+        // disableScrollLock
         fullWidth
         sx={{
           backdropFilter: open ? 'blur(5px)' : 'unset',
           overflow: 'hidden',
+          zIndex: '99999999',
           //other styles here
         }}
         // fullScreen

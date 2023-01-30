@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alkalami&family=Raleway:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&family=Poppins:wght@200;500;600;700&display=swap');
 
@@ -61,7 +61,7 @@
     /* background-color: rgba(0, 0, 0, 0.3); */
     /* border-radius: 15px; */
     
-    border-bottom: 5px solid #DC834E;
+    border-bottom: 3px solid #DC834E;
     /* position: absolute; */
     /* padding: 3px 7px 3px 7px; */
     /* font-style: italic; */

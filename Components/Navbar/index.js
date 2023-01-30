@@ -49,7 +49,10 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
     });
   }
   const setNavStatic = () => {
-    if (router.pathname === '/travelblogs/[blog]') {
+    if (
+      router.pathname === '/travelblogs/[blog]' ||
+      router.pathname === '/destinations/[destination]'
+    ) {
       setStaticBg(true);
     } else {
       setStaticBg(false);
@@ -150,7 +153,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             sx={{
               height: { md: '30px', lg: '60px' },
               width: { md: '90px', lg: '120px' },
-              marginTop: '20px',
+              marginTop: '23px',
             }}
             // height='60px'
             // width='150px'
@@ -161,8 +164,8 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
                   className={styles.navText}
                   sx={{
                     fontSize: { md: '13px', lg: '19px' },
-                    fontWeight: 800,
                     fontFamily: 'Raleway, sans-serif',
+                    fontWeight: 400,
                   }}
                 >
                   Home
@@ -176,8 +179,37 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             className={styles.textContainer}
             sx={{
               height: { md: '30px', lg: '60px' },
+              width: { md: '90px', lg: '150px' },
+              marginTop: '23px',
+            }}
+          >
+            <Grid className={styles.textItems}>
+              <Link
+                href='/packages'
+                style={{ textDecoration: 'none', color: 'white' }}
+              >
+                <Typography
+                  className={styles.NavText}
+                  sx={{
+                    fontSize: { md: '13px', lg: '19px' },
+                    fontFamily: 'Raleway, sans-serif',
+                    fontWeight: 400,
+                  }}
+                >
+                  Packages
+                </Typography>
+              </Link>
+              {/* <KeyboardArrowDownIcon /> */}
+            </Grid>
+          </Grid>
+
+          <Grid
+            item
+            className={styles.textContainer}
+            sx={{
+              height: { md: '30px', lg: '60px' },
               width: { md: '140px', lg: '160px' },
-              marginTop: '20px',
+              marginTop: '23px',
             }}
           >
             <Grid className={styles.textItems}>
@@ -189,8 +221,8 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
                   className={styles.navText}
                   sx={{
                     fontSize: { md: '13px', lg: '19px' },
-                    fontWeight: 800,
                     fontFamily: 'Raleway, sans-serif',
+                    fontWeight: 400,
                   }}
                 >
                   Travel Blogs
@@ -204,24 +236,24 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             className={styles.textContainer}
             sx={{
               height: { md: '30px', lg: '60px' },
-              width: { md: '90px', lg: '150px' },
-              marginTop: '20px',
+              width: { md: '140px', lg: '160px' },
+              marginTop: '23px',
             }}
           >
             <Grid className={styles.textItems}>
               <Link
-                href='/packages'
+                href='/destinations'
                 style={{ textDecoration: 'none', color: 'white' }}
               >
                 <Typography
-                  className={styles.NavText}
+                  className={styles.navText}
                   sx={{
                     fontSize: { md: '13px', lg: '19px' },
-                    fontWeight: 800,
                     fontFamily: 'Raleway, sans-serif',
+                    fontWeight: 400,
                   }}
                 >
-                  Packages
+                  Destinations
                 </Typography>
               </Link>
               {/* <KeyboardArrowDownIcon /> */}
@@ -233,7 +265,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             sx={{
               height: { md: '30px', lg: '60px' },
               width: { md: '90px', lg: '150px' },
-              marginTop: '20px',
+              marginTop: '23px',
             }}
           >
             <Grid className={styles.textItems}>
@@ -245,11 +277,11 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
                   className={styles.navText}
                   sx={{
                     fontSize: { md: '13px', lg: '19px' },
-                    fontWeight: 800,
                     fontFamily: 'Raleway, sans-serif',
+                    fontWeight: 400,
                   }}
                 >
-                  Contact Us
+                  Contact
                 </Typography>
               </Link>
             </Grid>

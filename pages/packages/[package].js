@@ -126,7 +126,8 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
       <Grid container>
         <HeroSection
           bgImage={packageData.bgImage}
-          packageName={packageData.packageName}
+          Name={packageData.packageName}
+          usedIn='Packages'
         />
         <Grid container className={styles.pdUpperContainer}>
           <Grid
