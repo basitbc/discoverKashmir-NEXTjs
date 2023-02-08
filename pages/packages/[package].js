@@ -95,7 +95,7 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
       value: packageData.vehicle,
     },
   ];
-  return (
+  return router.isReady ? (
     <div>
       <Head>
         <title>{packageData.packageName}</title>
@@ -405,6 +405,8 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
         </Grid>
       </Grid>
     </div>
+  ) : (
+    <div></div>
   );
 };
 

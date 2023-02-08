@@ -16,7 +16,7 @@ const BookingBox = (props) => {
     Child: 0,
     Infant: 0,
   });
-  const [open, setopen] = useState(true);
+  const [open, setopen] = useState(false);
 
   const handleOpen = () => {
     setopen(true);
