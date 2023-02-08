@@ -6,15 +6,21 @@ import Image1 from '../../public/Assets/Images/Packages/3.jpg';
 // import styles from '../../styles/BlogDetails.module.css';
 import WeatherWidget from '../../Components/WeatherWidget';
 import Router, { useRouter } from 'next/router';
+import destinationDataa from '../../Data/Destinations.json';
 import slugify from 'slugify';
 import styles from '../../styles/DestinationDetails.module.css';
 const index = ({ BlogsData, packagesData, destinationData }) => {
-  var router = useRouter();
-  const [destination, setDestination] = useState([]);
+  const router = useRouter();
+  const [destination, setDestination] = useState(
+    router.isReady ? destinationData[router.query.id] : destinationData[0]
+  );
   useEffect(() => {
     if (!router.isReady) return;
     console.log(destination);
     setDestination(destinationData[router.query.id]);
+    if (!router.query.id) {
+      router.push('/');
+    }
     // setPackageData(packageDataAll[router.query.id]);
   }, [router.isReady]);
 
@@ -27,7 +33,7 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
     // router.reload();
   };
 
-  return (
+  return router.isReady ? (
     <div>
       <Head>
         <title>
@@ -470,6 +476,8 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
         <Grid></Grid>
       )}
     </div>
+  ) : (
+    <Grid></Grid>
   );
 };
 
@@ -481,7 +489,6 @@ import FacebookEmbed from '../../Components/FacebookEmbed';
 import Head from 'next/head';
 import ShareButtons from '../../Components/ShareButtons';
 import BreadCrumb from '../../Components/Breadcrumb/BreadCrumb';
-import destinationDataa from '../../Data/Destinations.json';
 export async function getStaticProps() {
   const jsonDirectory = path.join(process.cwd(), 'Data');
   //Read the json data file data.json

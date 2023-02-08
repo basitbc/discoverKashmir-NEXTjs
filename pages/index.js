@@ -71,7 +71,7 @@ export default function Home({ detailsData, packagesData }) {
           width='100vw'
           sx={{ margin: '0 0 30px 0' }}
         >
-          <FormDialog />
+          {/* <FormDialog /> */}
           <Grid
             sx={{
               display: 'flex',

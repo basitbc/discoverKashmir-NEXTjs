@@ -6,9 +6,10 @@ import { useTheme } from '@mui/material/styles';
 import slugify from 'slugify';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from 'next/image';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 
 const BlogInHome = () => {
+  const router = useRouter();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
@@ -104,6 +105,11 @@ const BlogInHome = () => {
             {!isMobile ? (
               <button
                 style={{ fontFamily: "Headings, 'cursive'" }}
+                onClick={() => {
+                  router.push({
+                    pathname: '/destinations',
+                  });
+                }}
                 className={styles.bgButton}
               >
                 More Travel Experiences
@@ -192,6 +198,11 @@ const BlogInHome = () => {
         <Grid item>
           <button
             style={{ fontFamily: "Headings, 'cursive'", margin: '10px' }}
+            onClick={() => {
+              router.push({
+                pathname: '/destinations',
+              });
+            }}
             className={styles.bgButton}
           >
             More Travel Experiences

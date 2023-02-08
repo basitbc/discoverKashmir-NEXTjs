@@ -10,6 +10,7 @@ const destination = ({ destinationData }) => {
     'Anantnag',
     'Budgam',
     'Ganderbal',
+    'Bandipora',
   ];
   console.log(destinationData);
   return (
