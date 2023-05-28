@@ -49,13 +49,8 @@ const Packages = ({ packagesData }) => {
               </Typography>
             </Grid>
             <Typography sx={{ fontSize: '16px', color: 'gray', pt: '20px' }}>
-              Christmas bells are about to ring and the countdown will begin for
-              the New Year 2023. It is usual to celebrate the New Year because
-              every new beginning comes with great energy and positivity.
-              Looking at the clock and waiting for the tong is one of the most
-              awaited moments of December 31st night. Get ready to indulge in
-              festivities and celebrate the best New Year ever! With all-new
-              hopes, goals, resolutions, feelings, and with Ek Karvaan.
+             We offer customised itinerary allowing you to explore the scenic region of Kashmir as per your requirements. Typically, the travel agents offer packages arranging trips to most popular destinations like Mughal Gardens in Srinagar, Gulmarg, Pahalgam and Sonmarg. However, we offer you the opportunity to explore beyond these beaten tracks. The places like Doodhpathri, Yusmarg, Bangus Valley, Daksum, Sinthantop etc offer equally beautiful scenic views and are less crowded.Our packages include accommodation, transportation, sightseeing to popular attractions and the option for a local guide. Meals may be included or offered as add-ons.
+             Our services are our investment and ensure you have a  safe and enjoyable experience. Stay updated on travel advisories before planning your trip.
             </Typography>
           </Grid>
           <Grid item className={styles.pkgImgContainer}>
