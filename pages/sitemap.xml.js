@@ -59,7 +59,7 @@ function generateSiteMap({ Packages, Destinations, TravelBlogs }) {
   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
   xsi:schemaLocation='http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd'
 >
-  <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+  <sitemap xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
       <loc>https://www.thediscoverkashmir.in/</loc>
       <priority>1.0</priority>
@@ -112,7 +112,7 @@ function generateSiteMap({ Packages, Destinations, TravelBlogs }) {
           `;
         })
         .join('')}
-  </urlset>
+  </sitemap>
 </sitemapindex>
      
  `;

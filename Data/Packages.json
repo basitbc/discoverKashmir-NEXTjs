@@ -1,5 +1,55 @@
 [{
     "id":"0",
+    "packageName":"Great Lakes Trek",
+    "duration":"6 Nights 7 Days",
+    "location":"Sonmarg",
+    "notPrice":"19999",
+    "price":"13499",
+    "image":"4.jpg",
+    "bgImage":"4.jpg",
+    "mealsPlan":"MAP",
+    "vehicle":"Innova",
+    "pickAndDrop":"Srinagar Airport",
+    "description":"The Kashmir Great Lakes Trek is a stunning trekking expedition in Asia. It is a moderate to difficult level trek that covers a distance of approximately 72 km and takes about 7-8 days to complete. The trek takes you through some of the most beautiful landscapes in the Himalayas, lush meadows, pristine lakes, including Kishansar Lake, Vishansar Lake, Gadsar Lake, Satsar Lakes, and Gangbal Lake, besides the dense forests, and snow-capped peaks.The main feature of the trek is that it offers a unique camping experience, where you get to camp under the stars in some of the most beautiful locations in the Himalayas.",
+    "tourPlan":[
+        {
+            "day":"1",
+            "title":"Airport to Sonmarg",
+            "description":"You'll start your journey from Srinagar and drive to Sonmarg, which is about 80 km away. You'll drive through beautiful meadows and valleys, and the road offers stunning views of the surrounding mountains. After reaching Sonmarg, you'll set up your campsite for the night.",
+            "note":""
+        },{
+            "day":"2",
+            "title":"Sonmarg to Nichnai",
+            "description":"On the second day of the trek, you'll start your trek towards Nichnai. The trail passes through dense forests of pine and fir, and you'll cross several streams and waterfalls on the way. You'll also get to see beautiful meadows and small villages along the way. You'll reach Nichnai, which is at an altitude of 3,500 meters, in the afternoon. You'll set up your campsite for the night in Nichnai.",
+            "note":""
+        },{
+            "day":"3",
+            "title":"Nichnai to Kishansar and Vishansar lakes",
+            "description":"On day 3, you'll trek to Kishansar lake, which is one of the most beautiful high altitude lakes in the region. The trail is steep and challenging, but the views of the valley and the surrounding mountains are breathtaking. You'll reach Kishansar lake, which is at an altitude of 3,800 meters, in the afternoon. After spending some time at Kishansar lake, you'll trek further to Vishansar lake, which is another beautiful high altitude lake located nearby. You'll set up your campsite for the night near Vishansar lake.",
+            "note":""
+        },{
+            "day":"4",
+            "title":"Vishansar lake to Gadsar lake",
+            "description":"After breakfast, you'll start your trek towards Gadsar lake. The trail passes through rocky terrain and you'll come across several streams and waterfalls on the way. You'll also get to see beautiful meadows and small villages along the way. You'll reach Gadsar lake, which is at an altitude of 3,700 meters, in the evening. You'll set up your campsite for the night near the lake.",
+            "note":""
+        },{
+            "day":"5",
+            "title":"Gadsar lake to Satsar lakes",
+            "description":"On day 5, you'll trek to Satsar, which is a group of seven small lakes located in a beautiful meadow. The trail passes through rocky terrain and you'll cross a few streams on the way. You'll reach Satsar, which is at an altitude of 3,800 meters, in the afternoon. You'll set up your campsite for the night near the lakes.",
+            "note":""
+        },{
+            "day":"6",
+            "title":"Satsar lakes to Gangbal lake",
+            "description":"After breakfast, you'll trek to Gangbal, which is a beautiful high altitude lake surrounded by snow-capped peaks. The trail passes through meadows and rocky terrain, and you'll come across several streams and waterfalls on the way. You'll reach Gangbal, which is at an altitude of 3,800 meters, in the evening. You'll set up your campsite for the night near the lake.",
+            "note":""
+        },{
+            "day":"7",
+            "title":"Gangbal lake to Naranag to Srinagar",
+            "description":"On the last day of the trek, you'll trek to Naranag, which is an ancient temple town located at an altitude of 2,100 meters. From Naranag, you'll drive back to Srinagar, where your trek will end. On the way back, you'll get to see beautiful meadows, valleys, and small villages.",
+            "note":""
+        }
+]},{
+    "id":"1",
     "packageName":"Family Tour Package",
     "duration":"4 Nights 5 Days",
     "location":"Srinagar",
@@ -39,7 +89,7 @@
             "note":""
         }
 ]},{
-    "id":"1",
+    "id":"2",
     "packageName":"Kashmir Exotic Package",
     "duration":"7 Nights 8 Days",
     "location":"Phalgham",
@@ -94,7 +144,7 @@
             "note":""
         }
 ]},{
-    "id":"2",
+    "id":"3",
     "packageName":"Honeymoon Package ",
     "duration":"10 Nights 11 Days",
     "location":"Phalgham",
@@ -164,7 +214,7 @@
             "note":""
         }
 ]},{
-    "id":"3",
+    "id":"4",
     "packageName":"Honeymoon Package",
     "duration":"10 Nights 11 Days",
     "location":"Phalgham",
