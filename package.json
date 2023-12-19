@@ -25,6 +25,7 @@
     "axios": "^1.2.3",
     "bootstrap": "^5.2.3",
     "dayjs": "^1.11.7",
+    "html2canvas": "^1.4.1",
     "mdb-react-ui-kit": "^5.0.0",
     "moment": "^2.29.4",
     "mui-image": "^1.0.7",
@@ -35,12 +36,17 @@
     "react-bootstrap-carousel": "^4.1.1",
     "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
+    "react-pdf": "^7.4.0",
     "react-phone-input-2": "^2.15.1",
     "react-responsive-carousel": "^3.2.23",
     "react-share": "^4.4.1",
     "sharp": "^0.31.3",
     "slugify": "^1.6.5",
     "styled-components": "^5.3.6",
-    "swr": "^2.0.0"
+    "swr": "^2.0.0",
+    "handlebars": "^4.7.6",
+    "puppeteer": "^5.5.0",
+    "puppeteer-core": "1.18.1",
+    "jspdf":"2.5.1"
   }
 }
