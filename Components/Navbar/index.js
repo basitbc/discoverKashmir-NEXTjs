@@ -1,36 +1,36 @@
-import { Button, Fab, Grid, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import styles from '../../styles/Navbar.module.css';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import DialpadIcon from '@mui/icons-material/Dialpad';
-import { Link as LinkMUI } from '@mui/material';
-import logoWhite from '../../public/Assets/logo/logo-whiteColor.png';
-import logoBlack from '../../public/Assets/logo/logo-blackColor.png';
-import Link from 'next/link';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import Image from 'next/image';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
-import Head from 'next/head';
-import detailsData from '../../Data/Details.json';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import { useRouter } from 'next/router';
+import { Button, Fab, Grid, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import styles from "../../styles/Navbar.module.css";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import DialpadIcon from "@mui/icons-material/Dialpad";
+import { Link as LinkMUI } from "@mui/material";
+import logoWhite from "../../public/Assets/logo/logo-whiteColor.png";
+import logoBlack from "../../public/Assets/logo/logo-blackColor.png";
+import Link from "next/link";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import Image from "next/image";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
+import Head from "next/head";
+import detailsData from "../../Data/Details.json";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import { useRouter } from "next/router";
 
 const NavBar = ({ setOpenDrawer, openDrawer }) => {
   const [changedNavbar, setChangedNavbar] = useState(false);
   const [changedNavbarMobile, setChangedNavbarMobile] = useState(false);
   const [staticBg, setStaticBg] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"), {
     defaultMatches: true,
   });
   const router = useRouter();
 
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     let scroll = window.scrollY;
-    window.addEventListener('scroll', () => {
+    window.addEventListener("scroll", () => {
       if (window.scrollY < 10) {
         setChangedNavbar(false);
       } else if (scroll > window.scrollY) {
@@ -40,7 +40,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
       }
       scroll = window.scrollY;
     });
-    window.addEventListener('scroll', () => {
+    window.addEventListener("scroll", () => {
       if (window.scrollY > 50) {
         setChangedNavbarMobile(true);
       } else {
@@ -50,8 +50,8 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
   }
   const setNavStatic = () => {
     if (
-      router.pathname === '/travelblogs/[blog]' ||
-      router.pathname === '/destinations/[destination]'
+      router.pathname === "/travelblogs/[blog]" ||
+      router.pathname === "/destinations/[destination]"
     ) {
       setStaticBg(true);
     } else {
@@ -67,49 +67,49 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
     <Grid
       container
       className={styles.navbarContainer}
-      id='navbar'
+      id="navbar"
       sx={{
         backgroundColor: {
           // xs: changedNavbarMobile ? 'rgba(2, 27, 48, 0.9)' : '',
-          xs: 'white',
-          md: staticBg ? 'black' : changedNavbar ? 'black' : 'transparent',
+          xs: "white",
+          md: staticBg ? "black" : changedNavbar ? "black" : "transparent",
         },
         position: {
-          xs: 'fixed',
-          md: staticBg ? 'fixed' : changedNavbar ? 'fixed' : 'absolute',
+          xs: "fixed",
+          md: staticBg ? "fixed" : changedNavbar ? "fixed" : "absolute",
         },
         padding: {
           md: staticBg
-            ? '5px 10px 0 10px'
+            ? "5px 10px 0 10px"
             : changedNavbar
-            ? '5px 10px 0 10px'
-            : '15px 10px 0 10px',
+            ? "5px 10px 0 10px"
+            : "15px 10px 0 10px",
         },
         height: {
-          xs: '70px',
-          md: staticBg ? '70px' : changedNavbar ? '70px' : '100px',
+          xs: "70px",
+          md: staticBg ? "70px" : changedNavbar ? "70px" : "100px",
         },
-        width: '100vw',
-        zIndex: '9999',
+        width: "100vw",
+        zIndex: "9999",
         // borderBottom: '1px solid',
-        justifyContent: { xs: 'space-between', md: 'space-between' },
+        justifyContent: { xs: "space-between", md: "space-between" },
         // borderBottom: { xs: '2px solid gray', md: '0px solid' },
         boxShadow: {
-          xs: 'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;',
-          md: 'unset',
+          xs: "rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;",
+          md: "unset",
         },
       }}
     >
-      <Grid item sx={{ display: { xs: 'flex', md: 'none' } }}></Grid>
+      <Grid item sx={{ display: { xs: "flex", md: "none" } }}></Grid>
       <Grid
         item
         sx={{
-          padding: { xs: '0 0 0 20px', md: '0 8px 0 8px' },
-          margin: { xs: '0 10px 0 0', lg: '0 30px 0 0' },
+          padding: { xs: "0 0 0 20px", md: "0 8px 0 8px" },
+          margin: { xs: "0 10px 0 0", lg: "0 30px 0 0" },
         }}
         className={styles.logoContainer}
       >
-        <Link href='/' style={{ textDecoration: 'none', color: 'white' }}>
+        <Link href="/" style={{ textDecoration: "none", color: "white" }}>
           {/* <Typography
             className={styles.logo-text'
             variant='body1'
@@ -124,47 +124,47 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
           {isMobile ? (
             <Image
               src={logoBlack}
-              style={{ height: '52px', width: '130px' }}
-              alt='logo'
+              style={{ height: "52px", width: "130px" }}
+              alt="logo"
             />
           ) : (
             <Image
               src={logoWhite}
               // src={logoBlack}
-              style={{ height: '50px', width: '130px' }}
-              alt='logo'
+              style={{ height: "50px", width: "130px" }}
+              alt="logo"
             />
           )}
         </Link>
       </Grid>
 
-      <Grid container display='flex' flexDirection='row' width='auto'>
+      <Grid container display="flex" flexDirection="row" width="auto">
         <Grid
           container
-          sx={{ display: { xs: 'none', md: 'flex' } }}
+          sx={{ display: { xs: "none", md: "flex" } }}
           className={styles.navbarContainerLeft}
           item
-          height='60px'
-          width='auto'
+          height="60px"
+          width="auto"
         >
           <Grid
             item
             className={styles.textContainer}
             sx={{
-              height: { md: '30px', lg: '60px' },
-              width: { md: '90px', lg: '120px' },
-              marginTop: '23px',
+              height: { md: "30px", lg: "60px" },
+              width: { md: "90px", lg: "120px" },
+              marginTop: "23px",
             }}
             // height='60px'
             // width='150px'
           >
             <Grid className={styles.textItems}>
-              <Link href='/' style={{ textDecoration: 'none', color: 'white' }}>
+              <Link href="/" style={{ textDecoration: "none", color: "white" }}>
                 <Typography
                   className={styles.navText}
                   sx={{
-                    fontSize: { md: '13px', lg: '19px' },
-                    fontFamily: 'Raleway, sans-serif',
+                    fontSize: { md: "13px", lg: "19px" },
+                    fontFamily: "Raleway, sans-serif",
                     fontWeight: 400,
                   }}
                 >
@@ -178,21 +178,21 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             item
             className={styles.textContainer}
             sx={{
-              height: { md: '30px', lg: '60px' },
-              width: { md: '90px', lg: '150px' },
-              marginTop: '23px',
+              height: { md: "30px", lg: "60px" },
+              width: { md: "90px", lg: "150px" },
+              marginTop: "23px",
             }}
           >
             <Grid className={styles.textItems}>
               <Link
-                href='/packages'
-                style={{ textDecoration: 'none', color: 'white' }}
+                href="/packages"
+                style={{ textDecoration: "none", color: "white" }}
               >
                 <Typography
                   className={styles.NavText}
                   sx={{
-                    fontSize: { md: '13px', lg: '19px' },
-                    fontFamily: 'Raleway, sans-serif',
+                    fontSize: { md: "13px", lg: "19px" },
+                    fontFamily: "Raleway, sans-serif",
                     fontWeight: 400,
                   }}
                 >
@@ -207,21 +207,21 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             item
             className={styles.textContainer}
             sx={{
-              height: { md: '30px', lg: '60px' },
-              width: { md: '140px', lg: '160px' },
-              marginTop: '23px',
+              height: { md: "30px", lg: "60px" },
+              width: { md: "140px", lg: "160px" },
+              marginTop: "23px",
             }}
           >
             <Grid className={styles.textItems}>
               <Link
-                href='/travelblogs'
-                style={{ textDecoration: 'none', color: 'white' }}
+                href="/travelblogs"
+                style={{ textDecoration: "none", color: "white" }}
               >
                 <Typography
                   className={styles.navText}
                   sx={{
-                    fontSize: { md: '13px', lg: '19px' },
-                    fontFamily: 'Raleway, sans-serif',
+                    fontSize: { md: "13px", lg: "19px" },
+                    fontFamily: "Raleway, sans-serif",
                     fontWeight: 400,
                   }}
                 >
@@ -235,21 +235,21 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
             item
             className={styles.textContainer}
             sx={{
-              height: { md: '30px', lg: '60px' },
-              width: { md: '140px', lg: '160px' },
-              marginTop: '23px',
+              height: { md: "30px", lg: "60px" },
+              width: { md: "140px", lg: "160px" },
+              marginTop: "23px",
             }}
           >
             <Grid className={styles.textItems}>
               <Link
-                href='/destinations'
-                style={{ textDecoration: 'none', color: 'white' }}
+                href="/destinations"
+                style={{ textDecoration: "none", color: "white" }}
               >
                 <Typography
                   className={styles.navText}
                   sx={{
-                    fontSize: { md: '13px', lg: '19px' },
-                    fontFamily: 'Raleway, sans-serif',
+                    fontSize: { md: "13px", lg: "19px" },
+                    fontFamily: "Raleway, sans-serif",
                     fontWeight: 400,
                   }}
                 >
@@ -259,25 +259,43 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
               {/* <KeyboardArrowDownIcon /> */}
             </Grid>
           </Grid>
+          <Grid className={styles.textItems}>
+            <Link
+              href="/emi"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Typography
+                className={styles.navText}
+                sx={{
+                  fontSize: { md: "13px", lg: "19px" },
+                  fontFamily: "Raleway, sans-serif",
+                  fontWeight: 400,
+                }}
+              >
+                EMI
+              </Typography>
+              {/* <KeyboardArrowDownIcon /> */}
+            </Link>
+          </Grid>
           <Grid
             item
             className={styles.textContainer}
             sx={{
-              height: { md: '30px', lg: '60px' },
-              width: { md: '90px', lg: '150px' },
-              marginTop: '23px',
+              height: { md: "30px", lg: "60px" },
+              width: { md: "90px", lg: "150px" },
+              marginTop: "23px",
             }}
           >
             <Grid className={styles.textItems}>
               <Link
-                href='/contact'
-                style={{ textDecoration: 'none', color: 'white' }}
+                href="/contact"
+                style={{ textDecoration: "none", color: "white" }}
               >
                 <Typography
                   className={styles.navText}
                   sx={{
-                    fontSize: { md: '13px', lg: '19px' },
-                    fontFamily: 'Raleway, sans-serif',
+                    fontSize: { md: "13px", lg: "19px" },
+                    fontFamily: "Raleway, sans-serif",
                     fontWeight: 400,
                   }}
                 >
@@ -292,29 +310,29 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
       <Grid
         item
         className={styles.navbarContainerRight}
-        height='40spx'
+        height="40spx"
         sx={{
-          display: { xs: 'none', md: 'flex' },
-          margin: { md: '5px 0px 5px 0px', lg: '10px 5px 10px 5px' },
+          display: { xs: "none", md: "flex" },
+          margin: { md: "5px 0px 5px 0px", lg: "10px 5px 10px 5px" },
         }}
-        width='auto'
+        width="auto"
       >
         <Grid
           container
           sx={{
-            margin: '0 10px 0 0',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            margin: "0 10px 0 0",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Grid item>
             <LinkMUI
-              target={'_blank'}
-              href='https://www.instagram.com/discoverkashmir1/'
-              style={{ textDecoration: 'none', color: 'black' }}
+              target={"_blank"}
+              href="https://www.instagram.com/discoverkashmir1/"
+              style={{ textDecoration: "none", color: "black" }}
             >
-              <Fab size='small' aria-label='like' sx={{ marginRight: '10px' }}>
+              <Fab size="small" aria-label="like" sx={{ marginRight: "10px" }}>
                 {/* <i className='fa fa-instagram' style={{ fontSize: '23px' }}></i> */}
                 <InstagramIcon />
               </Fab>
@@ -322,31 +340,31 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
           </Grid>
           <Grid item>
             <LinkMUI
-              target={'_blank'}
-              href='https://www.facebook.com/discoverkashmir1/?mibextid=ZbWKwL'
-              style={{ textDecoration: 'none', color: 'white' }}
+              target={"_blank"}
+              href="https://www.facebook.com/discoverkashmir1/?mibextid=ZbWKwL"
+              style={{ textDecoration: "none", color: "white" }}
             >
               <Fab
-                size='small'
-                color='primary'
-                aria-label='like'
-                sx={{ marginRight: '10px' }}
+                size="small"
+                color="primary"
+                aria-label="like"
+                sx={{ marginRight: "10px" }}
               >
                 {/* <i className={styles.fa fa-facebook} style={{ fontSize: '23px' }}></i> */}
                 <FacebookIcon />
               </Fab>
             </LinkMUI>
           </Grid>
-          <Grid item sx={{ display: 'flex' }}>
+          <Grid item sx={{ display: "flex" }}>
             <Typography
               className={styles.textPhoneNo}
               sx={{ fontFamily: "'Montserrat Alternates', sans-serif" }}
             >
               <DialpadIcon />
-              &nbsp;{' '}
+              &nbsp;{" "}
               <a
-                style={{ textDecoration: 'none', color: 'white' }}
-                href='tel:+919419584775'
+                style={{ textDecoration: "none", color: "white" }}
+                href="tel:+919419584775"
               >
                 {detailsData.phoneNumber}
               </a>
