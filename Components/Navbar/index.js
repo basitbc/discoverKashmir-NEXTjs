@@ -261,7 +261,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
           </Grid>
           <Grid className={styles.textItems}>
             <Link
-              href="/emi"
+              href="https://api.thediscoverkashmir.in/payment"
               style={{ textDecoration: "none", color: "white" }}
             >
               <Typography
@@ -272,7 +272,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
                   fontWeight: 400,
                 }}
               >
-                EMI
+                Payments
               </Typography>
               {/* <KeyboardArrowDownIcon /> */}
             </Link>

@@ -22,6 +22,7 @@ import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined
 import DeckOutlinedIcon from '@mui/icons-material/DeckOutlined';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
+import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import { blue } from '@mui/material/colors';
 export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
   const sideBarLinks = [
@@ -53,6 +54,11 @@ export default function MobileSideBar({ setOpenDrawer, openDrawer }) {
       name: 'Contact Us',
       path: '/contact',
       icon: <PhoneOutlinedIcon sx={{ fontSize: '25px', color: '#DC834E' }} />,
+    },
+    {
+      name: 'Payments',
+      path: 'https://api.thediscoverkashmir.in/payment',
+      icon: <PaymentOutlinedIcon sx={{ fontSize: '25px', color: '#DC834E' }} />,
     },
   ];
 

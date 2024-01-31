@@ -46,63 +46,76 @@ export default function Checkout() {
     state: '',
     zip: '',
     country: '',
+    currency:''
   });
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
 
-
-                           
-  const handlePayment = async () => {
-    try {
-      // Prepare the data to be sent to the CCAvenue endpoint
-      const requestData = {
-        merchantId: 3145729,
-        orderId: 1,
-        currency: 'INR',
-        amount: 1.00,
-        redirectURL: 'https://thediscoverkashmir.in/ccavResponseHandler',
-        cancelURL: 'https://thediscoverkashmir.in/ccavResponseHandler',
-        language: 'EN'
-      };
-  
-      // Make a POST API call to CCAvenue endpoint using Axios
-      const response = await axios.post(
-        'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction',
-        requestData,
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        }
-      );
-  
-      // Assuming the response is text, modify accordingly
-      const responseData = response.data;
-      debugger;
-  
-      // Create a form dynamically and submit it to redirect to CCAvenue
-      const form = document.createElement('form');
-      form.innerHTML = responseData;
-      document.body.appendChild(form);
-      form.submit();
-      document.body.removeChild(form);
-    } catch (error) {
-      console.error('Error during payment:', error);
-      // Handle error (e.g., show an error message to the user)
-    }
+  const generateOrderId = () => {
+    const timestamp = format(new Date(), 'yyyyMMddHHmmss'); // Current timestamp
+    const randomNum = Math.floor(Math.random() * 1000000); // Random number (adjust the range as needed)
+    const orderId = `${timestamp}${randomNum}`; // Combine timestamp and random number
+    return orderId;
   };
+                          
+
+const handlePayment = async () => {
+  try {
+    // Prepare the data to be sent to the CCAvenue endpoint
+    const requestData = {
+      merchantId: 3145729,
+      orderId: generateOrderId(),
+      currency: formData?.currency,
+      amount: formData?.amount,
+      redirectURL: 'https://api.thediscoverkashmir.in/api/ccav/ccavResponseHandler',
+      cancelURL: 'https://api.thediscoverkashmir.in/api/ccav/ccavResponseHandler',
+      language: 'EN'
+    };
+
+    // Make a POST API call to CCAvenue endpoint using Axios
+    const response = await axios.post(
+      'http://localhost:3001/api/ccav/ccavRequestHandler',
+      requestData,
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
+
+    // Assuming the response is text, modify accordingly
+    const responseData = response.data;
+
+    // Create a form dynamically and submit it to redirect to CCAvenue
+    const form = document.createElement('form');
+    form.innerHTML = responseData;
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
+    // Now, make a POST request to your Next.js API route
+    const apiResponse = await axios.post('/api/ccavenueResponse', responseData);
+
+    // Handle the response from the API route if needed
+    console.log('API Response:', apiResponse.data);
+  } catch (error) {
+    console.error('Error during payment:', error);
+    // Handle error (e.g., show an error message to the user)
+  }
+};
+
   
   
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <AddressForm formData={formData} setFormData={setFormData} />;
-      case 1:
-        return <PaymentForm />;
-      case 2:
-        return <Review />;
+        return ;
+      // case 1:
+      //   return <PaymentForm />;
+      // case 2:
+      //   return <Review />;
       default:
         throw new Error('Unknown step');
     }
@@ -122,48 +135,20 @@ export default function Checkout() {
         />
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-          <Typography component="h1" variant="h4" align="center">
+          <Typography component="h1" variant="h4" align="center" sx={{marginBottom:"40px"}}>
             Checkout
           </Typography>
-          <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+          {/* <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
-          </Stepper>
-          {activeStep === steps.length ? (
+          </Stepper> */}
+        
             <React.Fragment>
-              <Typography variant="h5" gutterBottom>
-                Thank you for your order.
-              </Typography>
-              <Typography variant="subtitle1">
-                Your order number is #2001539. We have emailed your order
-                confirmation, and will send you an update when your order has
-                shipped.
-              </Typography>
+            <AddressForm formData={formData} setFormData={setFormData} handlePayment={handlePayment} />
             </React.Fragment>
-          ) : (
-            <React.Fragment>
-              {getStepContent(activeStep)}
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                {/* {activeStep !== 0 && (
-                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                    Back
-                  </Button>
-                )} */}
-
-                <Button
-                  variant="contained"
-                  onClick={handlePayment}
-                  sx={{ mt: 3, ml: 1 }}
-                >
-                  {/* {activeStep === steps.length - 1 ? 'Place order' : 'Next'} */}
-                  Place order
-                </Button>
-              </Box>
-            </React.Fragment>
-          )}
         </Paper>
         <Copyright />
       </Container>
