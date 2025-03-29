@@ -113,7 +113,7 @@ const PackageBox = ({ item, usedIn }) => {
               className={styles.pboxButtonContainer}
               variant='text'
               onClick={() => {
-                const phoneNumber = "+91-9797593199"; 
+                const phoneNumber = "9797593199"; 
                 const message = encodeURIComponent("Hello! I would like to know more.");
                 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
                 window.open(whatsappUrl, "_blank");
