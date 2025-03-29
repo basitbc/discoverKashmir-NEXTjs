@@ -100,20 +100,46 @@ const PackageBox = ({ item, usedIn }) => {
             justifyContent: 'space-between',
           }}
         >
-          <Grid item sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography
-              sx={{ fontFamily: "'Comfortaa',sans-serif" }}
-              className={styles.pboxFrom}
+           <Grid
+            item
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              mt: '20px',
+            }}
+          >
+            <Button
+              className={styles.pboxButtonContainer}
+              variant='text'
+              onClick={() => {
+                const phoneNumber = "+91-9797593199"; 
+                const message = encodeURIComponent("Hello! I would like to know more.");
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+                window.open(whatsappUrl, "_blank");
+              }}
+              
             >
-              From
-            </Typography>
-            <Typography
-              sx={{ fontFamily: "'Comfortaa',sans-serif" }}
-              className={styles.pboxPrice}
-              fontSize={'21px'}
-            >
-              ₹ {item.price} /-
-            </Typography>
+              <Typography
+                sx={{
+                  textDecoration: 'none',
+                  fontFamily: "'Comfortaa',sans-serif",
+                  color: 'black',
+                }}
+              >
+                <span
+                  className={styles.pboxButtonEx}
+                  style={{
+                    textDecoration: 'none',
+                    fontFamily: "'Comfortaa',sans-serif",
+                    textTransform: 'capitalize',
+                  }}
+                >
+                  WhatsApp
+                  <ArrowRightAltIcon sx={{ ml: '5px' }} />
+                </span>
+              </Typography>
+            </Button>
           </Grid>
 
           <Grid

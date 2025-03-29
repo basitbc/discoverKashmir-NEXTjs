@@ -60,7 +60,7 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
           style={{ fontSize: isMobile ? '30px' : '40px' }}
         />
       ),
-      value: 'From ' + packageData.price + '/-',
+      value: packageData.price,
     },
     {
       name: 'Duration',

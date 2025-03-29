@@ -8,7 +8,7 @@
 }
 
 
-.pboxPackageBox{
+.pboxPackageBox {
     display: flex;
     flex-direction: column;
     /* z-index: -1; */
@@ -17,10 +17,10 @@
     border-radius: 22px;
     margin: 30px 0;
     /* justify-content: center; */
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;    
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
-.pboxImageContainer{
+.pboxImageContainer {
     height: 250px;
     /* width: 410px; */
     /* width: 100%; */
@@ -31,25 +31,26 @@
 }
 
 
-.pboxImage{
+.pboxImage {
     border-radius: 22px;
     object-fit: cover;
     overflow: hidden;
     transition: 0.3s ease-in;
 }
 
-.pboxPackageBox:hover .pboxImage{
-    -webkit-transform:  scale(1.1);
-	transform: scale(1.1);
+.pboxPackageBox:hover .pboxImage {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
     -webkit-filter: blur(3px);
     filter: brightness(75%);
-    
+
 }
 
-.pboxButtonContainer:hover{
+.pboxButtonContainer:hover {
     background: none;
 }
-.pboxDurationContainer{
+
+.pboxDurationContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -62,23 +63,26 @@
     box-shadow: rgba(6, 30, 98, 0.08) 0px 0px 60px 0px;
 
 }
-.durationText{
+
+.durationText {
     color: rgb(69, 57, 57);
 }
 
-.pboxNameContainer{
+.pboxNameContainer {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 
 }
-.pboxName{
+
+.pboxName {
 
     color: #000;
     font-weight: 500;
 
 }
-.pboxLine{
+
+.pboxLine {
     width: 340px;
     color: grey;
 }
@@ -86,41 +90,43 @@
 
 
 
-.pboxLocation{
-color: gray;
-padding-top: 7px;
-font: 19px;
+.pboxLocation {
+    color: gray;
+    padding-top: 7px;
+    font: 19px;
 }
-.pboxPriceContainer{
+
+.pboxPriceContainer {
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     padding: 10px 10px;
 
 }
 
-.pboxFrom{
-color: grey;
-font-size: 14px;
+.pboxFrom {
+    color: grey;
+    font-size: 14px;
 }
 
-.pboxPrice{
-font-weight: 700;
-color: #DC834E;
+.pboxPrice {
+    font-weight: 700;
+    color: #DC834E;
 }
 
-.pboxButtonEx{
+.pboxButtonEx {
     font-size: 17px;
     padding-right: 12px;
     cursor: pointer;
 }
-.pboxButtonEx:hover{
+
+.pboxButtonEx:hover {
     color: #DC834E
 }
 
-.buttonPboxViewMore{
+.buttonPboxViewMore {
     margin: 20px 0 0 40px;
-    border:none;
+    border: none;
     font-weight: 700;
     text-transform: capitalize;
     border-radius: 5px;
