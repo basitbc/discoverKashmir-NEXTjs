@@ -108,9 +108,9 @@ const ContactUs = ({ detailsData, contactData }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                height: { md: '439px' },
-                width: { md: '27vw' },
-                flexWrap: 'wrap',
+                width: { xs: '100%', md: '100%' },
+                maxWidth: { md: '420px' },
+                flexWrap: 'nowrap',
               }}
             >
               <Grid
@@ -225,7 +225,15 @@ const ContactUs = ({ detailsData, contactData }) => {
                     style={{ color: 'orange', fontSize: '30px' }}
                   />
                 </Grid>
-                <Grid sx={styleTypo}>{detailsData.email}</Grid>
+                <Typography
+                  sx={{
+                    ...styleTypo,
+                    wordBreak: 'break-word',
+                    overflowWrap: 'anywhere',
+                  }}
+                >
+                  {detailsData.email}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>

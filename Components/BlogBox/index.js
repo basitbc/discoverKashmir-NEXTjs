@@ -5,7 +5,7 @@ import Router, { useRouter } from 'next/router';
 import slugify from 'slugify';
 import styles from '../../styles/BlogBox.module.css';
 import Image from 'next/image';
-import next from 'next';
+
 const BlogBox = ({ item }) => {
   const router = useRouter();
   const handleClick = (item) => {

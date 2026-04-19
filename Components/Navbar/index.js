@@ -4,8 +4,6 @@ import styles from "../../styles/Navbar.module.css";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DialpadIcon from "@mui/icons-material/Dialpad";
 import { Link as LinkMUI } from "@mui/material";
-import logoWhite from "../../public/Assets/logo/logo-whiteColor.png";
-import logoBlack from "../../public/Assets/logo/logo-blackColor.png";
 import Link from "next/link";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -121,20 +119,20 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
           >
             {details.Logo}
           </Typography> */}
-          {isMobile ? (
-            <Image
-              src={logoBlack}
-              style={{ height: "52px", width: "130px" }}
-              alt="logo"
-            />
-          ) : (
-            <Image
-              src={logoWhite}
-              // src={logoBlack}
-              style={{ height: "50px", width: "130px" }}
-              alt="logo"
-            />
-          )}
+          <Image
+            src="/Assets/logo/DK_logo.png"
+            alt="Discover Kashmir"
+            width={280}
+            height={254}
+            sizes="160px"
+            priority
+            style={{
+              height: isMobile ? "52px" : "50px",
+              width: "auto",
+              maxWidth: "min(200px, 44vw)",
+              filter: isMobile ? "invert(1)" : "none",
+            }}
+          />
         </Link>
       </Grid>
 

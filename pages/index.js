@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { Montserrat_Alternates } from '@next/font/google';
+import { Lato, Montserrat_Alternates, Poppins } from '@next/font/google';
 import React, { useEffect, useState } from 'react';
-import { Button, Fab, Grid, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import Router, { useRouter } from 'next/router';
 import HeroCarousel from '../Components/HeroCarousel';
 import styles from '../styles/Home.module.css';
@@ -13,6 +13,24 @@ import LocationsInHome from '../Components/LocationsInHome';
 import TestimonialHome from '../Components/TestimonialHome';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+
+const montserratAlternates = Montserrat_Alternates({
+  subsets: ['latin'],
+  weight: ['700'],
+  display: 'swap',
+});
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ['400', '700', '900'],
+  display: 'swap',
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['700'],
+  display: 'swap',
+});
 
 export default function Home({ detailsData, packagesData }) {
   <Head>
@@ -88,13 +106,13 @@ export default function Home({ detailsData, packagesData }) {
             }}
           >
             <Typography
-              className={styles.textExcape}
+              component='h1'
               sx={{
+                fontFamily: montserratAlternates.style.fontFamily,
                 fontSize: { xs: '15px', lg: '24px' },
                 color: 'white',
                 marginLeft: { xs: '-37px', lg: '-110px' },
                 lineHeight: '0',
-                // fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 700,
               }}
               data-aos='fade-right'
@@ -105,7 +123,7 @@ export default function Home({ detailsData, packagesData }) {
               data-aos-mirror={!isMobile ? 'true' : 'false'}
               data-aos-once={!isMobile ? 'false' : 'true'}
             >
-              Escape. Explore. &
+              Beyond Holidays.
             </Typography>
             <Typography
               data-aos='fade-up'
@@ -117,15 +135,14 @@ export default function Home({ detailsData, packagesData }) {
               data-aos-once={!isMobile ? 'false' : 'true'}
               className={styles.textDis}
               sx={{
+                fontFamily: lato.style.fontFamily,
                 fontSize: { xs: '37px', lg: '70px' },
                 color: 'black',
                 overflow: 'hidden',
-                // fontFamily: "'Lato', sans-serif",
-                // fontFamily: 'Poppins, sans-serif',
                 fontWeight: 900,
               }}
             >
-              <b>DISCOVER</b>
+              <b>BEYOND</b>
             </Typography>
             <Typography
               data-aos='fade-left'
@@ -137,17 +154,16 @@ export default function Home({ detailsData, packagesData }) {
               data-aos-once={!isMobile ? 'false' : 'true'}
               className={styles.textKmr}
               sx={{
+                fontFamily: poppins.style.fontFamily,
                 fontSize: { xs: '23px', lg: '50px' },
                 color: 'white',
                 lineHeight: '0',
                 marginRight: { xs: '-70px', lg: '-117px' },
                 letterSpacing: '3.0px',
-                // overflow: { xs: 'auto', md: 'visible' },
-                fontFamily: 'Poppins, sans-serif',
                 fontWeight: 700,
               }}
             >
-              <b>Kashmir</b>
+              <b>Ordinary</b>
             </Typography>
 
             <Grid>
@@ -165,8 +181,7 @@ export default function Home({ detailsData, packagesData }) {
                   });
                 }}
                 className={styles.heroButton}
-                zIndex='2'
-                style={{ fontFamily: "Lato, 'cursive'" }}
+                style={{ fontFamily: lato.style.fontFamily }}
               >
                 Get Best Deals
               </button>

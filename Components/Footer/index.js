@@ -8,7 +8,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import CallIcon from "@mui/icons-material/Call";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import GpsFixedIcon from "@mui/icons-material/GpsFixed";
-import logoBlack from "../../public/Assets/logo/logo-blackColor.png";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -69,12 +68,19 @@ const Footer = () => {
                 fontFamily: 'Caveat Brush, cursive',
               }}
             >
-              {logoBlack}
             </Typography> */}
             <Image
-              src={logoBlack}
-              style={{ height: isMobile ? "50px" : "90px", width: "auto" }}
-              alt="logoDk"
+              src="/Assets/logo/DK_logo.png"
+              width={280}
+              height={254}
+              sizes="220px"
+              alt="Discover Kashmir"
+              style={{
+                height: isMobile ? "50px" : "90px",
+                width: "auto",
+                maxWidth: "260px",
+                filter: "invert(1)",
+              }}
             />
           </Grid>
           <Grid item sx={{ mb: "40px", zIndex: "-1" }}>
