@@ -1,4 +1,4 @@
-import { adminClient } from './http';
+import { adminClient, sendUpdate } from './http';
 import { getPublic, getPublicOrNull } from './http';
 
 /**
@@ -63,7 +63,7 @@ export function createResourceService(resource) {
       },
 
       async update(id, payload) {
-        const { data } = await adminClient.patch(`${adminBase}/${id}`, payload);
+        const { data } = await sendUpdate(adminClient, `${adminBase}/${id}`, payload);
         return data;
       },
 

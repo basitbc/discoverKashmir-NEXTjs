@@ -1,4 +1,4 @@
-import { adminClient } from './http';
+import { adminClient, sendUpdate } from './http';
 
 /**
  * Media library.
@@ -25,7 +25,7 @@ export const imagesService = {
 
     /** Alt text is the main thing edited here. */
     async update(id, payload) {
-      const { data } = await adminClient.patch(`/admin/images/${id}`, payload);
+      const { data } = await sendUpdate(adminClient, `/admin/images/${id}`, payload);
       return data;
     },
 

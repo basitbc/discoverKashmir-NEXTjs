@@ -87,6 +87,31 @@ export const adminClient = axios.create({
 });
 
 /**
+ * Sends an update, falling back from PATCH to PUT.
+ *
+ * Some networks — corporate proxies, security appliances, a few browser
+ * extensions — drop PATCH before it leaves the machine. The request never
+ * reaches the API, so the browser has no response to read and reports it as
+ * "Method PATCH is not allowed by Access-Control-Allow-Methods", which sends
+ * you looking at a CORS allowlist that was correct all along.
+ *
+ * The API registers PUT as an alias on every update route, so retrying with it
+ * is not a workaround with different semantics — it is the same handler.
+ *
+ * Only network-level failures retry. An error carrying a response (400, 404,
+ * 409) is a real answer from the API and must surface unchanged; retrying
+ * those would just send the same rejected payload twice.
+ */
+export async function sendUpdate(client, url, payload) {
+  try {
+    return await client.patch(url, payload);
+  } catch (error) {
+    if (error?.response) throw error;
+    return client.put(url, payload);
+  }
+}
+
+/**
  * getSession() is an HTTP call to /api/auth/session, so caching it keeps every
  * admin request from making two round trips. The window is deliberately short —
  * a signed-out user stops working almost immediately rather than at token
