@@ -52,3 +52,6 @@ jspm_packages
 
 # Verification builds (see distDir in next.config.js)
 .next-verify/
+
+# Ready-to-paste production values (never commit)
+.env.vercel
