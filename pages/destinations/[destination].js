@@ -35,13 +35,6 @@ const index = ({ BlogsData, packagesData, destination }) => {
           <>
             <meta property='og:image' itemProp='image' content={ogImage} />
             <link itemProp='thumbnailUrl' href={ogImage} />
-            <span
-              itemProp='thumbnail'
-              itemScope
-              itemType='http://schema.org/ImageObject'
-            >
-              <link itemProp='url' href={ogImage} />
-            </span>
           </>
         ) : null}
       </Head>
