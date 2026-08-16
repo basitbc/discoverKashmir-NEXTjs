@@ -5,13 +5,11 @@ import path from 'path';
 import Router, { useRouter } from 'next/router';
 import Image from 'next/image';
 import CurrencyRupeeOutlinedIcon from '@mui/icons-material/CurrencyRupeeOutlined';
-import slugify from 'slugify';
 
 const TopPicks = ({ packagesData }) => {
   const handleClickPackage = (item) => {
     Router.push({
-      pathname: `/packages/${slugify(item.packageName).toLowerCase()}`,
-      query: { id: item.id },
+      pathname: `/packages/${item.slug}`,
     });
   };
   return (
@@ -81,7 +79,8 @@ const TopPicks = ({ packagesData }) => {
             >
               <Image
                 className={styles.imageCont}
-                src={'/Assets/Images/Packages/' + item.image}
+                src={item.cardImage || ''}
+                  alt={item.packageName}
                 fill
                 style={{
                   // height: '100%',

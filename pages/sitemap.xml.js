@@ -1,176 +1,103 @@
-{
-  /* <sitemapindex
-  xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'
-  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-  xsi:schemaLocation='http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd'
->
-  <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
-    <url>
-      <loc>https://www.thediscoverkashmir.in/</loc>
-      <priority>1.0</priority>
-    </url>
-    <url>
-      <loc>https://www.thediscoverkashmir.in/contact</loc>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://www.thediscoverkashmir.in/destinations</loc>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://www.thediscoverkashmir.in/travelblogs</loc>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://www.thediscoverkashmir.in/packages</loc>
-      <priority>0.8</priority>
-    </url>
-    <!-- Dynamic routes -->
-    <url>
-      <loc>https://www.thediscoverkashmir.in/packages/[packageName]</loc>
-      <priority>0.6</priority>
-      <changefreq>daily</changefreq>
-    </url>
-    <url>
-      <loc>https://www.thediscoverkashmir.in/travelblog/[title]</loc>
-      <priority>0.6</priority>
-      <changefreq>daily</changefreq>
-    </url>
-    <url>
-      <loc>
-        https://www.thediscoverkashmir.in/destinations/[destinationName]
-      </loc>
-      <priority>0.6</priority>
-      <changefreq>daily</changefreq>
-    </url>
-  </urlset>
-</sitemapindex>; */
-}
-//pages/sitemap.xml.js
+import { blogsService, destinationsService, packagesService } from '../services';
 
-import slugify from 'slugify';
-import des from '../Data/Destinations.json';
-import blog from '../Data/Blog.json';
-import pack from '../Data/Packages.json';
+/**
+ * XML sitemap, generated per request from the content API.
+ *
+ * The previous version was broken three ways and is worth recording so it does
+ * not come back:
+ *   1. generateSiteMap(a, b, c) was called with three positional arguments
+ *      against a signature that destructured a single object, so every value
+ *      was undefined — it only produced output by falling through to top-level
+ *      JSON imports, which made the fsPromises block dead code.
+ *   2. Its slugs used `.replace(/ /g, '-')` while the routes used slugify(), so
+ *      any name containing & ' , or : produced a sitemap URL matching no page.
+ *   3. The blog .map() had no .join(''), leaking commas into the XML.
+ *
+ * All three disappear by using the stored `slug` — the same value the routes
+ * resolve against — and building one flat list of entries.
+ */
 
-function generateSiteMap({ Packages, Destinations, TravelBlogs }) {
-  return `<sitemapindex
-  xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'
-  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-  xsi:schemaLocation='http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd'
->
-  <sitemap xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
-    <url>
-      <loc>https://www.thediscoverkashmir.in/</loc>
-      <priority>1.0</priority>
-    </url>
-    <url>
-      <loc>https://www.thediscoverkashmir.in/contact</loc>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://www.thediscoverkashmir.in/destinations</loc>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://www.thediscoverkashmir.in/travelblogs</loc>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://www.thediscoverkashmir.in/packages</loc>
-      <priority>0.8</priority>
-    </url>
-    ${blog.map((item) => {
-      return `
-            <url>
-                <loc>${`https://www.thediscoverkashmir.in/travelblogs/${item?.Title.replace(
-                  / /g,
-                  '-'
-                ).toLowerCase()}?id=${item?.id}`}</loc>
-            </url>
-          `;
-    })}
-    ${pack
-      .map((item) => {
-        return `
-          <url>
-              <loc>${`https://www.thediscoverkashmir.in/packages/${item?.packageName
-                .replace(/ /g, '-')
-                .toLowerCase()}?id=${item?.id}`}</loc>
-          </url>
-        `;
-      })
-      .join('')}
-      ${des
-        .map((item) => {
-          return `
-            <url>
-                <loc>${`https://www.thediscoverkashmir.in/destinations/${item?.destinationName
-                  .replace(/ /g, '-')
-                  .toLowerCase()}?id=${item?.id}`}</loc>
-            </url>
-          `;
-        })
-        .join('')}
-  </sitemap>
-</sitemapindex>
-     
- `;
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://thediscoverkashmir.in')
+  .replace(/\/$/, '');
+
+const STATIC_PATHS = [
+  { path: '/', priority: '1.0', changefreq: 'daily' },
+  { path: '/packages', priority: '0.9', changefreq: 'weekly' },
+  { path: '/destinations', priority: '0.9', changefreq: 'weekly' },
+  { path: '/travelblogs', priority: '0.8', changefreq: 'weekly' },
+  { path: '/contact', priority: '0.6', changefreq: 'monthly' },
+  { path: '/emi', priority: '0.4', changefreq: 'yearly' },
+  { path: '/privacy-policy', priority: '0.3', changefreq: 'yearly' },
+  { path: '/terms-and-conditions', priority: '0.3', changefreq: 'yearly' },
+  { path: '/cancellations-policy', priority: '0.3', changefreq: 'yearly' },
+  { path: '/disclaimer', priority: '0.3', changefreq: 'yearly' },
+];
+
+/** Slugs can contain & ' : — all of which must be escaped inside XML. */
+function escapeXml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
 }
 
-function SiteMap() {
-  // getServerSideProps will do the heavy lifting
+function toUrlEntry({ path, priority, changefreq, lastmod }) {
+  return `  <url>
+    <loc>${escapeXml(`${SITE_URL}${path}`)}</loc>${
+    lastmod ? `\n    <lastmod>${new Date(lastmod).toISOString()}</lastmod>` : ''
+  }
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
 }
-import path from 'path';
-import fsPromises from 'fs/promises';
+
+function generateSiteMap(entries) {
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${entries.map(toUrlEntry).join('\n')}
+</urlset>`;
+}
+
+// The route only exists to emit XML from getServerSideProps.
+export default function SiteMap() {
+  return null;
+}
 
 export async function getServerSideProps({ res }) {
-  const jsonDirectory = path.join(process.cwd(), 'Data');
-  //Read the json data file data.json
-  const Packages = await fsPromises.readFile(
-    jsonDirectory + '/Packages.json',
-    'utf8'
-  );
-  const Destinations = await fsPromises.readFile(
-    jsonDirectory + '/Destinations.json',
-    'utf8'
-  );
+  const [packages, destinations, blogs] = await Promise.all([
+    packagesService.listAll(),
+    destinationsService.listAll(),
+    blogsService.listAll(),
+  ]);
 
-  const TravelBlogs = await fsPromises.readFile(
-    jsonDirectory + '/Blog.json',
-    'utf8'
-  );
+  const entries = [
+    ...STATIC_PATHS,
+    ...packages.map((item) => ({
+      path: `/packages/${item.slug}`,
+      priority: '0.8',
+      changefreq: 'weekly',
+      lastmod: item.updatedAt,
+    })),
+    ...destinations.map((item) => ({
+      path: `/destinations/${item.slug}`,
+      priority: '0.8',
+      changefreq: 'weekly',
+      lastmod: item.updatedAt,
+    })),
+    ...blogs.map((item) => ({
+      path: `/travelblogs/${item.slug}`,
+      priority: '0.7',
+      changefreq: 'monthly',
+      lastmod: item.updatedAt,
+    })),
+  ];
 
-  // We generate the XML sitemap with the posts data
-  const sitemap = generateSiteMap(Packages, Destinations, TravelBlogs);
   res.setHeader('Content-Type', 'text/xml');
-  // we send the XML to the browser
-  res.write(sitemap);
+  res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate');
+  res.write(generateSiteMap(entries));
   res.end();
-  return {
-    props: {
-      Packages: JSON.parse(Packages),
-      Destinations: JSON.parse(Destinations),
-      TravelBlogs: JSON.parse(TravelBlogs),
-    },
-  };
+
+  return { props: {} };
 }
-// export async function getServerSideProps({ res }) {
-//   // We make an API call to gather the URLs for our site
-//   const request = await fetch(EXTERNAL_DATA_URL);
-//   const posts = await request.json();
-
-//   // We generate the XML sitemap with the posts data
-//   const sitemap = generateSiteMap(posts);
-
-//   res.setHeader('Content-Type', 'text/xml');
-//   // we send the XML to the browser
-//   res.write(sitemap);
-//   res.end();
-
-//   return {
-//     props: {},
-//   };
-// }
-
-export default SiteMap;

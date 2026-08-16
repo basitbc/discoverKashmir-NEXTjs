@@ -2,7 +2,6 @@ import { Box, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Router, { useRouter } from 'next/router';
-import slugify from 'slugify';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 import styles from '../../styles/DistrictSection.module.css';
@@ -15,8 +14,7 @@ const DistrictSection = (props) => {
   });
   const handleClick = (item) => {
     Router.push({
-      pathname: `/destinations/${slugify(item.destinationName).toLowerCase()}`,
-      query: { id: item.id },
+      pathname: `/destinations/${item.slug}`,
     });
   };
 
@@ -50,7 +48,7 @@ const DistrictSection = (props) => {
       </Grid>
       <Grid className={styles.dsOuterContainer} rowGap={2}>
         {props.destinationData.map((item) => {
-          return item.District.includes(props.name) ? (
+          return item.district?.name === props.name ? (
             <Grid
               item
               margin={'0 10px'}
@@ -72,7 +70,8 @@ const DistrictSection = (props) => {
                   //   width: isMobile ? '330px' : '310px',
                   borderRadius: '7px',
                 }}
-                src={`/Assets/Images/Destinations/${item.District}/${item.Image}/cardImage.jpg`}
+                src={item.cardImage || ''}
+                alt={item.destinationName}
               />
               <Grid
                 sx={{
@@ -99,7 +98,7 @@ const DistrictSection = (props) => {
                     lineHeight: '10px',
                   }}
                 >
-                  {item.District}
+                  {item.district?.name}
                 </Typography> */}
               </Grid>
             </Grid>

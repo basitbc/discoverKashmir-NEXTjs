@@ -21,6 +21,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 
 const Emi = ({ detailsData, contactData }) => {
+  const { contactBgImage } = useSiteSettings();
   const theme = useTheme();
   const [open, setopen] = useState(false);
   const [emiObj, setEmiObj] = useState({});
@@ -187,8 +188,7 @@ const Emi = ({ detailsData, contactData }) => {
       </Head>
       <Grid container>
         <HeroSection
-          usedIn="Contact"
-          bgImage="background.jpg"
+          src={contactBgImage}
           Name={"Travel Now Pay Later"}
         />
         <Grid
@@ -293,27 +293,25 @@ const Emi = ({ detailsData, contactData }) => {
 
 export default Emi;
 
-import path from "path";
-import fsPromises from "fs/promises";
 import Head from "next/head";
 import { sendForm } from "@emailjs/browser";
 import dynamic from "next/dynamic";
 import HeroSection from "../../Components/HeroSection";
+import { getSiteProps, REVALIDATE_SECONDS } from "../../lib/getSiteProps";
+import { useSiteSettings } from '../../context/SiteSettingsContext';
+
 export async function getStaticProps() {
-  const jsonDirectory = path.join(process.cwd(), "Data");
-  //Read the json data file data.json
-  const detailsData = await fsPromises.readFile(
-    jsonDirectory + "/Details.json",
-    "utf8"
-  );
-  const contactData = await fsPromises.readFile(
-    jsonDirectory + "/Contact.json",
-    "utf8"
-  );
+  const siteProps = await getSiteProps();
+
   return {
     props: {
-      detailsData: JSON.parse(detailsData),
-      contactData: JSON.parse(contactData),
+      ...siteProps,
+      // This page reads the settings record under its original prop name.
+      detailsData: siteProps.siteSettings,
+      // Data/Contact.json only ever held a background filename that the page
+      // never actually used; the hero image is hardcoded in the JSX.
+      contactData: {},
     },
+    revalidate: REVALIDATE_SECONDS,
   };
 }

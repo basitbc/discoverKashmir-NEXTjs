@@ -1,80 +1,49 @@
 import { Grid, Typography } from '@mui/material';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import blogDatas from '../../Data/Blog.json';
-import Image1 from '../../public/Assets/Images/Packages/3.jpg';
-// import styles from '../../styles/BlogDetails.module.css';
+import React from 'react';
 import WeatherWidget from '../../Components/WeatherWidget';
-import Router, { useRouter } from 'next/router';
-import destinationDataa from '../../Data/Destinations.json';
-import slugify from 'slugify';
+import { useRouter } from 'next/router';
 import styles from '../../styles/DestinationDetails.module.css';
-const index = ({ BlogsData, packagesData, destinationData }) => {
-  const router = useRouter();
-  const [destination, setDestination] = useState(
-    router.isReady ? destinationData[router.query.id] : destinationData[0]
-  );
-  useEffect(() => {
-    if (!router.isReady) return;
-    console.log(destination);
-    setDestination(destinationData[router.query.id]);
-    if (!router.query.id) {
-      router.push('/');
-    }
-    // setPackageData(packageDataAll[router.query.id]);
-  }, [router.isReady]);
 
+const index = ({ BlogsData, packagesData, destination }) => {
+  const router = useRouter();
+
+  // Related blog cards link to the BLOG route. They previously pushed
+  // /destinations/<blog-title>, which is not a page that exists.
   const handleClickBlog = (item) => {
-    router.push({
-      pathname: `/destinations/${slugify(item.Title).toLowerCase()}`,
-      query: { id: item.id },
-    });
-    // setBlogData(item);
-    // router.reload();
+    router.push(`/travelblogs/${item.slug}`);
   };
 
-  return router.isReady ? (
+  // thumbnail is the Open Graph image; only some destinations have one, so fall
+  // back rather than emit a link to a 404.
+  const ogImage = destination.thumbnail || destination.cardImage || '';
+  const metaDescription =
+    destination.metaDescription || (destination.shortDes || '').slice(0, 142);
+
+  return (
     <div>
       <Head>
         <title>
-          {destination.destinationName} | Discover Kashmir | Best Travel Company
-          in Kashmir{' '}
+          {destination.metaTitle ||
+            `${destination.destinationName} | Discover Kashmir | Best Travel Company in Kashmir`}
         </title>
         <meta property='og:title' content={destination.destinationName} />
-        <meta
-          property='og:description'
-          content={destination?.shortDes?.slice(0, 142)}
-        />
-        <meta
-          property='og:image'
-          itemprop='image'
-          content={`/Assets/Images/Destinations/${destination.District}/${destination.Image}/thumbnail.jpg`}
-        />
+        <meta property='og:description' content={metaDescription} />
         <meta property='og:type' content='website' />
-        <meta
-          name='description'
-          content={destination?.shortDes?.slice(0, 142)}
-        />
-        <meta
-          property='og:image'
-          itemprop='image'
-          content={`/Assets/Images/Destinations/${destination.District}/${destination.Image}/thumbnail.jpg`}
-        />
-        <link
-          itemprop='thumbnailUrl'
-          content={`/Assets/Images/Destinations/${destination.District}/${destination.Image}/thumbnail.jpg`}
-        />
-        <span
-          itemprop='thumbnail'
-          itemscope
-          itemtype='http://schema.org/ImageObject'
-        >
-          <link
-            itemprop='url'
-            content={`/Assets/Images/Destinations/${destination.District}/${destination.Image}/thumbnail.jpg`}
-          />
-        </span>
-        {/* <meta property='og:image:type' content='image/jpg'></meta> */}
+        <meta name='description' content={metaDescription} />
+        {ogImage ? (
+          <>
+            <meta property='og:image' itemProp='image' content={ogImage} />
+            <link itemProp='thumbnailUrl' href={ogImage} />
+            <span
+              itemProp='thumbnail'
+              itemScope
+              itemType='http://schema.org/ImageObject'
+            >
+              <link itemProp='url' href={ogImage} />
+            </span>
+          </>
+        ) : null}
       </Head>
 
       {destination ? (
@@ -233,7 +202,8 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
             >
               <Image
                 fill
-                src={`/Assets/Images/Destinations/${destination.District}/${destination.Image}/background.jpg`}
+                src={destination.bgImage || destination.cardImage || ''}
+                alt={destination.destinationName}
                 style={{
                   borderRadius: {
                     xs: '0% 0% 61% 49% / 66% 32% 27% 35% ',
@@ -419,11 +389,8 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
                       }}
                     >
                       <Image
-                        src={
-                          '/Assets/Images/Blogs/' +
-                          item.Image +
-                          '/cardImage.jpg'
-                        }
+                        src={item.cardImage || ''}
+                        alt={item.title}
                         fill
                         style={{
                           // height: '100%',
@@ -454,7 +421,7 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
                           textOverflow: 'ellipsis',
                         }}
                       >
-                        {item.Title}
+                        {item.title}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -476,58 +443,45 @@ const index = ({ BlogsData, packagesData, destinationData }) => {
         <Grid></Grid>
       )}
     </div>
-  ) : (
-    <Grid></Grid>
   );
 };
 
 export default index;
-import path from 'path';
-import fsPromises from 'fs/promises';
+
 import TopPicks from '../../Components/TopPicks';
 import FacebookEmbed from '../../Components/FacebookEmbed';
 import Head from 'next/head';
 import ShareButtons from '../../Components/ShareButtons';
 import BreadCrumb from '../../Components/Breadcrumb/BreadCrumb';
-export async function getStaticProps() {
-  const jsonDirectory = path.join(process.cwd(), 'Data');
-  //Read the json data file data.json
-  const BlogsData = await fsPromises.readFile(
-    jsonDirectory + '/Blog.json',
-    'utf8'
-  );
-  const packagesData = await fsPromises.readFile(
-    jsonDirectory + '/Packages.json',
-    'utf8'
-  );
-  const destinationsData = await fsPromises.readFile(
-    jsonDirectory + '/Destinations.json',
-    'utf8'
-  );
-  // const res = await fetch(
-  //   'https://api.openweathermap.org/data/2.5/weather?q=Gulmarg,in&APPID=2d48b1d7080d09ea964e645ccd1ec93f&units=metric'
-  // );
-  // const weatherData = await res.json();
-  return {
-    props: {
-      BlogsData: JSON.parse(BlogsData),
-      packagesData: JSON.parse(packagesData),
-      destinationData: JSON.parse(destinationsData),
+import { destinationsService, blogsService, packagesService } from '../../services';
+import { getSiteProps, REVALIDATE_SECONDS } from '../../lib/getSiteProps';
 
-      // weatherData: weatherData,
-    },
+export async function getStaticProps({ params }) {
+  // Resolve by slug. The previous version indexed the array with
+  // router.query.id, so deleting or reordering a destination would silently
+  // repoint every URL at the wrong record — the exact thing an admin panel does.
+  const destination = await destinationsService.getBySlug(params.destination);
+
+  if (!destination) return { notFound: true };
+
+  const [{ items: BlogsData }, { items: packagesData }] = await Promise.all([
+    blogsService.list({ perPage: 4 }),
+    packagesService.list({ perPage: 4 }),
+  ]);
+
+  return {
+    props: { ...(await getSiteProps()), destination, BlogsData, packagesData },
+    revalidate: REVALIDATE_SECONDS,
   };
 }
+
 export async function getStaticPaths() {
-  const paths = destinationDataa.map((item) => {
-    return {
-      params: {
-        destination: slugify(item.destinationName).toLowerCase(),
-      },
-    };
-  });
+  const destinations = await destinationsService.listAll();
+
   return {
-    paths,
-    fallback: false, // can also be true or 'blocking'
+    paths: destinations.map((item) => ({
+      params: { destination: item.slug },
+    })),
+    fallback: 'blocking',
   };
 }

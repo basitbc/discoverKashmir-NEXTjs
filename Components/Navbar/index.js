@@ -12,11 +12,20 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
 import Head from "next/head";
-import detailsData from "../../Data/Details.json";
+import { useSiteSettings } from "../../context/SiteSettingsContext";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import { useRouter } from "next/router";
 
 const NavBar = ({ setOpenDrawer, openDrawer }) => {
+  const {
+    phoneNumber,
+    headerLogo,
+    headerLogoAlt,
+    footerLogo,
+    footerLogoAlt,
+    logoText,
+  } = useSiteSettings();
+
   const [changedNavbar, setChangedNavbar] = useState(false);
   const [changedNavbarMobile, setChangedNavbarMobile] = useState(false);
   const [staticBg, setStaticBg] = useState(false);
@@ -24,6 +33,14 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"), {
     defaultMatches: true,
   });
+
+  // The navbar is BLACK on desktop but WHITE on mobile, so one logo cannot
+  // work on both. Previously a CSS invert(1) faked a dark version — which
+  // silently inverted whatever an editor uploaded, so a dark logo came out
+  // light. Each background now gets the mark actually chosen for it.
+  const logo = isMobile ? footerLogo || headerLogo : headerLogo;
+  const logoAlt =
+    (isMobile ? footerLogoAlt : headerLogoAlt) || logoText || 'Discover Kashmir';
   const router = useRouter();
 
   if (typeof window !== "undefined") {
@@ -119,20 +136,32 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
           >
             {details.Logo}
           </Typography> */}
-          <Image
-            src="/Assets/logo/DK_logo.png"
-            alt="Discover Kashmir"
-            width={280}
-            height={254}
-            sizes="160px"
-            priority
-            style={{
-              height: isMobile ? "52px" : "50px",
-              width: "auto",
-              maxWidth: "min(200px, 44vw)",
-              filter: isMobile ? "invert(1)" : "none",
-            }}
-          />
+          {logo ? (
+            <Image
+              src={logo}
+              alt={logoAlt}
+              width={280}
+              height={254}
+              sizes="160px"
+              priority
+              style={{
+                height: isMobile ? "52px" : "50px",
+                width: "auto",
+                maxWidth: "min(200px, 44vw)",
+              }}
+            />
+          ) : (
+            <Typography
+              sx={{
+                fontSize: { xs: "22px", lg: "28px" },
+                fontWeight: 700,
+                fontFamily: "Caveat Brush, cursive",
+                color: isMobile ? "#fff" : "inherit",
+              }}
+            >
+              {logoText || "Discover Kashmir"}
+            </Typography>
+          )}
         </Link>
       </Grid>
 
@@ -364,7 +393,7 @@ const NavBar = ({ setOpenDrawer, openDrawer }) => {
                 style={{ textDecoration: "none", color: "white" }}
                 href="tel:+919419584775"
               >
-                {detailsData.phoneNumber}
+                {phoneNumber}
               </a>
             </Typography>
           </Grid>

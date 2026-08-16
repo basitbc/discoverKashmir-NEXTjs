@@ -1,6 +1,5 @@
 import React from 'react';
 import { CardMedia, Grid, Typography } from '@mui/material';
-import testimonialsData from '../../Data/Testimonials.json';
 import Carousel from 'react-bootstrap/Carousel';
 import { Alert, CCarousel, CCarouselItem } from '@coreui/react';
 import '@coreui/coreui/dist/css/coreui.min.css';
@@ -10,7 +9,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import styles from '../../styles/TestimonialHome.module.css';
 import Image from 'next/image';
 
-export default function TestimonialHome() {
+export default function TestimonialHome({ testimonialsData = [] }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
@@ -125,7 +124,7 @@ export default function TestimonialHome() {
                       variant='h5'
                       sx={{ fontFamily: 'PTSans', paddingLeft: '20px' }}
                     >
-                      {item.Name}
+                      {item.name}
                     </Typography>
                     <Typography
                       variant='body1'
@@ -135,7 +134,7 @@ export default function TestimonialHome() {
                         color: 'gray',
                       }}
                     >
-                      {item.Place}
+                      {item.place}
                     </Typography>
                   </Grid>
                 </Grid>

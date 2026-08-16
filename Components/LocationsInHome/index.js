@@ -1,30 +1,25 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react';
 import styles from '../../styles/LocationsInHome.module.css';
-import destinationData from '../../Data/Destinations.json';
-import blogData from '../../Data/Blog.json';
-import slugify from 'slugify';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from 'next/image';
 import Router from 'next/router';
 
-const LocationsInHome = () => {
+const LocationsInHome = ({ destinationData = [], blogData = [] }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
   });
   const handleClick = (item) => {
     Router.push({
-      pathname: `/travelblogs/${slugify(item.Title).toLowerCase()}`,
-      query: { id: item.id },
+      pathname: `/travelblogs/${item.slug}`,
     });
   };
 
   const handleClickLocation = (item) => {
     Router.push({
-      pathname: `/destinations/${slugify(item.destinationName).toLowerCase()}`,
-      query: { id: item.id },
+      pathname: `/destinations/${item.slug}`,
     });
   };
   return (
@@ -77,7 +72,8 @@ const LocationsInHome = () => {
                   borderRadius: '12px',
                   // marginRight: '20px',
                 }}
-                src={'/Assets/Images/Blogs/' + item.Image + '/cardImage.jpg'}
+                src={item.cardImage || ''}
+                alt={item.title}
                 alt='imageOf'
               />
             </Grid>
@@ -103,7 +99,7 @@ const LocationsInHome = () => {
                   whiteSpace: 'pre-wrap',
                 }}
               >
-                {item.Title}
+                {item.title}
               </Typography>
             </Grid>
           </Grid>
@@ -137,7 +133,8 @@ const LocationsInHome = () => {
                 // width: isMobile ? '226px' : '249px',
                 borderRadius: '7px',
               }}
-              src={`/Assets/Images/Destinations/${item.District}/${item.Image}/cardImage.jpg`}
+              src={item.cardImage || ''}
+              alt={item.destinationName}
             />
             <Grid
               sx={{
@@ -164,7 +161,7 @@ const LocationsInHome = () => {
                   fontSize: { xs: '13px', md: '19px' },
                 }}
               >
-                {item.District}
+                {item.district?.name}
               </Typography>
             </Grid>
           </Grid>

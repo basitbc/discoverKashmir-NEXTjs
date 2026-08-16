@@ -1,26 +1,21 @@
 import { Button, Grid, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from '../../styles/PackageBox.module.css';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import Link from 'next/link';
-import Router, { useRouter } from 'next/router';
-import slugify from 'slugify';
+import Router from 'next/router';
 import Image from 'next/image';
+import { useSiteSettings } from '../../context/SiteSettingsContext';
 
 const PackageBox = ({ item, usedIn }) => {
-  const router = useRouter();
-  useEffect(() => {
-    if (!router.isReady) return;
-    console.log(item, 'item in box');
-    console.log(router, 'router in box');
-  }, [router]);
-  const handleClick = (item) => {
-    Router.push({
-      pathname: `/packages/${slugify(item.packageName).toLowerCase()}`,
-      query: { id: item.id },
-    });
+  const { whatsappNumber } = useSiteSettings();
+
+  // The slug is stored on the record now, so it is no longer re-derived from
+  // the name — and no ?id= is needed, because the detail page looks the record
+  // up by slug rather than picking it client-side.
+  const handleClick = () => {
+    Router.push(`/packages/${item.slug}`);
   };
 
   return (
@@ -42,11 +37,14 @@ const PackageBox = ({ item, usedIn }) => {
         className={styles.pboxImageContainer}
         sx={{ height: '250px', width: { xs: '100%', md: '410px' } }}
       >
-        <Image
-          fill
-          className={styles.pboxImage}
-          src={'/Assets/Images/Packages/' + item.image}
-        />
+        {item.cardImage ? (
+          <Image
+            fill
+            className={styles.pboxImage}
+            src={item.cardImage}
+            alt={item.packageName}
+          />
+        ) : null}
       </Grid>
       <Grid
         item
@@ -113,12 +111,19 @@ const PackageBox = ({ item, usedIn }) => {
               className={styles.pboxButtonContainer}
               variant='text'
               onClick={() => {
-                const phoneNumber = "9797593199"; 
-                const message = encodeURIComponent("Hello! I would like to know more.");
-                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
-                window.open(whatsappUrl, "_blank");
+                // Number comes from site settings so staff can change it in the
+                // admin instead of it being hardcoded here.
+                const phoneNumber = (whatsappNumber || '').replace(/[^0-9]/g, '');
+                const message = encodeURIComponent(
+                  `Hello! I would like to know more about ${item.packageName}.`
+                );
+                window.open(
+                  `https://wa.me/${phoneNumber}?text=${message}`,
+                  '_blank',
+                  'noopener,noreferrer'
+                );
               }}
-              
+
             >
               <Typography
                 sx={{
@@ -154,9 +159,7 @@ const PackageBox = ({ item, usedIn }) => {
             <Button
               className={styles.pboxButtonContainer}
               variant='text'
-              onClick={() => {
-                handleClick(item);
-              }}
+              onClick={handleClick}
             >
               <Typography
                 sx={{

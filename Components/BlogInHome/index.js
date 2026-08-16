@@ -1,14 +1,14 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react';
 import styles from '../../styles/BlogInHome.module.css';
-import blogData from '../../Data/Blog.json';
 import { useTheme } from '@mui/material/styles';
-import slugify from 'slugify';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from 'next/image';
 import Router, { useRouter } from 'next/router';
+import { useSiteSettings } from '../../context/SiteSettingsContext';
 
-const BlogInHome = () => {
+const BlogInHome = ({ blogData = [] }) => {
+  const { blogSectionBg } = useSiteSettings();
   const router = useRouter();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
@@ -16,8 +16,7 @@ const BlogInHome = () => {
   });
   const handleClick = (item) => {
     Router.push({
-      pathname: `/travelblogs/${slugify(item.Title).toLowerCase()}`,
-      query: { id: item.id },
+      pathname: `/travelblogs/${item.slug}`,
     });
   };
   return (
@@ -25,6 +24,11 @@ const BlogInHome = () => {
       container
       className={styles.bgContainer}
       sx={{
+        // Background comes from site settings so staff can change the homepage
+        // blog strip without a code change.
+        backgroundImage: blogSectionBg ? `url(${blogSectionBg})` : 'none',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         margin: '20px 0 30px 0',
         flexDirection: { xs: 'column', md: 'row' },
         padding: { xs: '20px 0 0 0', md: '' },
@@ -159,7 +163,8 @@ const BlogInHome = () => {
               }}
             >
               <Image
-                src={'/Assets/Images/Blogs/' + item.Image + '/cardImage.jpg'}
+                src={item.cardImage || ''}
+                alt={item.title}
                 fill
                 style={{
                   // height: '100%',
@@ -188,7 +193,7 @@ const BlogInHome = () => {
                   textOverflow: 'ellipsis',
                 }}
               >
-                {item.Title}
+                {item.title}
               </Typography>
             </Grid>
           </Grid>

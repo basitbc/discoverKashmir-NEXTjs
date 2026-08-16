@@ -1,7 +1,7 @@
 import { Fab, Grid, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import styles from "../../styles/Footer.module.css";
-import detailsData from "../../Data/Details.json";
+import { useSiteSettings } from "../../context/SiteSettingsContext";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -17,6 +17,15 @@ import Image from "next/image";
 import { Link as LinkMUI } from "@mui/material";
 import Link from "next/link";
 const Footer = () => {
+  const {
+    phoneNumber,
+    whatsappNumber,
+    email,
+    address,
+    footerLogo,
+    footerLogoAlt,
+    logoText,
+  } = useSiteSettings();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"), {
     defaultMatches: true,
@@ -69,19 +78,31 @@ const Footer = () => {
               }}
             >
             </Typography> */}
-            <Image
-              src="/Assets/logo/DK_logo.png"
-              width={280}
-              height={254}
-              sizes="220px"
-              alt="Discover Kashmir"
-              style={{
-                height: isMobile ? "50px" : "90px",
-                width: "auto",
-                maxWidth: "260px",
-                filter: "invert(1)",
-              }}
-            />
+            {footerLogo ? (
+              <Image
+                src={footerLogo}
+                width={280}
+                height={254}
+                sizes="220px"
+                alt={footerLogoAlt || logoText || 'Discover Kashmir'}
+                style={{
+                  height: isMobile ? "50px" : "90px",
+                  width: "auto",
+                  maxWidth: "260px",
+                }}
+              />
+            ) : (
+              <Typography
+                sx={{
+                  fontSize: { xs: "24px", md: "32px" },
+                  fontWeight: 700,
+                  fontFamily: "Caveat Brush, cursive",
+                  color: "#fff",
+                }}
+              >
+                {logoText || "Discover Kashmir"}
+              </Typography>
+            )}
           </Grid>
           <Grid item sx={{ mb: "40px", zIndex: "-1" }}>
             <LinkMUI
@@ -327,11 +348,11 @@ const Footer = () => {
               >
                 <a
                   style={{ textDecoration: "none", color: "black" }}
-                  href={`tel:${detailsData.phoneNumber}`}
+                  href={`tel:${phoneNumber}`}
                 >
                   <CallIcon style={{ marginRight: "20px" }} />
 
-                  {detailsData.phoneNumber}
+                  {phoneNumber}
                 </a>
               </Typography>
             </Grid>
@@ -352,10 +373,10 @@ const Footer = () => {
                 <WhatsAppIcon style={{ marginRight: "20px" }} />
                 <LinkMUI
                   target={"_blank"}
-                  href={`https://wa.me/${detailsData.whatsappNumber}?text=Hello discover kashmir, I want to get my customized package for my trip to Kashmir `}
+                  href={`https://wa.me/${whatsappNumber}?text=Hello discover kashmir, I want to get my customized package for my trip to Kashmir `}
                   style={{ textDecoration: "none", color: "black" }}
                 >
-                  {detailsData.whatsappNumber}
+                  {whatsappNumber}
                 </LinkMUI>
               </Typography>
             </Grid>
@@ -377,9 +398,9 @@ const Footer = () => {
                 <a
                   style={{ textDecoration: "none", color: "black" }}
                   target={"_blank"}
-                  href={`mailto:${detailsData.email}`}
+                  href={`mailto:${email}`}
                 >
-                  {detailsData.email}
+                  {email}
                 </a>
               </Typography>
             </Grid>
@@ -396,7 +417,7 @@ const Footer = () => {
               }}
             >
               <GpsFixedIcon style={{ marginRight: "10px" }} />
-              {detailsData.address}
+              {address}
             </Typography>
           </Grid>
         </Grid>

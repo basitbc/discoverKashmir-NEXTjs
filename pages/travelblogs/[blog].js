@@ -1,63 +1,43 @@
 import { Grid, Typography } from '@mui/material';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import blogDatas from '../../Data/Blog.json';
-import Image1 from '../../public/Assets/Images/Packages/3.jpg';
+import React from 'react';
 import styles from '../../styles/BlogDetails.module.css';
-import Router, { useRouter } from 'next/router';
-import slugify from 'slugify';
-const index = ({ BlogsData, packagesData }) => {
+import { useRouter } from 'next/router';
+
+const index = ({ blogData, relatedBlogs, packagesData }) => {
   const router = useRouter();
-  const [blogData, setBlogData] = useState(
-    !router.isReady ? BlogsData[0] : BlogsData[router.query.id]
-  );
-  useEffect(() => {
-    if (!router.isReady) return;
 
-    console.log(router, 'router in blog');
-    // setPackageData(packageDataAll[router.query.id]);
-    setBlog();
-  }, [router.isReady]);
-  const setBlog = () => {
-    BlogsData.map((item) => {
-      item.id === router.query.id ? setBlogData(item) : null;
-    });
-  };
-
+  // Navigating to a sibling article is a normal route change now — the page
+  // re-renders from that slug's own getStaticProps instead of swapping state.
   const handleClickBlog = (item) => {
-    router.push({
-      pathname: `/travelblogs/${slugify(item.Title).toLowerCase()}`,
-      query: { id: item.id },
-    });
-    setBlogData(item);
-    // router.reload();
+    router.push(`/travelblogs/${item.slug}`);
   };
 
-  return router.isReady ? (
+  const ogImage = blogData.cardImage || blogData.bgImage || '';
+
+  return (
     <div>
       <Head>
-        <title>{blogData.Title}</title>
-        <meta name='description' content={blogData.shortDes.slice(0, 142)} />
+        <title>{blogData.metaTitle || blogData.title}</title>
         <meta
-          property='og:image'
-          itemprop='image'
-          content={`/Assets/Images/Blogs/${blogData.Image}/cardImage.jpg`}
+          name='description'
+          content={
+            blogData.metaDescription || (blogData.shortDes || '').slice(0, 142)
+          }
         />
-        <link
-          itemprop='thumbnailUrl'
-          href={`/Assets/Images/Blogs/${blogData.Image}/cardImage.jpg`}
-        />
-        <span
-          itemprop='thumbnail'
-          itemscope
-          itemtype='http://schema.org/ImageObject'
-        >
-          <link
-            itemprop='url'
-            href={`/Assets/Images/Blogs/${blogData.Image}/cardImage.jpg`}
-          />
-        </span>
-        {/* <meta property='og:image:type' content='image/jpg'></meta> */}
+        {ogImage ? (
+          <>
+            <meta property='og:image' itemProp='image' content={ogImage} />
+            <link itemProp='thumbnailUrl' href={ogImage} />
+            <span
+              itemProp='thumbnail'
+              itemScope
+              itemType='http://schema.org/ImageObject'
+            >
+              <link itemProp='url' href={ogImage} />
+            </span>
+          </>
+        ) : null}
       </Head>
 
       <Grid>
@@ -92,7 +72,7 @@ const index = ({ BlogsData, packagesData }) => {
                 fontWeight: '900',
               }}
             >
-              {blogData.Title}
+              {blogData.title}
             </Typography>
             <Typography
               sx={{
@@ -130,7 +110,8 @@ const index = ({ BlogsData, packagesData }) => {
           >
             <Image
               fill
-              src={`/Assets/Images/Blogs/${blogData.bgImage}/background.jpg`}
+              src={blogData.bgImage || blogData.cardImage || ''}
+              alt={blogData.title}
               style={{
                 borderRadius: {
                   xs: '0% 0% 61% 49% / 66% 32% 27% 35% ',
@@ -213,8 +194,9 @@ const index = ({ BlogsData, packagesData }) => {
                 margin: { md: '5px 0px', xs: '10px 0' },
               }}
             >
-              {BlogsData.slice(0, 3).map((item) => (
+              {relatedBlogs.map((item) => (
                 <Grid
+                  key={item.id}
                   onClick={() => {
                     handleClickBlog(item);
                   }}
@@ -241,9 +223,8 @@ const index = ({ BlogsData, packagesData }) => {
                     }}
                   >
                     <Image
-                      src={
-                        '/Assets/Images/Blogs/' + item.Image + '/cardImage.jpg'
-                      }
+                      src={item.cardImage || ''}
+                      alt={item.title}
                       fill
                       style={{
                         // height: '100%',
@@ -274,14 +255,14 @@ const index = ({ BlogsData, packagesData }) => {
                         textOverflow: 'ellipsis',
                       }}
                     >
-                      {item.Title}
+                      {item.title}
                     </Typography>
                   </Grid>
                 </Grid>
               ))}
             </Grid>
             <Grid item>
-              <TopPicks BlogsData={BlogsData} packagesData={packagesData} />
+              <TopPicks BlogsData={relatedBlogs} packagesData={packagesData} />
             </Grid>
             <Grid item>
               <FacebookEmbed />
@@ -293,48 +274,49 @@ const index = ({ BlogsData, packagesData }) => {
         </Grid>
       </Grid>
     </div>
-  ) : (
-    <Grid></Grid>
   );
 };
 
 export default index;
-import path from 'path';
-import fsPromises from 'fs/promises';
+
 import TopPicks from '../../Components/TopPicks';
 import FacebookEmbed from '../../Components/FacebookEmbed';
 import Head from 'next/head';
 import ShareButtons from '../../Components/ShareButtons';
 import BreadCrumb from '../../Components/Breadcrumb/BreadCrumb';
+import { blogsService, packagesService } from '../../services';
+import { getSiteProps, REVALIDATE_SECONDS } from '../../lib/getSiteProps';
 
-export async function getStaticProps() {
-  const jsonDirectory = path.join(process.cwd(), 'Data');
-  //Read the json data file data.json
-  const BlogsData = await fsPromises.readFile(
-    jsonDirectory + '/Blog.json',
-    'utf8'
-  );
-  const packagesData = await fsPromises.readFile(
-    jsonDirectory + '/Packages.json',
-    'utf8'
-  );
+export async function getStaticProps({ params }) {
+  // Resolve by slug. Previously this took no params and the component indexed
+  // the array with router.query.id, so a bare slug rendered the wrong article.
+  const blogData = await blogsService.getBySlug(params.blog);
+
+  if (!blogData) return { notFound: true };
+
+  const [{ items: blogItems }, { items: packagesData }] = await Promise.all([
+    blogsService.list({ perPage: 4 }),
+    packagesService.list({ perPage: 4 }),
+  ]);
+
+  const relatedBlogs = blogItems.filter((b) => b.id !== blogData.id).slice(0, 3);
+
   return {
     props: {
-      BlogsData: JSON.parse(BlogsData),
-      packagesData: JSON.parse(packagesData),
+      ...(await getSiteProps()),
+      blogData,
+      relatedBlogs,
+      packagesData,
     },
+    revalidate: REVALIDATE_SECONDS,
   };
 }
+
 export async function getStaticPaths() {
-  const paths = blogDatas.map((item) => {
-    return {
-      params: {
-        blog: slugify(item.Title).toLowerCase(),
-      },
-    };
-  });
+  const blogs = await blogsService.listAll();
+
   return {
-    paths,
-    fallback: false, // can also be true or 'blocking'
+    paths: blogs.map((item) => ({ params: { blog: item.slug } })),
+    fallback: 'blocking',
   };
 }

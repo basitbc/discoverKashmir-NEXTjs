@@ -1,157 +1,238 @@
-import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
-import Paper from '@mui/material/Paper';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
-import AddressForm from '../../Components/AddressForm';
-import PaymentForm from '../../Components/PaymentForm';
-import Review from '../../Components/Review';
-import HeroSection from '../../Components/HeroSection';
-import axios from 'axios';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import {
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  InputAdornment,
+  MenuItem,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
+import LockRoundedIcon from '@mui/icons-material/LockRounded';
+import { paymentsService, ApiError } from '../../services';
 
+const CURRENCIES = [
+  { code: 'INR', symbol: '₹' },
+  { code: 'USD', symbol: '$' },
+  { code: 'GBP', symbol: '£' },
+  { code: 'EUR', symbol: '€' },
+  { code: 'AED', symbol: 'AED' },
+  { code: 'SGD', symbol: 'S$' },
+];
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
-
-
-
-export default function Checkout() {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [formData, setFormData] = React.useState({
-    name: '',
-    duration: '',
-    packageDetails: '',
+/**
+ * Customer payment form. Replaces the old MUI checkout template, which threw
+ * on click (`format` was used but never imported) and posted to localhost:3001.
+ *
+ * The customer enters the amount agreed with us — deliberate, and the agency
+ * verifies the figure before confirming the trip.
+ *
+ * What the browser CANNOT set is anything that steers the money: merchant id,
+ * gateway return URLs and the working key all stay on the server. The old form
+ * carried all three as hidden inputs, so a tampered page could have sent the
+ * payment confirmation somewhere else entirely.
+ *
+ * The order is recorded BEFORE the redirect, so an abandoned attempt still
+ * appears in the admin log rather than vanishing.
+ */
+export default function PaymentPage() {
+  const router = useRouter();
+  const [form, setForm] = useState({
+    customerName: '',
+    customerEmail: '',
+    customerPhone: '',
     amount: '',
-    city: '',
-    state: '',
-    zip: '',
-    country: '',
-    currency:''
+    currency: 'INR',
+    description: '',
+    billingCity: '',
+    billingState: '',
   });
+  const [errors, setErrors] = useState({});
+  const [error, setError] = useState(null);
+  const [busy, setBusy] = useState(false);
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-  };
+  const set = (key) => (event) => setForm({ ...form, [key]: event.target.value });
+  const symbol = CURRENCIES.find((c) => c.code === form.currency)?.symbol ?? '';
 
-  const generateOrderId = () => {
-    const timestamp = format(new Date(), 'yyyyMMddHHmmss'); // Current timestamp
-    const randomNum = Math.floor(Math.random() * 1000000); // Random number (adjust the range as needed)
-    const orderId = `${timestamp}${randomNum}`; // Combine timestamp and random number
-    return orderId;
-  };
-                          
+  const submit = async (event) => {
+    event.preventDefault();
+    setBusy(true);
+    setError(null);
+    setErrors({});
 
-const handlePayment = async () => {
-  try {
-    // Prepare the data to be sent to the CCAvenue endpoint
-    const requestData = {
-      merchantId: 3145729,
-      orderId: generateOrderId(),
-      currency: formData?.currency,
-      amount: formData?.amount,
-      redirectURL: 'https://api.thediscoverkashmir.in/api/ccav/ccavResponseHandler',
-      cancelURL: 'https://api.thediscoverkashmir.in/api/ccav/ccavResponseHandler',
-      language: 'EN'
-    };
-
-    // Make a POST API call to CCAvenue endpoint using Axios
-    const response = await axios.post(
-      'http://localhost:3001/api/ccav/ccavRequestHandler',
-      requestData,
-      {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+    try {
+      const { reference } = await paymentsService.create({
+        ...form,
+        customerPhone: form.customerPhone || null,
+        billingCity: form.billingCity || null,
+        billingState: form.billingState || null,
+      });
+      router.push(`/pay/${reference}`);
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setErrors(err.fieldErrors);
+        setError(err.isValidation ? 'Please check the highlighted fields.' : err.message);
+      } else {
+        setError('Something went wrong. Please try again.');
       }
-    );
-
-    // Assuming the response is text, modify accordingly
-    const responseData = response.data;
-
-    // Create a form dynamically and submit it to redirect to CCAvenue
-    const form = document.createElement('form');
-    form.innerHTML = responseData;
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
-
-    // Now, make a POST request to your Next.js API route
-    const apiResponse = await axios.post('/api/ccavenueResponse', responseData);
-
-    // Handle the response from the API route if needed
-    console.log('API Response:', apiResponse.data);
-  } catch (error) {
-    console.error('Error during payment:', error);
-    // Handle error (e.g., show an error message to the user)
-  }
-};
-
-  
-  
-  function getStepContent(step) {
-    switch (step) {
-      case 0:
-        return ;
-      // case 1:
-      //   return <PaymentForm />;
-      // case 2:
-      //   return <Review />;
-      default:
-        throw new Error('Unknown step');
+      setBusy(false);
     }
-  }
-
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
   };
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <HeroSection
-          usedIn='Contact'
-          bgImage='background.jpg'
-          Name={"Payment"}
-        />
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-          <Typography component="h1" variant="h4" align="center" sx={{marginBottom:"40px"}}>
-            Checkout
-          </Typography>
-          {/* <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper> */}
-        
-            <React.Fragment>
-            <AddressForm formData={formData} setFormData={setFormData} handlePayment={handlePayment} />
-            </React.Fragment>
-        </Paper>
-        <Copyright />
-      </Container>
-    </React.Fragment>
+    <>
+      <Head>
+        <title>Make a payment | Discover Kashmir</title>
+        <meta name='robots' content='noindex' />
+      </Head>
+
+      <Box
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: { xs: 'flex-start', md: 'center' },
+          justifyContent: 'center',
+          p: { xs: 2, sm: 3 },
+          pt: { xs: 4, md: 3 },
+        }}
+      >
+        <Box sx={{ width: '100%', maxWidth: 520 }}>
+          <Stack spacing={0.5} sx={{ textAlign: 'center', mb: 3 }}>
+            <Typography variant='h1'>Make a payment</Typography>
+            <Typography variant='body2' sx={{ color: 'text.secondary' }}>
+              Enter the amount agreed with us and pay securely
+            </Typography>
+          </Stack>
+
+          <Paper variant='outlined' component='form' onSubmit={submit}>
+            <Stack spacing={2.5} sx={{ p: { xs: 2.5, sm: 3 } }}>
+              {error ? <Alert severity='error'>{error}</Alert> : null}
+
+              <TextField
+                label='Amount'
+                required
+                fullWidth
+                value={form.amount}
+                onChange={set('amount')}
+                error={Boolean(errors.amount)}
+                helperText={errors.amount || 'The figure we agreed with you'}
+                inputMode='decimal'
+                InputProps={{
+                  startAdornment: <InputAdornment position='start'>{symbol}</InputAdornment>,
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <TextField
+                        select
+                        variant='standard'
+                        value={form.currency}
+                        onChange={set('currency')}
+                        InputProps={{ disableUnderline: true }}
+                        sx={{ '& .MuiSelect-select': { py: 0, fontSize: '0.85rem' } }}
+                        aria-label='Currency'
+                      >
+                        {CURRENCIES.map((c) => (
+                          <MenuItem key={c.code} value={c.code}>
+                            {c.code}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                    </InputAdornment>
+                  ),
+                }}
+                // The amount is what this screen is about — make it the focus.
+                sx={{ '& input': { fontSize: '1.5rem', fontWeight: 700, py: 1.25 } }}
+              />
+
+              <TextField
+                label='What is this payment for?'
+                required
+                fullWidth
+                multiline
+                rows={2}
+                value={form.description}
+                onChange={set('description')}
+                error={Boolean(errors.description)}
+                helperText={
+                  errors.description || 'e.g. Advance for Kashmir family package, 12–17 May'
+                }
+              />
+
+              <Divider />
+
+              <TextField
+                label='Your name'
+                required
+                fullWidth
+                value={form.customerName}
+                onChange={set('customerName')}
+                error={Boolean(errors.customerName)}
+                helperText={errors.customerName}
+              />
+              <TextField
+                label='Email'
+                type='email'
+                required
+                fullWidth
+                value={form.customerEmail}
+                onChange={set('customerEmail')}
+                error={Boolean(errors.customerEmail)}
+                helperText={errors.customerEmail || 'Your receipt goes here'}
+              />
+              <TextField
+                label='Phone'
+                fullWidth
+                value={form.customerPhone}
+                onChange={set('customerPhone')}
+                error={Boolean(errors.customerPhone)}
+                helperText={errors.customerPhone}
+              />
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                <TextField
+                  label='City'
+                  fullWidth
+                  value={form.billingCity}
+                  onChange={set('billingCity')}
+                />
+                <TextField
+                  label='State'
+                  fullWidth
+                  value={form.billingState}
+                  onChange={set('billingState')}
+                />
+              </Stack>
+            </Stack>
+
+            <Divider />
+
+            <Box sx={{ p: { xs: 2.5, sm: 3 } }}>
+              <Button
+                type='submit'
+                variant='contained'
+                size='large'
+                fullWidth
+                disabled={busy}
+                startIcon={busy ? null : <LockRoundedIcon />}
+                sx={{ py: 1.5, fontSize: '1rem' }}
+              >
+                {busy ? <CircularProgress size={24} color='inherit' /> : 'Continue to payment'}
+              </Button>
+              <Typography
+                variant='caption'
+                sx={{ display: 'block', textAlign: 'center', color: 'text.secondary', mt: 1.5 }}
+              >
+                You will review everything before paying. Card details are entered on
+                CCAvenue&rsquo;s secure page, never here.
+              </Typography>
+            </Box>
+          </Paper>
+        </Box>
+      </Box>
+    </>
   );
 }

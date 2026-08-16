@@ -1,5 +1,5 @@
 import { Grid, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 // import PackageDetail from '../../public/Data/Packages.json';
@@ -12,7 +12,6 @@ import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import RestaurantMenuOutlinedIcon from '@mui/icons-material/RestaurantMenuOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
-import packages from '../../Data/Packages.json';
 import HeroSection from '../../Components/HeroSection';
 import SingleAccordion from '../../Components/SingleAccordion';
 import BookingBox from '../../Components/BookingBox';
@@ -20,37 +19,22 @@ import PackageBox from '../../Components/PackageBox';
 import FacebookEmbed from '../../Components/FacebookEmbed';
 import PackageAccordain from '../../Components/PackageAccordain';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import { useRouter } from 'next/router';
-import packageDatas from '../../Data/Packages.json';
-import { withRouter } from 'next/router';
-
-const PackageDetails = ({ packageDataAll, morePackageData }) => {
+const PackageDetails = ({ packageData, relatedPackages }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
   });
 
-  const router = useRouter();
-  const [packageData, setPackageData] = useState(packageDataAll[0]);
-
-  let Inclusions = morePackageData?.inclusions?.split(';');
-  let Exclusions = morePackageData?.exclusions?.split(';');
-  let ThingsToCarry = morePackageData?.thingsToCarry?.split(';');
-  let TermsAndConditions = morePackageData?.termsAndConditions?.split(';');
-  let MajorActivities = morePackageData?.majorActivities?.split(';');
-
-  const setPackage = () => {
-    packageDataAll.map((item) => {
-      item.id === router.query.id ? setPackageData(item) : null;
-    });
-  };
-
-  useEffect(() => {
-    if (!router.isReady) return;
-    console.log(router, 'router in details');
-    // setPackageData(packageDataAll[router.query.id]);
-    setPackage();
-  }, [router.isReady]);
+  // The API resolves per-package overrides against the global defaults and
+  // returns ready-to-render arrays, so there is nothing to split or fall back
+  // to here. Previously these came from a semicolon-delimited string.
+  const {
+    INCLUSION: Inclusions = [],
+    EXCLUSION: Exclusions = [],
+    THING_TO_CARRY: ThingsToCarry = [],
+    MAJOR_ACTIVITY: MajorActivities = [],
+    TERM: TermsAndConditions = [],
+  } = packageData.lists ?? {};
 
   const MainData = [
     {
@@ -95,39 +79,39 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
       value: packageData.vehicle,
     },
   ];
-  return router.isReady ? (
+  // Image fields now hold a complete path (or a Blob URL for admin uploads),
+  // so nothing is assembled from fragments at render time any more.
+  const ogImage = packageData.cardImage || packageData.bgImage || '';
+
+  return (
     <div>
       <Head>
-        <title>{packageData.packageName}</title>
+        <title>{packageData.metaTitle || packageData.packageName}</title>
         <meta
           name='description'
-          content={packageData.description.slice(0, 142)}
+          content={
+            packageData.metaDescription ||
+            (packageData.description || '').slice(0, 142)
+          }
         />
-        <meta
-          property='og:image'
-          itemprop='image'
-          content={`/Assets/Images/Packages/${packageData.image}`}
-        />
-        <link
-          itemprop='thumbnailUrl'
-          href={`/Assets/Images/Packages/${packageData.image}`}
-        />
-        <span
-          itemprop='thumbnail'
-          itemscope
-          itemtype='http://schema.org/ImageObject'
-        >
-          <link
-            itemprop='url'
-            href={`/Assets/Images/Packages/${packageData.image}`}
-          />
-        </span>
+        {ogImage ? (
+          <>
+            <meta property='og:image' itemProp='image' content={ogImage} />
+            <link itemProp='thumbnailUrl' href={ogImage} />
+            <span
+              itemProp='thumbnail'
+              itemScope
+              itemType='http://schema.org/ImageObject'
+            >
+              <link itemProp='url' href={ogImage} />
+            </span>
+          </>
+        ) : null}
       </Head>
       <Grid container>
         <HeroSection
-          bgImage={packageData.bgImage}
+          src={packageData.bgImage}
           Name={packageData.packageName}
-          usedIn='Packages'
         />
         <Grid container className={styles.pdUpperContainer}>
           <Grid
@@ -369,9 +353,9 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
                 flexWrap: 'nowrap',
               }}
             >
-              {packages.slice(0, 2).map((item) => {
-                return <PackageBox item={item} />;
-              })}
+              {relatedPackages.map((item) => (
+                <PackageBox key={item.id} item={item} />
+              ))}
             </Grid>
           </Grid>
           <Grid
@@ -387,7 +371,9 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
             }}
           >
             <Grid item>
-              <BookingBox />
+              {/* Passing the package through means the enquiry email finally
+                  says which package the visitor was looking at. */}
+              <BookingBox packageName={packageData.packageName} />
             </Grid>
             <Grid
               item
@@ -405,46 +391,39 @@ const PackageDetails = ({ packageDataAll, morePackageData }) => {
         </Grid>
       </Grid>
     </div>
-  ) : (
-    <div></div>
   );
 };
 
 export default PackageDetails;
 
-import path from 'path';
-import fsPromises from 'fs/promises';
-import slugify from 'slugify';
 import Head from 'next/head';
-export async function getStaticProps() {
-  const jsonDirectory = path.join(process.cwd(), 'Data');
-  //Read the json data file data.json
-  const packageDataAll = await fsPromises.readFile(
-    jsonDirectory + '/Packages.json',
-    'utf8'
-  );
-  const morePackageData = await fsPromises.readFile(
-    jsonDirectory + '/MorePackageDetails.json',
-    'utf8'
-  );
+import { packagesService } from '../../services';
+import { getSiteProps, REVALIDATE_SECONDS } from '../../lib/getSiteProps';
+
+export async function getStaticProps({ params }) {
+  // Look the record up BY SLUG. The old version took no params at all, shipped
+  // every package into every page, and picked one client-side from a ?id=
+  // querystring — so visiting a bare slug always rendered the first package.
+  const packageData = await packagesService.getBySlug(params.package);
+
+  if (!packageData) return { notFound: true };
+
+  const { items } = await packagesService.list({ perPage: 3 });
+  const relatedPackages = items.filter((p) => p.id !== packageData.id).slice(0, 2);
+
   return {
-    props: {
-      packageDataAll: JSON.parse(packageDataAll),
-      morePackageData: JSON.parse(morePackageData),
-    },
+    props: { ...(await getSiteProps()), packageData, relatedPackages },
+    revalidate: REVALIDATE_SECONDS,
   };
 }
 
 export async function getStaticPaths() {
-  const paths = packageDatas.map((item) => {
-    return {
-      params: {
-        package: slugify(item.packageName).toLowerCase(),
-      },
-    };
-  });
+  const packages = await packagesService.listAll();
+
   return {
-    paths,
-    fallback: false, // can also be true or 'blocking'
+    paths: packages.map((item) => ({ params: { package: item.slug } })),
+    // 'blocking' so a package added in the admin resolves on first visit
+    // instead of 404ing until the next deploy.
+    fallback: 'blocking',
   };
 }

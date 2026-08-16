@@ -4,22 +4,10 @@ import { Grid, Typography } from '@mui/material';
 import { textAlign } from '@mui/system';
 import { MDBCarousel, MDBCarouselItem } from 'mdb-react-ui-kit';
 
-const data = [
-  {
-    image: 'hero1.jpg',
-  },
-  {
-    image: 'hero2.jpg',
-  },
-  // {
-  //   image: 'hero3.jpg',
-  // },
-  // {
-  //   image: 'hero4.jpg',
-  // },
-];
+// Slides come from the API so staff can change them in the admin; the
+// previous hardcoded array is gone.
 
-function HeroCarousel() {
+function HeroCarousel({ slides = [] }) {
   return (
     <Grid sx={{ zIndex: '1' }}>
       <CCarousel
@@ -28,13 +16,13 @@ function HeroCarousel() {
         transition='crossfade'
         style={{ height: '75vh', width: '100vw' }}
       >
-        {data.map((item) => {
+        {slides.map((item) => {
           return (
-            <CCarouselItem>
+            <CCarouselItem key={item.id}>
               <img
                 className='d-block w-100 imageCarousel'
                 style={{ height: '75vh', width: '100vw', objectFit: 'cover' }}
-                src={'/Assets/Images/Home/' + item.image}
+                src={item.image}
                 alt='slide'
                 width='100%'
               />

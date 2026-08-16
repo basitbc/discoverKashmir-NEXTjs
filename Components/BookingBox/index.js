@@ -73,6 +73,10 @@ const BookingBox = (props) => {
   const [value, setValue] = useState(dayjs());
   return (
     <form ref={form} onSubmit={sendEmail} id='myForm'>
+      {/* EmailJS reads the form's DOM, so the package the visitor was viewing
+          has to be an actual field. Without it the enquiry email cannot say
+          which package the request is about. */}
+      <input type='hidden' name='packageName' value={props.packageName || ''} />
       <Grid
         container
         sx={{

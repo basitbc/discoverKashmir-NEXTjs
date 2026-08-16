@@ -4,12 +4,11 @@ import React, { useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PackageBox from '../../Components/PackageBox';
-import heroImage from '../../public/Assets/Images/Packages/background.jpg';
 import Image from 'next/image';
 import Head from 'next/head';
-import aboutOverview from '../../public/Assets/Images/Packages/aboutOverview.jpg';
 
 const Packages = ({ packagesData }) => {
+  const { packagesBanner, packagesOverview } = useSiteSettings();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), {
     defaultMatches: true,
@@ -23,11 +22,7 @@ const Packages = ({ packagesData }) => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </Head>
       <Grid container>
-        <HeroSection
-          usedIn='Packages'
-          bgImage='background.jpg'
-          Name={'Packages'}
-        />
+        <HeroSection src={packagesBanner} Name={'Packages'} />
         <Grid
           container
           sx={{
@@ -66,11 +61,14 @@ const Packages = ({ packagesData }) => {
                 overflow: 'hidden',
               }}
             >
-              <Image
-                fill
-                style={{ borderRadius: '12px' }}
-                src={aboutOverview}
-              />
+              {packagesOverview ? (
+                <Image
+                  fill
+                  style={{ borderRadius: '12px' }}
+                  src={packagesOverview}
+                  alt='Planning a Kashmir trip'
+                />
+              ) : null}
             </Grid>
           </Grid>
           <Grid sx={{ mt: '50px' }}>
@@ -110,9 +108,9 @@ const Packages = ({ packagesData }) => {
             m: { md: '10px 30px 0px 60px' },
           }}
         >
-          {packagesData.map((item) => {
-            return <PackageBox item={item} />;
-          })}
+          {packagesData.map((item) => (
+            <PackageBox key={item.id} item={item} />
+          ))}
         </Grid>
       </Grid>
     </>
@@ -121,21 +119,16 @@ const Packages = ({ packagesData }) => {
 
 export default Packages;
 
-import path from 'path';
-import fsPromises from 'fs/promises';
 import HeroSection from '../../Components/HeroSection';
+import { packagesService } from '../../services';
+import { getSiteProps, REVALIDATE_SECONDS } from '../../lib/getSiteProps';
+import { useSiteSettings } from '../../context/SiteSettingsContext';
+
 export async function getStaticProps() {
-  const jsonDirectory = path.join(process.cwd(), 'Data');
-  //Read the json data file data.json
-  // const detailsData = await fsPromises.readFile(
-  //   jsonDirectory + '/Details.json',
-  //   'utf8'
-  // );
-  const packagesData = await fsPromises.readFile(
-    jsonDirectory + '/Packages.json',
-    'utf8'
-  );
+  const packagesData = await packagesService.listAll();
+
   return {
-    props: { packagesData: JSON.parse(packagesData) },
+    props: { ...(await getSiteProps()), packagesData },
+    revalidate: REVALIDATE_SECONDS,
   };
 }

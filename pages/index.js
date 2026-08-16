@@ -32,7 +32,14 @@ const poppins = Poppins({
   display: 'swap',
 });
 
-export default function Home({ detailsData, packagesData }) {
+export default function Home({
+  detailsData,
+  packagesData,
+  destinationData,
+  blogData,
+  testimonialsData,
+  heroSlides,
+}) {
   <Head>
     {/* <link rel='preconnect' href='https://fonts.googleapis.com' />
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
@@ -187,14 +194,17 @@ export default function Home({ detailsData, packagesData }) {
               </button>
             </Grid>
           </Grid>
-          <HeroCarousel />
+          <HeroCarousel slides={heroSlides} />
         </Grid>
         <AboutInHome detailsData={detailsData} />
         <PackagesSection packagesData={packagesData} />
-        <DestinationSection />
-        <BlogInHome />
-        <LocationsInHome />
-        <TestimonialHome />
+        <DestinationSection destinationData={destinationData} />
+        <BlogInHome blogData={blogData} />
+        <LocationsInHome
+          destinationData={destinationData}
+          blogData={blogData}
+        />
+        <TestimonialHome testimonialsData={testimonialsData} />
       </Grid>
     </div>
   );
@@ -205,25 +215,47 @@ import useSWR from 'swr';
 
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 
-import path from 'path';
-import fsPromises from 'fs/promises';
-import PreLoader from '../Components/PreLoader';
-import FormDialog from '../Components/FormDialog';
+import PreLoader from "../Components/PreLoader";
+import FormDialog from "../Components/FormDialog";
+import {
+  packagesService,
+  destinationsService,
+  blogsService,
+  testimonialsService,
+  heroSlidesService,
+} from "../services";
+import { getSiteProps, REVALIDATE_SECONDS } from "../lib/getSiteProps";
+
 export async function getStaticProps() {
-  const jsonDirectory = path.join(process.cwd(), 'Data');
-  //Read the json data file data.json
-  const detailsData = await fsPromises.readFile(
-    jsonDirectory + '/Details.json',
-    'utf8'
-  );
-  const packagesData = await fsPromises.readFile(
-    jsonDirectory + '/Packages.json',
-    'utf8'
-  );
+  // One round of parallel reads rather than six sequential ones — this runs on
+  // every regeneration, so the latency is worth avoiding.
+  const [
+    packagesData,
+    destinationData,
+    blogData,
+    testimonialsData,
+    heroSlides,
+    siteProps,
+  ] = await Promise.all([
+    packagesService.listAll(),
+    destinationsService.listAll(),
+    blogsService.listAll(),
+    testimonialsService.listAll(),
+    heroSlidesService.listAll(),
+    getSiteProps(),
+  ]);
+
   return {
     props: {
-      detailsData: JSON.parse(detailsData),
-      packagesData: JSON.parse(packagesData),
+      ...siteProps,
+      // AboutInHome still calls this prop detailsData; it is the settings record.
+      detailsData: siteProps.siteSettings,
+      packagesData,
+      destinationData,
+      blogData,
+      testimonialsData,
+      heroSlides,
     },
+    revalidate: REVALIDATE_SECONDS,
   };
 }

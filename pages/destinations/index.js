@@ -3,29 +3,21 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import HeroSection from '../../Components/HeroSection';
 
-const destination = ({ destinationData }) => {
-  const Districts = [
-    'Srinagar',
-    'Baramulla',
-    'Anantnag',
-    'Budgam',
-    'Ganderbal',
-    'Bandipora',
-  ];
-  console.log(destinationData);
+const destination = ({ destinationData, districts }) => {
+  const { destinationsBanner } = useSiteSettings();
+  // Districts used to be a hardcoded array here; they are a table now so staff
+  // can add one without a code change.
+  const Districts = districts.map((d) => d.name);
   return (
     <div>
-      <HeroSection
-        usedIn='Destinations'
-        bgImage='background.jpg'
-        Name={'Destinations'}
-      />
+      <HeroSection src={destinationsBanner} Name={'Destinations'} />
       <Grid container>
         <Grid>
           {Districts.length > 0 &&
             Districts.map((item) => {
               return (
                 <DistrictSection
+                  key={item}
                   name={item}
                   destinationData={destinationData}
                 />
@@ -39,17 +31,21 @@ const destination = ({ destinationData }) => {
 
 export default destination;
 
-import path from 'path';
-import fsPromises from 'fs/promises';
-import DistrictSection from '../../Components/DistrictSection';
-import { Grid } from '@mui/material';
+import DistrictSection from "../../Components/DistrictSection";
+import { Grid } from "@mui/material";
+import { destinationsService, districtsService } from "../../services";
+import { getSiteProps, REVALIDATE_SECONDS } from "../../lib/getSiteProps";
+import { useSiteSettings } from '../../context/SiteSettingsContext';
+
 export async function getStaticProps() {
-  const jsonDirectory = path.join(process.cwd(), 'Data');
-  const destinationData = await fsPromises.readFile(
-    jsonDirectory + '/Destinations.json',
-    'utf8'
-  );
+  const [destinationData, districts, siteProps] = await Promise.all([
+    destinationsService.listAll(),
+    districtsService.listAll(),
+    getSiteProps(),
+  ]);
+
   return {
-    props: { destinationData: JSON.parse(destinationData) },
+    props: { ...siteProps, destinationData, districts },
+    revalidate: REVALIDATE_SECONDS,
   };
 }

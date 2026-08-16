@@ -7,10 +7,11 @@ import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import CloseIcon from '@mui/icons-material/Close';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import styles from '../../styles/Layout.module.css';
-import details from '../../Data/Details.json';
+import { useSiteSettings } from '../../context/SiteSettingsContext';
 import Link from 'next/link';
 import BreadCrumb from '../Breadcrumb/BreadCrumb';
 export default function Layout({ children }) {
+  const { whatsappNumber } = useSiteSettings();
   const [openDrawer, setOpenDrawer] = useState(false);
 
   return (
@@ -50,7 +51,7 @@ export default function Layout({ children }) {
       <Footer />
       <Link
         target={'_blank'}
-        href={`https://wa.me/${details.whatsappNumber}?text=Hello, I want to get my customized package for my trip to Kashmir`}
+        href={`https://wa.me/${whatsappNumber}?text=Hello, I want to get my customized package for my trip to Kashmir`}
       >
         <Grid
           className={styles.btnWhatsappPulse}

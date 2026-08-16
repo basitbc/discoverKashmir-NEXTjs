@@ -5,7 +5,6 @@ import styles from '../../styles/AboutInHome.module.css';
 
 const AboutInHome = (props) => {
   useEffect(() => {
-    console.log(props.detailsData);
   }, []);
 
   return (
@@ -130,7 +129,8 @@ const AboutInHome = (props) => {
             <Image
               // className={styles.abhImage}
               fill
-              src={'/Assets/Images/Home/' + props.detailsData.aboutImageBack}
+              src={props.detailsData.aboutImageBack || ''}
+              alt="About Discover Kashmir"
             />
           </Grid>
           <Grid
@@ -148,7 +148,8 @@ const AboutInHome = (props) => {
             <Image
               className={styles.abhImage}
               fill
-              src={'/Assets/Images/Home/' + props.detailsData.aboutImageFront}
+              src={props.detailsData.aboutImageFront || ''}
+              alt=""
             />
           </Grid>
         </Grid>

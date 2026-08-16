@@ -1,15 +1,12 @@
 import { Grid, Typography } from '@mui/material';
 import Image from 'next/image';
-import destinationData from '../../Data/Destinations.json';
 import styles from '../../styles/DestinationSection.module.css';
 import Router from 'next/router';
-import slugify from 'slugify';
 
-const DestinationSection = () => {
+const DestinationSection = ({ destinationData = [] }) => {
   const handleClickLocation = (item) => {
     Router.push({
-      pathname: `/destinations/${slugify(item.destinationName).toLowerCase()}`,
-      query: { id: item.id },
+      pathname: `/destinations/${item.slug}`,
     });
   };
   return (
@@ -69,7 +66,8 @@ const DestinationSection = () => {
                 className={styles.imageDisBox}
                 height='40'
                 width='40'
-                src={`/Assets/Images/Destinations/${item.District}/${item.Image}/cardImage.jpg`}
+                src={item.cardImage || ''}
+                alt={item.destinationName}
                 alt='img'
               />
               <Typography

@@ -1,19 +1,16 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react';
 import '../../styles/BlogBox.module.css';
-import Router, { useRouter } from 'next/router';
-import slugify from 'slugify';
+import Router from 'next/router';
 import styles from '../../styles/BlogBox.module.css';
-import Image from 'next/image';
 
 const BlogBox = ({ item }) => {
-  const router = useRouter();
-  const handleClick = (item) => {
-    Router.push({
-      pathname: `/travelblogs/${slugify(item.Title).toLowerCase()}`,
-      query: { id: item.id },
-    });
+  // Slug is stored on the record; no ?id= because the detail page resolves by
+  // slug rather than picking the record client-side.
+  const handleClick = () => {
+    Router.push(`/travelblogs/${item.slug}`);
   };
+
   return (
     <Grid
       container
@@ -24,18 +21,13 @@ const BlogBox = ({ item }) => {
         // border: '1px solid',
         borderRadius: '12px',
         flexWrap: 'wrap',
-        background: `url(/Assets/Images/Blogs/${item.Image}/cardImage.jpg)`,
-        // /Assets/Images/Blogs/1/cardImage.jpg
-        // {'/Assets/Images/Packages/' + item.image}
+        background: item.cardImage ? `url(${item.cardImage})` : '#ddd',
         backgroundSize: '100% 100%',
         overflow: 'hidden',
         padding: '10px 40px',
         cursor: 'pointer',
-        // overflow: 'hidden',
       }}
-      onClick={() => {
-        handleClick(item);
-      }}
+      onClick={handleClick}
     >
       <Typography
         variant='h6'
@@ -55,20 +47,9 @@ const BlogBox = ({ item }) => {
             fontSize: { xs: '20px', md: '' },
           }}
         >
-          {item.Title}
+          {item.title}
         </span>
       </Typography>
-      {/* <img
-        style={{
-          position: 'initial',
-          top: '0',
-          left: '0',
-          height: '100%',
-          width: '100%',
-          borderRadius: '12px',
-        }}
-        src={item.Image}
-      /> */}
     </Grid>
   );
 };
